@@ -2,17 +2,16 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
-{
+class CreateUsersTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -27,6 +26,19 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+
+        DB::table('users')->insert([
+            'name'       => 'Administrator',
+            'username'   => 'admin',
+            'email'      => 'admin@gmail.com',
+            'phone'      => 987654321,
+            'status'     => 1,
+            'role_id'    => 1,
+            'password'   => bcrypt('123456'),
+            'created_at' => '2020-10-15 23:30:41',
+            'updated_at' => '2020-10-20 22:17:19'
+        ]);
     }
 
     /**
@@ -34,8 +46,7 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('users');
     }
 }

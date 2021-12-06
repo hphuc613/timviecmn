@@ -203,7 +203,7 @@ class ' . $module . 'Request extends FormRequest
      */
     public function rules()
     {
-        $method = Helper::segment(2);
+        $method = segmentUrl(2);
         switch ($method) {
             default:
                 return [];

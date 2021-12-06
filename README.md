@@ -27,15 +27,20 @@ VI. Generate Application Key:
 
         php artisan key:generate
 
-VI. Generate Data Fake:
+VII. Generate Data Fake:
     Run this command:
 
         php artisan db:seed
         
-V. Make migration in module:
-
-        php artisan module:migration {migration_name} {--create=migration_name} {--tablemigration_name} {module}
+VIII. Gererate Module:
+    Run this command:
         
-VI. Storage link:
+        php artisan make:module {name}
+        
+IX. Make migration in module:
+
+        php artisan module:migration {migration_name} {--create=table_name(s/es)} {--table=able_name(s/es)} {module}
+        
+X. Storage link:
 
         php artisan storage:link
