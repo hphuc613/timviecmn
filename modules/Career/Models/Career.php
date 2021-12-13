@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Models\BaseModel;
 use Modules\Company\Models\Company;
+use Modules\ContactRecruitment\Models\ContactRecruitment;
 use Modules\Position\Models\Position;
 
 class Career extends BaseModel
@@ -55,5 +56,12 @@ class Career extends BaseModel
      */
     public function companys() {
         return $this->hasMany(Company::class, 'career_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function contactrecruiments() {
+        return $this->hasMany(ContactRecruitment::class, 'career_id');
     }
 }
