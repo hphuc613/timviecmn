@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-8">
             @php($prompt = ['' => trans('Select')])
-            {!! Form::select('status', $prompt + $statuses, $data->status ?? NULL, [
+            {!! Form::select('status', $statuses, $data->status ?? NULL, [
                 'id' => 'status',
                 'class' => 'select2 form-control',
                 'style' => 'width: 100%']) !!}

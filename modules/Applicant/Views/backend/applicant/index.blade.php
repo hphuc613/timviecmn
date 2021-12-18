@@ -39,14 +39,6 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="text-input">{{ trans('Status') }}</label>
-                                {!! Form::select('status', $prompt + $statuses, $filter['status'] ?? NULL, ['class' => 'select2 form-control']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
                                 <label for="text-input">{{ trans("Email") }}</label>
                                 <input type="text" class="form-control" id="text-input" name="email" value="">
                             </div>
@@ -61,6 +53,12 @@
                             <div class="form-group">
                                 <label for="text-input">{{ trans("Phone") }}</label>
                                 <input type="text" class="form-control" id="text-input" name="phone" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="text-input">{{ trans('Status') }}</label>
+                                {!! Form::select('status', $prompt + $statuses, $filter['status'] ?? NULL, ['class' => 'select2 form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -84,6 +82,9 @@
                         <tr>
                             <th>#</th>
                             <th>{{ trans('Name') }}</th>
+                            <th>{{ trans('Email') }}</th>
+                            <th>{{ trans('Phone') }}</th>
+                            <th>{{ trans('Address') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
                             <th>{{ trans('Updated At') }}</th>
@@ -96,6 +97,9 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
+                                <td>{{ trans($item->email) }}</td>
+                                <td>{{ trans($item->phone) }}</td>
+                                <td>{{ trans($item->address) }}</td>
                                 <td>{{ \Modules\Base\Models\Status::getStatus($item->status) ?? NULL }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y H:i:s')}}</td>

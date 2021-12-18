@@ -27,7 +27,6 @@ class CareerRequest extends FormRequest{
                 return [
                     'name'        => 'required|validate_unique:careers',
                     'slug'        => 'validate_unique:careers',
-                    'position_id' => 'required',
                     'status'      => 'required',
                 ];
                 break;
@@ -35,7 +34,6 @@ class CareerRequest extends FormRequest{
                 return [
                     'name'        => 'required|validate_unique:careers,' . $this->id,
                     'slug'        => 'validate_unique:careers,' . $this->id,
-                    'position_id' => 'required',
                     'status'      => 'required',
                 ];
                 break;
@@ -45,7 +43,6 @@ class CareerRequest extends FormRequest{
     public function messages(){
         return [
             'required'             => ':attribute' . trans(' can not be empty.'),
-            'position_id.required' => trans('Please select ') . ':attribute',
             'validate_unique'      => ':attribute' . trans(' was exist.'),
         ];
     }
@@ -55,7 +52,6 @@ class CareerRequest extends FormRequest{
             'name'        => trans('Name'),
             'slug'        => trans('Slug'),
             'status'      => trans('Status'),
-            'position_id' => trans('Position'),
         ];
     }
 }

@@ -1,18 +1,18 @@
 <?php
 return [
-    'name' => 'contactrecruitment',
-    'display_name' => trans('ContactRecruitment'),
+    'name' => 'contact_recruitment',
+    'display_name' => trans('Contact Recruitment'),
     'group'        => [
         [
-            'name'         => 'contactrecruitment-create',
+            'name'         => 'contact_recruitment-create',
             'display_name' => trans('Create Contact Recruitment'),
         ],
         [
-            'name'         => 'contactrecruitment-update',
+            'name'         => 'contact_recruitment-update',
             'display_name' => trans('Update Contact Recruitment'),
         ],
         [
-            'name'         => 'contactrecruitment-delete',
+            'name'         => 'contact_recruitment-delete',
             'display_name' => trans('Delete Contact Recruitment'),
         ],
     ]

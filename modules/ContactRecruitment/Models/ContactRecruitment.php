@@ -12,7 +12,7 @@ class ContactRecruitment extends Model
 {
     use SoftDeletes;
 
-    protected $table = "contactrecruitments";
+    protected $table = "contact_recruitments";
 
     protected $primaryKey = "id";
 

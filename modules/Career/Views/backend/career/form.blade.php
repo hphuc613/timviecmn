@@ -18,23 +18,11 @@
     </div>
     <div class="form-group row">
         <div class="col-md-4">
-            <label for="position_id">{{ trans('Position') }}</label>
-        </div>
-        <div class="col-md-8">
-            @php($prompt = ['' => trans('Select')])
-            {!! Form::select('position_id', $prompt + $positions, $data->position_id ?? NULL, [
-                'id' => 'position_id',
-                'class' => 'select2 form-control',
-                'style' => 'width: 100%']) !!}
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-md-4">
             <label for="status">{{ trans('Status') }}</label>
         </div>
         <div class="col-md-8">
             @php($prompt = ['' => trans('Select')])
-            {!! Form::select('status', $prompt + $statuses, $data->status ?? NULL, [
+            {!! Form::select('status', $statuses, $data->status ?? NULL, [
                 'id' => 'status',
                 'class' => 'select2 form-control',
                 'style' => 'width: 100%']) !!}

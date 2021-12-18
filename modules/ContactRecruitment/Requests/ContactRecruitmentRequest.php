@@ -27,26 +27,24 @@ class ContactRecruitmentRequest extends FormRequest
         switch ($method){
             default:
                 return [
-                    'name'      => 'required|validate_unique:contactrecruitments',
-                    'slug'      => 'validate_unique:contactrecruitments',
+                    'name'      => 'required|validate_unique:contact_recruitments',
+                    'slug'      => 'validate_unique:contact_recruitments',
                     'email'     => 'required',
                     'phone'     => 'required',
                     'address'   => 'required',
                     'status'    => 'required',
                     'career_id' => 'required',
-                    'logo'      => 'image|mimes:jpeg,png,jpg,gif,svg',
                 ];
                 break;
             case "update":
                 return [
-                    'name'      => 'required|validate_unique:contactrecruitments,' . $this->id,
-                    'slug'      => 'validate_unique:contactrecruitments,' . $this->id,
+                    'name'      => 'required|validate_unique:contact_recruitments,' . $this->id,
+                    'slug'      => 'validate_unique:contact_recruitments,' . $this->id,
                     'email'     => 'required',
                     'phone'     => 'required',
                     'address'   => 'required',
                     'status'    => 'required',
                     'career_id' => 'required',
-                    'logo'      => 'image|mimes:jpeg,png,jpg,gif,svg',
                 ];
                 break;
         }
@@ -56,7 +54,6 @@ class ContactRecruitmentRequest extends FormRequest
         return [
             'required'           => ':attribute' . trans(' can not be empty.'),
             'career_id.required' => trans('Please select ') . ':attribute',
-            'logo'               => ':attribute' . trans(' must be an image.'),
             'mimes'              => ':attribute' .
                                     trans(' extention must be one of the following: jpeg, png, jpg, gif, svg.'),
             'validate_unique'    => ':attribute' . trans(' was exist.'),
@@ -72,7 +69,6 @@ class ContactRecruitmentRequest extends FormRequest
             'address'   => trans('Address'),
             'status'    => trans('Status'),
             'career_id' => trans('Career'),
-            'logo'      => trans('Logo')
         ];
     }
 }

@@ -41,7 +41,7 @@
             <label for="status">{{ trans('Status') }}</label>
         </div>
         <div class="col-md-8">
-            {!! Form::select('status', $prompt + $statuses, $data->status ?? NULL, [
+            {!! Form::select('status', $statuses, $data->status ?? NULL, [
                 'id' => 'status',
                 'class' => 'select2 form-control',
                 'style' => 'width: 100%']) !!}

@@ -17,7 +17,6 @@ class CreateCareersTable extends Migration{
             $table->string('name');
             $table->string('slug')->nullable();
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('position_id');
             $table->integer('status')->default(1);
             $table->softDeletes();
             $table->timestamps();

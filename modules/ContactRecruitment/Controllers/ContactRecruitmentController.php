@@ -2,16 +2,12 @@
 
 namespace Modules\ContactRecruitment\Controllers;
 
-use App\AppHelpers\Helper;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Base\Models\Status;
 use Modules\Career\Models\Career;
 use Modules\Company\Models\Company;
-use Modules\Company\Requests\CompanyRequest;
 use Modules\ContactRecruitment\Models\ContactRecruitment;
 
 class ContactRecruitmentController extends Controller{
@@ -31,7 +27,7 @@ class ContactRecruitmentController extends Controller{
         $careers  = Career::getArray();
         $data     = ContactRecruitment::filter($filter)->orderBy("created_at", "DESC")->paginate(20);
 
-        return view("ContactRecruitment::backend.contactrecruitment.index", compact("data", "statuses", "careers"));
+        return view("ContactRecruitment::backend.contact-recruitment.index", compact("data", "statuses", "careers"));
     }
 
     /**

@@ -17,7 +17,7 @@ class Banner extends Model
 
     protected $guarded = [];
 
-    public $timestamps = true;
+    public $timestamps = TRUE;
 
     const HOME_PAGE = 'Home Page';
 
@@ -29,5 +29,4 @@ class Banner extends Model
             'HOME_PAGE' => self::HOME_PAGE
         ];
     }
-
 }

@@ -43,12 +43,6 @@
                                 {!! Form::select('status', $prompt + $statuses, $filter['status'] ?? NULL, ['class' => 'select2 form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="text-input">{{ trans('Position') }}</label>
-                                {!! Form::select('position', $prompt + $positions, $filter['position'] ?? NULL, ['class' => 'select2 form-control']) !!}
-                            </div>
-                        </div>
                     </div>
                     <div class="input-group">
                         <button type="submit" class="btn btn-info mr-2">{{ trans("Search") }}</button>
@@ -70,6 +64,7 @@
                         <tr>
                             <th>#</th>
                             <th>{{ trans('Name') }}</th>
+                            <th>{{ trans('Description') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
                             <th>{{ trans('Updated At') }}</th>
@@ -82,6 +77,7 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
+                                <td>{{ isset($item->description) ? trans($item->description) : NULL }}</td>
                                 <td>{{ \Modules\Base\Models\Status::getStatus($item->status) ?? NULL }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y H:i:s')}}</td>

@@ -3,7 +3,7 @@ return [
     'name' => trans('Product Management'),
     'route' => "#",
     'sort' => 4,
-    'active'=> TRUE,
+    'active'=> FALSE,
     'id'=> 'product',
     'icon' => '<i class="fa fa-shopping-cart"></i>',
     'middleware' => [],

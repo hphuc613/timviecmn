@@ -3,7 +3,7 @@ return [
     'name' => trans('Payment Method'),
     'route' => route('get.payment_method.list'),
     'sort' => 6,
-    'active'=> TRUE,
+    'active'=> FALSE,
     'id'=> 'payment-method',
     'icon' => '<i class="mdi mdi-credit-card-multiple"></i>',
     'middleware' => [],

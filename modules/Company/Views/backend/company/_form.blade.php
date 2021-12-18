@@ -1,15 +1,11 @@
-<form action="" method="post" class="form-material" id="company-form" enctype=multipart/form-data>
+<form action="" method="post" class="" id="company-form" enctype=multipart/form-data>
     @csrf
     @php($prompt = ['' => trans('Select')])
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="name" class="title">{{ trans('Name') }}</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $data->name ?? null }}">
-            </div>
-            <div class="form-group">
-                <label for="slug" class="title">{{ trans('Slug') }}</label>
-                <input type="text" class="form-control" id="slug" name="slug" value="{{ $data->slug ?? old('slug') }}" readonly>
+                <input type="text" class="form-control" id="name" name="name" value="{{ $data->name ?? NULL }}">
             </div>
         </div>
         <div class="col-md-3">
@@ -23,29 +19,33 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="status" class="title">{{ trans('Status') }}</label>
-                {!! Form::select('status', $prompt + $statuses, $data->status ?? NULL, [
+                {!! Form::select('status', $statuses, $data->status ?? NULL, [
                     'id' => 'status',
                     'class' => 'select2 form-control']) !!}
             </div>
         </div>
         <div class="col-md-9">
             <div class="form-group">
+                <label for="slug" class="title">{{ trans('Slug') }}</label>
+                <input type="text" class="form-control" id="slug" name="slug" value="{{ $data->slug ?? old('slug') }}" readonly>
+            </div>
+            <div class="form-group">
                 <label for="email" class="title">{{ trans('Email') }}</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ $data->email ?? null }}">
+                <input type="email" class="form-control" id="email" name="email" value="{{ $data->email ?? NULL }}">
             </div>
             <div class="form-group">
                 <label for="address" class="title">{{ trans('Address') }}</label>
-                <input type="text" class="form-control" id="address" name="address" value="{{ $data->address ?? null }}">
+                <input type="text" class="form-control" id="address" name="address" value="{{ $data->address ?? NULL }}">
             </div>
             <div class="form-group">
                 <label for="phone" class="title">{{ trans('Phone') }}</label>
-                <input type="text" class="form-control" id="phone" name="phone" value="{{ $data->phone ?? null }}">
+                <input type="text" class="form-control" id="phone" name="phone" value="{{ $data->phone ?? NULL }}">
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="logo" class="title">{{ trans('Logo') }}</label>
-                <input type="file" id="logo" class="dropify" name="logo" data-default-file="{{ asset($data->logo ?? null) }}"/>
+                <input type="file" id="logo" class="dropify" name="logo" data-default-file="{{ asset($data->logo ?? NULL) }}"/>
             </div>
         </div>
         <div class="col-md-9">
@@ -54,28 +54,28 @@
                 <textarea name="remarks" id="remarks" class="form-control" rows="10">{{ $data->remarks ?? NULL }}</textarea>
             </div>
         </div>
-        <div class="col-md-3">
-            @if(isset($data))
-{{--                <div class="form-group">--}}
-{{--                    <label for="tags" class="title">{{ trans('Updated By') }}</label>--}}
-{{--                    <div>{{ $data->updatedBy->name ?? "N/A" }}</div>--}}
-{{--                </div>--}}
+        @if(isset($data))
+            <div class="col-md-9">
+                {{--                <div class="form-group">--}}
+                {{--                    <label for="tags" class="title">{{ trans('Updated By') }}</label>--}}
+                {{--                    <div>{{ $data->updatedBy->name ?? "N/A" }}</div>--}}
+                {{--                </div>--}}
                 <div class="form-group">
                     <label for="tags" class="title">{{ trans('Updated At') }}</label>
                     <div>{{ formatDate(strtotime($data->updated_at), 'd-m-Y H:i:s') }}</div>
                 </div>
-{{--                <div class="form-group">--}}
-{{--                    <label for="tags" class="title">{{ trans('Created By') }}</label>--}}
-{{--                    <div>{{ $data->author->name ?? "N/A" }}</div>--}}
-{{--                </div>--}}
+                {{--                <div class="form-group">--}}
+                {{--                    <label for="tags" class="title">{{ trans('Created By') }}</label>--}}
+                {{--                    <div>{{ $data->author->name ?? "N/A" }}</div>--}}
+                {{--                </div>--}}
                 <div class="form-group">
                     <label for="tags" class="title">{{ trans('Created At') }}</label>
                     <div>{{ formatDate(strtotime($data->created_at), 'd-m-Y H:i:s') }}</div>
                 </div>
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
-    <div class="input-group mt-5">
+    <div class="input-group">
         <button type="submit" class="btn btn-info mr-2">{{ trans('Save') }}</button>
         <button type="reset" class="btn btn-default" data-dismiss="modal">{{ trans('Cancel') }}</button>
     </div>

@@ -65,7 +65,8 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{ trans('Name') }}</th>
+                            <th>{{ trans('Name') }}
+                            <th>{{ trans('Description') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
                             <th>{{ trans('Updated At') }}</th>
@@ -78,6 +79,7 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
+                                <td>{{ isset($item->description) ? trans($item->description) : NULL }}</td>
                                 <td>{{ \Modules\Base\Models\Status::getStatus($item->status) ?? null }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s')}}</td>

@@ -37,19 +37,4 @@ class Position extends BaseModel
 
         return $data;
     }
-
-    protected static function boot() {
-        parent::boot();
-
-        static::deleting(function ($position) {
-            $position->careers->each->delete();
-        });
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function careers() {
-        return $this->hasMany(Career::class, 'position_id');
-    }
 }

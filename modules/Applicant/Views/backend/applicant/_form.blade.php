@@ -17,7 +17,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="status" class="title">{{ trans('Status') }}</label>
-                {!! Form::select('status', $prompt + $statuses, $data->status ?? NULL, [
+                {!! Form::select('status', $statuses, $data->status ?? NULL, [
                     'id' => 'status',
                     'class' => 'select2 form-control']) !!}
             </div>
@@ -47,7 +47,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="birthday" class="title">{{ trans('Birthday') }}</label>
-                <input type="date" class="form-control" id="birthday" name="birthday" value="{{ $data->birthday ?? NULL }}">
+                <input type="date" class="form-control" id="birthday" name="birthday" value="{{isset($data->birthday) ? date('Y-m-d',strtotime($data->birthday)) : NULL }}">
             </div>
         </div>
         <div class="col-md-3">
@@ -59,7 +59,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="start_date" class="title">{{ trans('Start Date') }}</label>
-                <input type="date" class="form-control" id="start_date" name="start_date" value="{{ $data->start_date ?? NULL }}">
+                <input type="date" class="form-control" id="start_date" name="start_date" value="{{isset($data->start_date) ? date('Y-m-d',strtotime($data->start_date)) : NULL }}">
             </div>
         </div>
         <div class="col-md-3">
@@ -83,9 +83,8 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-3">
-        @if(isset($data))
+    @if(isset($data))
+        <div class="col-md-9">
             {{--                <div class="form-group">--}}
             {{--                    <label for="tags" class="title">{{ trans('Updated By') }}</label>--}}
             {{--                    <div>{{ $data->updatedBy->name ?? "N/A" }}</div>--}}
@@ -102,9 +101,9 @@
                 <label for="tags" class="title">{{ trans('Created At') }}</label>
                 <div>{{ formatDate(strtotime($data->created_at), 'd-m-Y H:i:s') }}</div>
             </div>
-        @endif
-    </div>
-    <div class="input-group mt-5">
+        </div>
+    @endif
+    <div class="input-group">
         <button type="submit" class="btn btn-info mr-2">{{ trans('Save') }}</button>
         <button type="reset" class="btn btn-default" data-dismiss="modal">{{ trans('Cancel') }}</button>
     </div>

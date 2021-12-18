@@ -16,8 +16,7 @@
             </div>
         </div>
         <div class="mb-3 d-flex justify-content-end group-btn">
-            <a href="{{ route('get.banner.create') }}" class="btn btn-primary"
-               data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Create Banner") }}">
+            <a href="{{ route('get.banner.create') }}" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Create Banner") }}">
                 <i class="fa fa-plus"></i>&nbsp; {{ trans("Add New") }}
             </a>
         </div>
@@ -25,8 +24,7 @@
     <!--Search box-->
     <div class="search-box">
         <div class="card">
-            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false"
-                 aria-controls="form-search-box">
+            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false" aria-controls="form-search-box">
                 <div class="title">{{ trans("Search") }}</div>
             </div>
             <div class="card-body collapse show" id="form-search-box">
@@ -59,6 +57,7 @@
                         <tr>
                             <th>#</th>
                             <th>{{ trans('Name') }}</th>
+                            <th>{{ trans('Page') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
                             <th>{{ trans('Updated At') }}</th>
@@ -71,16 +70,14 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
-                                <td>{{ \Modules\Base\Models\Status::getStatus($item->status) ?? null }}</td>
+                                <td>{{ isset($item->page_id) ? trans(\Modules\Banner\Models\Banner::getPageList()[$item->page_id]) : NULL }}</td>
+                                <td>{{ \Modules\Base\Models\Status::getStatus($item->status) ?? NULL }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y H:i:s')}}</td>
                                 <td class="link-action">
-                                    <a href="{{ route('get.banner.update', $item->id) }}" class="btn btn-primary"
-                                       data-toggle="modal" data-target="#form-modal"
-                                       data-title="{{ trans("Update Banner") }}">
-                                        <i class="fa fa-pencil"></i></a>
-                                    <a href="{{ route('get.banner.delete',$item->id) }}"
-                                       class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></a>
+                                    <a href="{{ route('get.banner.update', $item->id) }}" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Update Banner") }}">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a href="{{ route('get.banner.delete',$item->id) }}" class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach

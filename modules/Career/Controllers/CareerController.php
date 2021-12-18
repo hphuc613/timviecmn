@@ -26,10 +26,9 @@ class CareerController extends Controller{
     public function index(Request $request){
         $filter    = $request->all();
         $statuses  = Status::getStatuses();
-        $positions = Position::getArray();
         $data      = Career::filter($filter)->orderBy("created_at", "DESC")->paginate(20);
 
-        return view("Career::backend.career.index", compact("data", "statuses", "positions"));
+        return view("Career::backend.career.index", compact("data", "statuses"));
     }
 
     /**
@@ -39,13 +38,12 @@ class CareerController extends Controller{
      */
     public function getCreate(Request $request){
         $statuses  = Status::getStatuses();
-        $positions = Position::getArray(Status::STATUS_ACTIVE);
 
         if (!$request->ajax()){
             return redirect()->back();
         }
 
-        return view("Career::backend.career.form", compact("statuses", "positions"));
+        return view("Career::backend.career.form", compact("statuses"));
     }
 
     /**
@@ -69,13 +67,12 @@ class CareerController extends Controller{
     public function getUpdate(Request $request, $id){
         $statuses  = Status::getStatuses();
         $data      = Career::query()->find($id);
-        $positions = Position::getArray(Status::STATUS_ACTIVE);
 
         if (!$request->ajax()){
             return redirect()->back();
         }
 
-        return view("Career::backend.career.form", compact("data", "statuses", "positions"));
+        return view("Career::backend.career.form", compact("data", "statuses"));
     }
 
     /**
