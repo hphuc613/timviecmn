@@ -1,0 +1,163 @@
+@import "mixins";
+
+body {
+  font-family: 'Piazzolla', serif;
+}
+
+header {
+  nav {
+    a {
+      font-size: 18px !important;
+      font-weight: normal !important;
+      text-transform: capitalize !important;
+
+      &:hover {
+        color: #1ABC9C !important;
+      }
+    }
+
+    .recruit-modal {
+      float: right;
+      width: 6.25rem;
+      height: 6.25rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        color: black;
+      }
+    }
+  }
+
+  &.sticky-header {
+    .recruit-modal {
+      height: 3.75rem;
+    }
+  }
+
+  &.dark {
+    nav {
+      a {
+        color: white;
+      }
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.index-page {
+  .slider-caption{
+    @include mobile{
+      h2{
+        font-size: 50px;
+      }
+    }
+  }
+  .search-group {
+    button {
+      background-color: rgba(0, 0, 0, 0.2);
+      color: white;
+      text-align: center;
+      width: 3.75rem;
+      height: 3.75rem;
+      font-size: 20px;
+
+      &.search-btn {
+        width: 10rem;
+        background-color: black;
+      }
+    }
+
+    input {
+      color: white !important;
+      font-size: 20px;
+    }
+  }
+}
+
+.news-listing {
+  .news {
+    padding: 0 3rem;
+
+    .listing {
+      margin-bottom: 5rem;
+
+      .news-item {
+        display: flex;
+
+        .image {
+          width: 10rem;
+          margin-right: 1.5rem;
+        }
+
+        .title a h2{
+          font-weight: 600;
+        }
+        
+        .time{
+          font-style: italic;
+          margin-bottom: 1rem;
+        }
+
+        @include mobile {
+          .image {
+            margin-right: 0;
+            width: 25%;
+          }
+
+          .title a h2{
+            font-size: 20px;
+            font-weight: 600;
+          }
+
+          .time, .description{
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
+    @include mobile {
+      padding: inherit;
+    }
+  }
+}
+
+.btn-close{
+  color: black;
+  &:focus{
+    box-shadow: inherit;
+    color: inherit;
+  }
+}
+
+.select2 {
+  width: 100% !important;
+
+  .select2-selection {
+    border-color: #aaaaaa73;
+    border-radius: 0;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.select2-container {
+  z-index: 9999;
+  .select2-dropdown {
+    border-color: #aaaaaa73;
+  }
+}
+
+footer {
+  .social-icon {
+    i {
+      font-size: 18px;
+    }
+  }
+}

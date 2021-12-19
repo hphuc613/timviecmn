@@ -1,0 +1,126 @@
+body {
+  font-family: "Piazzolla", serif;
+}
+
+header nav a {
+  font-size: 18px !important;
+  font-weight: normal !important;
+  text-transform: capitalize !important;
+}
+header nav a:hover {
+  color: #1ABC9C !important;
+}
+header nav .recruit-modal {
+  float: right;
+  width: 6.25rem;
+  height: 6.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header nav .recruit-modal a {
+  color: black;
+}
+header.sticky-header .recruit-modal {
+  height: 3.75rem;
+}
+header.dark nav a {
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 739px) {
+  .index-page .slider-caption h2 {
+    font-size: 50px;
+  }
+}
+.index-page .search-group button {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  text-align: center;
+  width: 3.75rem;
+  height: 3.75rem;
+  font-size: 20px;
+}
+.index-page .search-group button.search-btn {
+  width: 10rem;
+  background-color: black;
+}
+.index-page .search-group input {
+  color: white !important;
+  font-size: 20px;
+}
+
+.news-listing .news {
+  padding: 0 3rem;
+}
+.news-listing .news .listing {
+  margin-bottom: 5rem;
+}
+.news-listing .news .listing .news-item {
+  display: flex;
+}
+.news-listing .news .listing .news-item .image {
+  width: 10rem;
+  margin-right: 1.5rem;
+}
+.news-listing .news .listing .news-item .title a h2 {
+  font-weight: 600;
+}
+.news-listing .news .listing .news-item .time {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+@media (max-width: 739px) {
+  .news-listing .news .listing .news-item .image {
+    margin-right: 0;
+    width: 25%;
+  }
+  .news-listing .news .listing .news-item .title a h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .news-listing .news .listing .news-item .time, .news-listing .news .listing .news-item .description {
+    font-size: 13px;
+  }
+}
+@media (max-width: 739px) {
+  .news-listing .news {
+    padding: inherit;
+  }
+}
+
+.btn-close {
+  color: black;
+}
+.btn-close:focus {
+  box-shadow: inherit;
+  color: inherit;
+}
+
+.select2 {
+  width: 100% !important;
+}
+.select2 .select2-selection {
+  border-color: #aaaaaa73;
+  border-radius: 0;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.select2-container {
+  z-index: 9999;
+}
+.select2-container .select2-dropdown {
+  border-color: #aaaaaa73;
+}
+
+footer .social-icon i {
+  font-size: 18px;
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -3,7 +3,7 @@ return [
     'name' => trans('Post Management'),
     'route' => '#',
     'sort' => 3,
-    'active'=> FALSE,
+    'active'=> TRUE,
     'id'=> 'post',
     'icon' => '<i class="fa fa-clipboard"></i>',
     'middleware' => [],
