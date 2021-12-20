@@ -85,29 +85,38 @@
                             LANG
                         </a>
                         <div class="dropdown-menu animated flipInY">
-                            <a class="dropdown-item @if(session()->get('locale') === 'tw') active @endif"
-                               href="{{ route('change_locale','tw') }}">
-                                @if(session()->get('locale') === 'tw') <i
-                                    class="icon-lang mdi mdi-check text-success"></i> @endif
-                                {{ trans('Chinese') }}(Traditional)
-                            </a>
-                            <a class="dropdown-item @if(session()->get('locale') === 'cn') active @endif"
-                               href="{{ route('change_locale','cn') }}">
-                                @if(session()->get('locale') === 'cn') <i
-                                    class="icon-lang mdi mdi-check text-success"></i> @endif
-                                {{ trans('Chinese') }}(Simplify)
-                            </a>
+                            <div class="d-none">
+                                <a class="dropdown-item @if(session()->get('locale') === 'tw') active @endif"
+                                   href="{{ route('change_locale','tw') }}">
+                                    @if(session()->get('locale') === 'tw') <i
+                                        class="icon-lang mdi mdi-check text-success"></i> @endif
+                                    {{ trans('Chinese') }}(Traditional)
+                                </a>
+                                <a class="dropdown-item @if(session()->get('locale') === 'cn') active @endif"
+                                   href="{{ route('change_locale','cn') }}">
+                                    @if(session()->get('locale') === 'cn') <i
+                                        class="icon-lang mdi mdi-check text-success"></i> @endif
+                                    {{ trans('Chinese') }}(Simplify)
+                                </a>
+                            </div>
                             <a class="dropdown-item @if(session()->get('locale') === 'en') active @endif"
                                href="{{ route('change_locale','en') }}">
                                 @if(session()->get('locale') === 'en') <i
                                     class="icon-lang mdi mdi-check text-success"></i> @endif
                                 {{ trans('English') }}(US)
                             </a>
+                            <a class="dropdown-item @if(session()->get('locale') === 'vi') active @endif"
+                               href="{{ route('change_locale','vi') }}">
+                                @if(session()->get('locale') === 'vi') <i
+                                    class="icon-lang mdi mdi-check text-success"></i> @endif
+                                {{ trans('Việt Nam') }}
+                            </a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item dropdown u-pro">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href=""
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="hidden-md-down">
                             {{ auth('admin')->user()->name }} <i class="fa fa-angle-down"></i>
                         </span>
@@ -119,11 +128,12 @@
                         <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account
                             Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a href="{{ route("admin.get.logout") }}" class="dropdown-item"><i class="fa fa-power-off"></i> {{ trans('Logout') }}</a>
+                        <a href="{{ route("admin.get.logout") }}" class="dropdown-item"><i
+                                class="fa fa-power-off"></i> {{ trans('Logout') }}</a>
                     </div>
                 </li>
-{{--                <li class="nav-item right-side-toggle"><a class="nav-link  waves-effect waves-light"--}}
-{{--                                                          href="javascript:void(0)"><i class="ti-settings"></i></a></li>--}}
+                {{--                <li class="nav-item right-side-toggle"><a class="nav-link  waves-effect waves-light"--}}
+                {{--                                                          href="javascript:void(0)"><i class="ti-settings"></i></a></li>--}}
             </ul>
         </div>
     </nav>
