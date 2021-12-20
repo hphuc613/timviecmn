@@ -64,15 +64,30 @@ header.dark nav a {
   display: flex;
 }
 .news-listing .news .listing .news-item .image {
-  width: 10rem;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
+}
+.news-listing .news .listing .news-item .image img {
+  width: 12rem;
+  height: 12rem;
+  object-fit: cover;
 }
 .news-listing .news .listing .news-item .title a h2 {
   font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 .news-listing .news .listing .news-item .time {
   font-style: italic;
-  margin-bottom: 1rem;
+}
+.news-listing .news .listing .news-item .description {
+  font-size: 1rem;
+  max-height: 82px;
+  line-height: 20px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 @media (max-width: 739px) {
   .news-listing .news .listing .news-item .image {

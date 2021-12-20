@@ -88,6 +88,7 @@
                         <tr>
                             <th>#</th>
                             <th>{{ trans('Name') }}</th>
+                            <th>{{ trans('Career') }}</th>
                             <th>{{ trans('Email') }}</th>
                             <th>{{ trans('Phone') }}</th>
                             <th>{{ trans('Address') }}</th>
@@ -103,6 +104,7 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
+                                <td>{{ trans($item->career->name ?? NULL) }}</td>
                                 <td>{{ trans($item->email) }}</td>
                                 <td>{{ trans($item->phone) }}</td>
                                 <td>{{ trans($item->address) }}</td>

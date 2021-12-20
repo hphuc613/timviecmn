@@ -41,6 +41,22 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
+                                <label for="cate_id" class="title">{{ trans('Company') }}</label>
+                                {!! Form::select('company_id', $prompt + $companies, $filter['company_id']  ?? NULL, [
+                                    'id' => 'company_id',
+                                    'class' => 'select2 form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="cate_id" class="title">{{ trans('Position') }}</label>
+                                {!! Form::select('position_id', $prompt + $positions, $filter['position_id'] ?? NULL, [
+                                    'id' => 'position_id',
+                                    'class' => 'select2 form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
                                 <label for="text-input">{{ trans('Author') }}</label>
                                 {!! Form::select('created_by', $prompt + $authors, $filter['created_by'] ?? NULL, ['class' => 'select2 form-control']) !!}
                             </div>
@@ -73,7 +89,7 @@
                             <th>#</th>
                             <th>{{ trans('Title') }}</th>
                             <th>{{ trans('Image') }}</th>
-                            <th>{{ trans('Category') }}</th>
+                            <th>{{ trans('Company') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Author') }}</th>
                             <th>{{ trans('Updated By') }}</th>
@@ -95,7 +111,7 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td>{{ $item->category->name }}</td>
+                                <td>{{ $item->company->name ?? NULL }}</td>
                                 <?php
                                 $status = $statuses[$item->status] ?? null;
                                 $color = 'text-danger';

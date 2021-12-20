@@ -11,7 +11,7 @@
                         Việc làm Miền Nam tự hào 1 năm làm cầu nối cho hơn 1 lượt tuyển dụng và tìm việc thành công
                     </div>
                     <div class="search d-none d-sm-block mb-3">
-                        <form action="list.html" method="get">
+                        <form action="{{ route('get.frontend.listing') }}" method="get">
                             <div data-animate="fadeInUp" data-delay="800" class="search-group">
                                 <div class="input-group mb-3">
                                     <button class="input-group-text border-end-0 d-block">

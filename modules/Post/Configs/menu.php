@@ -1,14 +1,14 @@
 <?php
 return [
-    'name' => trans('Post Management'),
-    'route' => '#',
+    'name' => trans('Post'),
+    'route' => route('get.post.list'),
     'sort' => 3,
     'active'=> TRUE,
     'id'=> 'post',
     'icon' => '<i class="fa fa-clipboard"></i>',
     'middleware' => [],
     'group' => [
-        [
+        /*[
             'name' => trans('Post Category'),
             'route' => route('get.post_category.list'),
             'id' => 'post-category',
@@ -19,6 +19,6 @@ return [
             'route' => route('get.post.list'),
             'id' => 'post',
             'middleware' => ['post']
-        ]
+        ]*/
     ]
 ];

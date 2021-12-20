@@ -13,7 +13,7 @@
             <nav id="primary-menu">
                 <ul>
                     <li><a href="#">Gần bạn</a></li>
-                    <li><a href="list.html">Tin tuyển dụng</a></li>
+                    <li><a href="{{ route('get.frontend.listing') }}">Tin tuyển dụng</a></li>
                     <li><a href="#form-modal" data-url="{{ route('get.frontend.recruit') }}" data-bs-toggle="modal">Đăng tuyển</a></li>
                 </ul>
             </nav>

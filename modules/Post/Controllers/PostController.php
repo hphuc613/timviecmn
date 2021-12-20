@@ -38,8 +38,10 @@ class PostController extends Controller {
         $statuses = Status::getStatuses();
         $authors  = User::query()->orderBy("name")->pluck('name', 'id')->toArray();
         $data     = Post::filter($filter)->orderBy("created_at", "DESC")->paginate(20);
+        $companies    = Company::getArray();
+        $positions  = Position::getArray();
 
-        return view("Post::backend.post.index", compact("data", "filter", "statuses", "authors"));
+        return view("Post::backend.post.index", compact("data", "filter", "statuses", "authors", "companies", "positions"));
     }
 
     /**
