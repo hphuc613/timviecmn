@@ -2,7 +2,6 @@
 
 namespace Modules\Post\Requests;
 
-use App\AppHelpers\Helper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostRequest extends FormRequest {
@@ -22,10 +21,12 @@ class PostRequest extends FormRequest {
      */
     public function rules() {
         return [
-            'title'   => 'required',
-            'status'  => 'required',
-            'cate_id' => 'required',
-            'image'   => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'title'       => 'required',
+            'status'      => 'required',
+//            'cate_id'     => 'required',
+            'company_id'  => 'required',
+            'position_id' => 'required',
+            'image'       => 'image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 
@@ -47,10 +48,12 @@ class PostRequest extends FormRequest {
      */
     public function attributes() {
         return [
-            'title'   => 'Title',
-            'status'  => 'Status',
-            'cate_id' => 'Category',
-            'image'   => 'Image'
+            'title'       => trans('Title'),
+            'status'      => trans('Status'),
+//            'cate_id'     => trans('Category'),
+            'company_id'  => trans('Company'),
+            'position_id' => trans('required'),
+            'image'       => trans('Image')
         ];
     }
 }

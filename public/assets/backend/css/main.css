@@ -131,4 +131,8 @@ label, .title {
   background: inherit;
 }
 
+.form-material .form-control[readonly] {
+  background-color: #e9ecef !important;
+}
+
 /*# sourceMappingURL=main.css.map */

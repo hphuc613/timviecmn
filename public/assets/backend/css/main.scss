@@ -19,11 +19,13 @@ body {
 label, .title {
     font-weight: 500 !important;
 }
-.sidebar-nav{
-    a{
+
+.sidebar-nav {
+    a {
         padding-right: 30px !important;
     }
 }
+
 .table-striped {
     tbody tr {
         &:nth-of-type(odd) {
@@ -62,7 +64,7 @@ label, .title {
             object-fit: cover;
         }
 
-        &.image-in-listing{
+        &.image-in-listing {
             padding: 0;
 
             img {
@@ -72,7 +74,7 @@ label, .title {
             }
         }
 
-        .btn-remove{
+        .btn-remove {
             position: absolute;
             right: -7px;
             top: -8px;
@@ -111,8 +113,8 @@ label, .title {
     border-radius: 1rem;
 }
 
-.btn{
-    i{
+.btn {
+    i {
         font-size: 18px;
     }
 }
@@ -158,5 +160,11 @@ label, .title {
 .elfinder {
     .ui-widget-header {
         background: inherit;
+    }
+}
+
+.form-material {
+    .form-control[readonly] {
+        background-color: #e9ecef !important;
     }
 }

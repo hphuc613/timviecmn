@@ -3,13 +3,12 @@
 namespace Modules\Company\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Base\Models\BaseModel;
 use Modules\Career\Models\Career;
 
-class Company extends Model
-{
+class Company extends BaseModel {
     use SoftDeletes;
 
     protected $table = "companys";

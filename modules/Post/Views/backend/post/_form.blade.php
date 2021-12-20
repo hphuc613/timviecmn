@@ -9,11 +9,19 @@
                        value="{{ $data->title ?? null }}">
             </div>
         </div>
-        <div class="col-md-3">
+        {{--<div class="col-md-3">
             <div class="form-group">
                 <label for="cate_id" class="title">{{ trans('Category') }}</label>
                 {!! Form::select('cate_id', $prompt + $categories, $data->cate_id ?? NULL, [
                     'id' => 'cate_id',
+                    'class' => 'select2 form-control']) !!}
+            </div>
+        </div>--}}
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="cate_id" class="title">{{ trans('Position') }}</label>
+                {!! Form::select('position_id', $prompt + $positions, $data->position_id ?? NULL, [
+                    'id' => 'position_id',
                     'class' => 'select2 form-control']) !!}
             </div>
         </div>
@@ -22,6 +30,20 @@
                 <label for="status" class="title">{{ trans('Status') }}</label>
                 {!! Form::select('status', $prompt + $statuses, $data->status ?? NULL, [
                     'id' => 'status',
+                    'class' => 'select2 form-control']) !!}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="slug" class="title">{{ trans('Slug') }}</label>
+                <input type="text" class="form-control" id="slug"  value="{{ $data->slug ?? null }}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="cate_id" class="title">{{ trans('Company') }}</label>
+                {!! Form::select('company_id', $prompt + $companies, $data->company_id ?? NULL, [
+                    'id' => 'company_id',
                     'class' => 'select2 form-control']) !!}
             </div>
         </div>
