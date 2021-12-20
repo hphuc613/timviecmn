@@ -51,6 +51,7 @@ class CompanyController extends Controller{
     public function postCreate(CompanyRequest $request){
         $data = $request->all();
         unset($data['logo']);
+        $data['slug'] = Helper::slug($request->name);
         $company = Company::query()->create($data);
         if ($request->hasFile('logo')){
             $logo          = $request->logo;
@@ -94,6 +95,7 @@ class CompanyController extends Controller{
             $upload_address    = 'Company/' . $company->id . '-' . $company->name;
             $data['thumbnail'] = Helper::storageFile($thumbnail, $thumbnail_name, $upload_address);
         }
+        $data['slug'] = Helper::slug($request->name);
         $company->update($data);
         $request->session()->flash('success', trans('Updated successfully.'));
 

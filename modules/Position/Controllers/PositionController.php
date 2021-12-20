@@ -2,6 +2,7 @@
 
 namespace Modules\Position\Controllers;
 
+use App\AppHelpers\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -51,7 +52,9 @@ class PositionController extends Controller{
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postCreate(PositionRequest $request){
-        Position::query()->create($request->all());
+        $data = $request->all();
+        $data['slug'] = Helper::slug($request->name);
+        Position::query()->create($data);
         $request->session()->flash('success', trans('Created successfully.'));
 
         return back();
@@ -80,7 +83,9 @@ class PositionController extends Controller{
      * @return RedirectResponse
      */
     public function postUpdate(PositionRequest $request, $id){
-        Position::query()->find($id)->update($request->all());
+        $data = $request->all();
+        $data['slug'] = Helper::slug($request->name);
+        Position::query()->find($id)->update($data);
         $request->session()->flash('success', trans('Updated successfully.'));
 
         return back();

@@ -2,6 +2,7 @@
 
 namespace Modules\Career\Controllers;
 
+use App\AppHelpers\Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -52,7 +53,9 @@ class CareerController extends Controller{
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postCreate(CareerRequest $request){
-        Career::query()->create($request->all());
+        $data = $request->all();
+        $data['slug'] = Helper::slug($request->name);
+        Career::query()->create($data);
         $request->session()->flash('success', trans('Created successfully.'));
 
         return back();
@@ -82,7 +85,9 @@ class CareerController extends Controller{
      * @return RedirectResponse
      */
     public function postUpdate(CareerRequest $request, $id){
-        Career::query()->find($id)->update($request->all());
+        $data = $request->all();
+        $data['slug'] = Helper::slug($request->name);
+        Career::query()->find($id)->update($data);
         $request->session()->flash('success', trans('Updated successfully.'));
 
         return back();
