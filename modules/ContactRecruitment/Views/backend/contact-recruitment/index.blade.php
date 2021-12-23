@@ -89,12 +89,12 @@
                         <tr>
                             <th>#</th>
                             <th>{{ trans('Name') }}</th>
+                            <th>{{ trans('Career') }}</th>
                             <th>{{ trans('Email') }}</th>
                             <th>{{ trans('Phone') }}</th>
                             <th>{{ trans('Address') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
-                            <th>{{ trans('Updated At') }}</th>
                             <th class="action">{{ trans('Action') }}</th>
                         </tr>
                         </thead>
@@ -104,17 +104,17 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
+                                <td>{{ trans($item->career->name) }}</td>
                                 <td>{{ trans($item->email) }}</td>
                                 <td>{{ trans($item->phone) }}</td>
                                 <td>{{ trans($item->address) }}</td>
-                                <td>{{ \Modules\Base\Models\Status::getStatus($item->status) ?? null }}</td>
+                                <td>{{ \Modules\ContactRecruitment\Models\ContactRecruitment::getStatus($item->status) ?? null }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y H:i:s')}}</td>
                                 <td class="link-action">
-                                    <a href="" class="btn btn-primary"
-                                       data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Approve Company") }}">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    <a href="{{ route('get.company.delete', $item->id) }}"
+                                    <a href="{{ route('get.contact_recruitment.update', $item->id) }}" class="btn btn-primary"
+                                       data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Detail") }}">
+                                        <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="{{ route('get.contact_recruitment.delete', $item->id) }}"
                                        class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
