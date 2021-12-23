@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Base\Models\Status;
 use Modules\Career\Models\Career;
+use Modules\City\Models\City;
 use Modules\Company\Models\Company;
 use Modules\Company\Requests\CompanyRequest;
 
@@ -28,9 +29,11 @@ class CompanyController extends Controller{
         $filter   = $request->all();
         $statuses = Status::getStatuses();
         $careers  = Career::getArray();
+        $cities    = City::getArray();
         $data     = Company::filter($filter)->orderBy("created_at", "DESC")->paginate(20);
 
-        return view("Company::backend.company.index", compact("data", "statuses", "careers"));
+        return view("Company::backend.company.index",
+            compact("data", "statuses", "careers", "cities"));
     }
 
     /**
@@ -39,8 +42,9 @@ class CompanyController extends Controller{
     public function getCreate(){
         $statuses = Status::getStatuses();
         $careers  = Career::getArray(Status::STATUS_ACTIVE);
+        $cities    = City::getArray(Status::STATUS_ACTIVE);
 
-        return view("Company::backend.company.create", compact("statuses", "careers"));
+        return view("Company::backend.company.create", compact("statuses", "careers", "cities"));
     }
 
     /**
@@ -52,7 +56,7 @@ class CompanyController extends Controller{
         $data = $request->all();
         unset($data['logo']);
         $data['slug'] = Helper::slug($request->name);
-        $company = Company::query()->create($data);
+        $company      = Company::query()->create($data);
         if ($request->hasFile('logo')){
             $logo          = $request->logo;
             $company->logo = Helper::storageFile($logo,
@@ -73,8 +77,9 @@ class CompanyController extends Controller{
         $data     = Company::query()->find($id);
         $statuses = Status::getStatuses();
         $careers  = Career::getArray(Status::STATUS_ACTIVE);
+        $cities    = City::getArray(Status::STATUS_ACTIVE);
 
-        return view("Company::backend.company.update", compact("data", "statuses", "careers"));
+        return view("Company::backend.company.update", compact("data", "statuses", "careers", "cities"));
     }
 
     /**
@@ -109,8 +114,7 @@ class CompanyController extends Controller{
      * @return RedirectResponse
      */
     public function delete(Request $request, $id){
-        $data = Company::query()->find($id)->delete();
-        $data->delete();
+        Company::query()->find($id)->delete();
         $request->session()->flash('success', trans('Deleted successfully.'));
 
         return back();

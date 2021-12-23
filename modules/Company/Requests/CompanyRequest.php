@@ -32,6 +32,7 @@ class CompanyRequest extends FormRequest{
                     'address'   => 'required',
                     'status'    => 'required',
                     'career_id' => 'required',
+                    'city_id'   => 'required',
                     'logo'      => 'image|mimes:jpeg,png,jpg,gif,svg',
                 ];
                 break;
@@ -44,6 +45,7 @@ class CompanyRequest extends FormRequest{
                     'address'   => 'required',
                     'status'    => 'required',
                     'career_id' => 'required',
+                    'city_id'   => 'required',
                     'logo'      => 'image|mimes:jpeg,png,jpg,gif,svg',
                 ];
                 break;
@@ -54,6 +56,7 @@ class CompanyRequest extends FormRequest{
         return [
             'required'           => ':attribute' . trans(' can not be empty.'),
             'career_id.required' => trans('Please select ') . ':attribute',
+            'city_id.required'   => trans('Please select ') . ':attribute',
             'logo'               => ':attribute' . trans(' must be an image.'),
             'mimes'              => ':attribute' .
                                     trans(' extention must be one of the following: jpeg, png, jpg, gif, svg.'),
@@ -70,6 +73,7 @@ class CompanyRequest extends FormRequest{
             'address'   => trans('Address'),
             'status'    => trans('Status'),
             'career_id' => trans('Career'),
+            'city_id'   => trans('Career'),
             'logo'      => trans('Logo')
         ];
     }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Models\BaseModel;
 use Modules\Career\Models\Career;
+use Modules\City\Models\City;
 
 class Company extends BaseModel {
     use SoftDeletes;
@@ -26,7 +27,7 @@ class Company extends BaseModel {
      * @return Builder
      */
     public static function filter($filter) {
-        $data = self::query()->with('career');
+        $data = self::query()->with('career')->with('city');
         if (isset($filter['name'])) {
             $data = $data->where('name', 'LIKE', '%' . $filter['name'] . '%');
         }
@@ -45,6 +46,9 @@ class Company extends BaseModel {
         if (isset($filter['career'])) {
             $data = $data->where('career_id', $filter['career']);
         }
+        if (isset($filter['city'])) {
+            $data = $data->where('city_id', $filter['city']);
+        }
 
         return $data;
     }
@@ -54,5 +58,12 @@ class Company extends BaseModel {
      */
     public function career() {
         return $this->belongsTo(Career::class, 'career_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function city() {
+        return $this->belongsTo(City::class, 'city_id');
     }
 }

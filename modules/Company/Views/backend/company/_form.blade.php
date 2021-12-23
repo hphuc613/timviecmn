@@ -18,9 +18,9 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <label for="status" class="title">{{ trans('Status') }}</label>
-                {!! Form::select('status', $statuses, $data->status ?? NULL, [
-                    'id' => 'status',
+                <label for="career_id" class="title">{{ trans('City') }}</label>
+                {!! Form::select('city_id', $prompt + $cities, $data->city_id ?? NULL, [
+                    'id' => 'city_id',
                     'class' => 'select2 form-control']) !!}
             </div>
         </div>
@@ -43,6 +43,12 @@
             </div>
         </div>
         <div class="col-md-3">
+            <div class="form-group">
+                <label for="status" class="title">{{ trans('Status') }}</label>
+                {!! Form::select('status', $statuses, $data->status ?? NULL, [
+                    'id' => 'status',
+                    'class' => 'select2 form-control']) !!}
+            </div>
             <div class="form-group">
                 <label for="logo" class="title">{{ trans('Logo') }}</label>
                 <input type="file" id="logo" class="dropify" name="logo" data-default-file="{{ asset($data->logo ?? NULL) }}"/>
