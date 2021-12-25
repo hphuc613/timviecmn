@@ -21,12 +21,12 @@ class PostRequest extends FormRequest {
      */
     public function rules() {
         return [
-            'title'       => 'required',
-            'status'      => 'required',
-//            'cate_id'     => 'required',
-            'company_id'  => 'required',
-            'position_id' => 'required',
-            'image'       => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'title'        => 'required',
+            'status'       => 'required',
+            //            'cate_id'     => 'required',
+            'position_ids' => 'required',
+            'company_id'   => 'required',
+            'image'        => 'image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 
@@ -50,9 +50,9 @@ class PostRequest extends FormRequest {
         return [
             'title'       => trans('Title'),
             'status'      => trans('Status'),
-//            'cate_id'     => trans('Category'),
+            //            'cate_id'     => trans('Category'),
             'company_id'  => trans('Company'),
-            'position_id' => trans('required'),
+            'position_ids' => trans('required'),
             'image'       => trans('Image')
         ];
     }

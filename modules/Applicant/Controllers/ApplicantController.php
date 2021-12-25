@@ -12,6 +12,7 @@ use Modules\Applicant\Requests\ApplicantRequest;
 use Modules\Base\Models\Status;
 use Modules\Career\Models\Career;
 use Modules\Position\Models\Position;
+use Modules\Post\Models\Post;
 
 class ApplicantController extends Controller{
 
@@ -40,8 +41,9 @@ class ApplicantController extends Controller{
      */
     public function getCreate(){
         $statuses = Status::getStatuses();
+        $positions = Position::getArray(Status::STATUS_ACTIVE);
 
-        return view("Applicant::backend.applicant.create", compact("statuses"));
+        return view("Applicant::backend.applicant.create", compact("statuses", "positions"));
     }
 
     /**
@@ -65,8 +67,10 @@ class ApplicantController extends Controller{
     public function getUpdate($id){
         $statuses  = Status::getStatuses();
         $data      = Applicant::query()->find($id);
+        $positions = Position::getArray(Status::STATUS_ACTIVE);
+        $post = Post::query()->find($data->post_id);
 
-        return view("Applicant::backend.applicant.update", compact("data", "statuses"));
+        return view("Applicant::backend.applicant.update", compact("data", "statuses", "positions", "post"));
     }
 
     /**

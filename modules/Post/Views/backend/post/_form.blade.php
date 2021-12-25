@@ -9,34 +9,28 @@
                        value="{{ $data->title ?? null }}">
             </div>
         </div>
-        {{--<div class="col-md-3">
-            <div class="form-group">
-                <label for="cate_id" class="title">{{ trans('Category') }}</label>
-                {!! Form::select('cate_id', $prompt + $categories, $data->cate_id ?? NULL, [
-                    'id' => 'cate_id',
-                    'class' => 'select2 form-control']) !!}
-            </div>
-        </div>--}}
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for="cate_id" class="title">{{ trans('Position') }}</label>
-                {!! Form::select('position_id', $prompt + $positions, $data->position_id ?? NULL, [
-                    'id' => 'position_id',
-                    'class' => 'select2 form-control']) !!}
-            </div>
+        <div class="col-md-3 form-group">
+            <label for="input-file-now-custom-1" class="title">{{ trans('Position') }} <a href="javascript:"
+                                                                                          id="position-refresh"><i
+                        class="fa fa-refresh"></i></a></label>
+            @php($position_selected = isset($data) ? json_decode(!empty($data->position_ids) ? $data->position_ids : "[]", 1) : NULL)
+            {!! Form::select('position_ids[]', $positions, $position_selected, [
+                'id' => 'position',
+                'multiple' => 'multiple',
+                'class' => 'tag-select2 form-control w-100']) !!}
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="status" class="title">{{ trans('Status') }}</label>
                 {!! Form::select('status', $prompt + $statuses, $data->status ?? NULL, [
                     'id' => 'status',
-                    'class' => 'select2 form-control']) !!}
+                    'class' => 'select2 form-control w-100']) !!}
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="slug" class="title">{{ trans('Slug') }}</label>
-                <input type="text" class="form-control" id="slug"  value="{{ $data->slug ?? null }}" readonly>
+                <input type="text" class="form-control" id="slug" value="{{ $data->slug ?? null }}" readonly>
             </div>
         </div>
         <div class="col-md-6">
@@ -70,8 +64,8 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="input-file-now-custom-1" class="title">{{ trans('Tag') }}</label>
-                @php($selected = isset($data) ? $data->tags->pluck("name")->toArray() : NULL)
-                {!! Form::select('tags[][name]', $tags, $selected, [
+                @php($tag_selected = isset($data) ? $data->tags->pluck("name")->toArray() : NULL)
+                {!! Form::select('tags[][name]', $tags, $tag_selected, [
                     'id' => 'tags',
                     'multiple' => 'multiple',
                     'class' => 'tag-select2 form-control']) !!}
@@ -109,6 +103,19 @@
             $('.dropify').dropify();
             $('.tag-select2').select2({
                 tags: true
+            });
+
+            $(document).on('click', '#position-refresh', function () {
+                var dropdown = $(this).parents('.form-group').find('#position');
+                $.ajax({
+                    url: "{{ route('get.post.updatePositionDropdown') }}",
+                    type: "get"
+                }).done(function (response) {
+                    dropdown.find("option").remove();
+                    dropdown.select2({
+                        data: jQuery.parseJSON(response)
+                    });
+                })
             })
         })
     </script>

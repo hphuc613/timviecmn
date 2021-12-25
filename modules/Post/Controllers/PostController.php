@@ -9,7 +9,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Base\Models\Status;
-use Modules\Career\Models\Career;
 use Modules\Company\Models\Company;
 use Modules\Position\Models\Position;
 use Modules\Post\Models\Post;
@@ -34,12 +33,12 @@ class PostController extends Controller {
      * @return Factory|View
      */
     public function index(Request $request) {
-        $filter   = $request->all();
-        $statuses = Status::getStatuses();
-        $authors  = User::query()->orderBy("name")->pluck('name', 'id')->toArray();
-        $data     = Post::filter($filter)->orderBy("created_at", "DESC")->paginate(20);
-        $companies    = Company::getArray();
-        $positions  = Position::getArray();
+        $filter    = $request->all();
+        $statuses  = Status::getStatuses();
+        $authors   = User::query()->orderBy("name")->pluck('name', 'id')->toArray();
+        $data      = Post::filter($filter)->orderBy("created_at", "DESC")->paginate(20);
+        $companies = Company::getArray();
+        $positions = Position::getArray();
 
         return view("Post::backend.post.index", compact("data", "filter", "statuses", "authors", "companies", "positions"));
     }
@@ -52,7 +51,7 @@ class PostController extends Controller {
         $statuses   = Status::getStatuses();
         $categories = PostCategory::getArray();
         $tags       = Tag::getTagArray();
-        $companies    = Company::getArray();
+        $companies  = Company::getArray();
         $positions  = Position::getArray();
 
         return view("Post::backend.post.create", compact("statuses", "categories", "tags", "companies", "positions"));
@@ -66,9 +65,10 @@ class PostController extends Controller {
         $data = $request->all();
         unset($data['tags']);
         unset($data['image']);
-        $tag_ids = Tag::createTags($request->tags ?? []);
-        $data['slug'] = Helper::slug($request->title);
-        $post    = Post::query()->create($data);
+        $data['position_ids'] = json_encode($data['position_ids']);
+        $tag_ids              = Tag::createTags($request->tags ?? []);
+        $data['slug']         = Helper::slug($request->title);
+        $post                 = Post::query()->create($data);
         if ($request->hasFile('image')) {
             $image       = $request->image;
             $post->image = Helper::storageFile($image, time() . '_' . $image->getClientOriginalName(), 'Post/' . $post->id);
@@ -89,7 +89,7 @@ class PostController extends Controller {
         $statuses   = Status::getStatuses();
         $categories = PostCategory::getArray();
         $tags       = Tag::getTagArray();
-        $companies    = Company::getArray();
+        $companies  = Company::getArray();
         $positions  = Position::getArray();
 
         return view("Post::backend.post.update", compact("data", "statuses", "categories", "tags", "companies", "positions"));
@@ -102,8 +102,9 @@ class PostController extends Controller {
     public function postUpdate(PostRequest $request, $id) {
         $data = $request->all();
         unset($data['tags']);
-        $tag_ids = Tag::createTags($request->tags ?? []);
-        $post    = Post::query()->find($id);
+        $data['position_ids'] = json_encode($data['position_ids']);
+        $tag_ids              = Tag::createTags($request->tags ?? []);
+        $post                 = Post::query()->find($id);
         if ($request->hasFile('image')) {
             $image = $request->image;
             if (file_exists($post->image)) {
@@ -131,6 +132,18 @@ class PostController extends Controller {
         $request->session()->flash('success', trans('Deleted successfully.'));
 
         return back();
+    }
+
+
+    public function updatePositionDropdown() {
+        $data = Position::query()->where('status', Status::STATUS_ACTIVE)->orderBy('name')->get();
+
+        $array = [];
+        foreach ($data as $item) {
+            $array[] = ['id' => $item->id, 'text' => $item->name];
+        }
+
+        return json_encode($array);
     }
 
 }
