@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Modules\Base\Models\BaseModel;
 use Modules\Career\Models\Career;
 use Modules\Company\Models\Company;
 use Modules\Position\Models\Position;
 use Modules\Tag\Models\Tag;
 use Modules\User\Models\User;
 
-class Post extends Model {
+class Post extends BaseModel {
     use SoftDeletes;
 
     protected $table = "posts";

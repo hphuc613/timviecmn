@@ -30,26 +30,31 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="birthday" class="title">{{ trans('Birthday') }}</label>
-                <input type="date" class="form-control" id="birthday" name="birthday"
+                <input type="text" class="form-control date" id="birthday" name="birthday"
                        value="{{isset($data->birthday) ? date('Y-m-d',strtotime($data->birthday)) : NULL }}">
             </div>
         </div>
         <div class="col-md-4">
-            @if(isset($data))
-                <div class="form-group">
-                    <label for="birthday" class="title">{{ trans('CV File') }}</label>
-                    <br>
-                    <a href="{{ asset($data->file) }}" class="w-100" target="_blank">{{ asset($data->file) }}</a>
-                </div>
-            @endif
+            <div class="form-group">
+                <label for="birthday" class="title">{{ trans('CV File') }}</label>
+                <br>
+                <input type="file" class="form-control" name="file">
+                @if(isset($data))
+                    <a href="{{ asset($data->file) }}" class="w-100" target="_blank">{{ trans('CV file link') }}</a>
+                @endif
+            </div>
         </div>
         <div class="col-md-8">
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="birthday" class="title">{{ trans('Post') }}</label>
                     <br>
+                    {!! Form::select('post_id', ["" => trans('Select')] + $posts, $post->id ?? NULL, [
+                        'id' => 'post',
+                        'class' => 'select2 form-control']) !!}
                     @if(isset($post))
-                        <a href="{{ route('get.post.update', $post->id) }}" class="w-100" target="_blank">{{ $post->title }}</a>
+                        <a href="{{ route('get.post.update', $post->id) }}" class="w-100"
+                           target="_blank">{{ $post->title }}</a>
                     @endif
                 </div>
                 <div class="form-group col-md-6">

@@ -4,14 +4,14 @@ namespace Modules\Applicant\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApplicantRequest extends FormRequest{
+class ApplicantRequest extends FormRequest {
 
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize(){
+    public function authorize() {
         return TRUE;
     }
 
@@ -20,56 +20,48 @@ class ApplicantRequest extends FormRequest{
      *
      * @return array
      */
-    public function rules(){
-        $method = segmentUrl(2);
-        switch ($method){
-            default:
-                return [
-                    'name'            => 'required|validate_unique:applicants',
-                    'slug'            => 'validate_unique:applicants',
-                    'email'           => 'required',
-                    'phone'           => 'required',
-                    'birthday'        => 'required',
-                    'address'         => 'required',
-                    'expected_salary' => 'required',
-                    'start_date'      => 'required',
-                    'status'          => 'required',
-                ];
-                break;
-            case "update":
-                return [
-                    'name'            => 'required|validate_unique:applicants,' . $this->id,
-                    'slug'            => 'validate_unique:applicants,' . $this->id,
-                    'email'           => 'required',
-                    'phone'           => 'required',
-                    'birthday'        => 'required',
-                    'address'         => 'required',
-                    'expected_salary' => 'required',
-                    'start_date'      => 'required',
-                    'status'          => 'required',
-                ];
-                break;
-        }
-    }
-
-    public function messages(){
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules() {
         return [
-            'required'        => ':attribute' . trans(' can not be empty.'),
-            'validate_unique' => ':attribute' . trans(' was exist.'),
+            'name'        => 'required',
+            'birthday'    => 'required',
+            'email'       => 'required|email',
+            'phone'       => 'digits:10|required',
+            'address'     => 'required',
+            'position_id' => 'required',
+            'file'        => 'required|mimes:pdf',
         ];
     }
 
-    public function attributes(){
+    /**
+     * @return array
+     */
+    public function messages() {
         return [
-            'name'            => trans('Name'),
-            'slug'            => trans('Slug'),
-            'email'           => trans('Email'),
-            'phone'           => trans('Phone'),
-            'birthday'        => trans('Birthday'),
-            'address'         => trans('Address'),
-            'expected_salary' => trans('Expected Salary'),
-            'start_date'      => trans('Start Date'),
-            'status'          => trans('Status'),
+            'required'        => ':attribute' . trans(' cannot be empty'),
+            'email'           => ':attribute' . trans(' must be the email.'),
+            'digits'          => ':attribute' . trans(' must be 10 digits.'),
+            'mimes'           => ':attribute' .
+                trans(' must be pdf file.'),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function attributes() {
+        return [
+            'birthday'    => trans('Birthday'),
+            'position_id' => trans('Position'),
+            'file'        => trans('CV file'),
+            'name'        => trans('Name'),
+            'email'       => trans('Email'),
+            'phone'       => trans('Phone'),
+            'address'     => trans('Address'),
         ];
     }
 }

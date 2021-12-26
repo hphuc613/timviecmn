@@ -23,8 +23,8 @@ class ApplyRequest extends FormRequest {
         return [
             'name'        => 'required',
             'birthday'    => 'required',
-            'email'       => 'required|email|validate_unique:applicants',
-            'phone'       => 'digits:10|required|validate_unique:applicants',
+            'email'       => 'required|email',
+            'phone'       => 'digits:10|required',
             'address'     => 'required',
             'position_id' => 'required',
             'file'        => 'required|mimes:pdf',
