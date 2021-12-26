@@ -5,8 +5,7 @@ namespace Modules\Banner\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Banner extends Model
-{
+class Banner extends Model {
     use SoftDeletes;
 
     protected $table = "banners";
@@ -19,14 +18,26 @@ class Banner extends Model
 
     public $timestamps = TRUE;
 
-    const HOME_PAGE = 'Home Page';
+    const HOME_PAGE    = 'HOME_PAGE';
+    const LISTING_PAGE = 'LISTING_PAGE';
+    const DETAIL_PAGE  = 'DETAIL_PAGE';
 
     /**
      * @return array
      */
-    public static function getPageList(){
+    public static function getPageList() {
         return [
-            'HOME_PAGE' => self::HOME_PAGE
+            self::HOME_PAGE    => trans("Home Page"),
+            self::LISTING_PAGE => trans("Listing Page"),
+            self::DETAIL_PAGE  => trans("Detail Page")
         ];
+    }
+
+    /**
+     * @param $page_id
+     * @return mixed
+     */
+    public static function getBanner($page_id) {
+        return self::query()->where('page_id', $page_id)->first()->image;
     }
 }

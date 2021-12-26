@@ -61,8 +61,6 @@
 <script src="{{ asset("assets/backend/node_modules/toast-master/js/jquery.toast.js") }}"></script>
 <script src="{{ asset("assets/backend/node_modules/dropify/dist/js/dropify.min.js") }}"></script>
 <script src="{{ asset('assets/plugins/datetimepicker/js/datetimepicker.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-TW.js') }}"></script>
-<script src="{{ asset('assets/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js') }}"></script>
 <script src="{{ asset("assets/backend/jquery/main.js") }}"></script>
 <script src="{{ asset("assets/backend/jquery/modal.js") }}"></script>
 <script src="{{ asset('assets/plugins/jsvalidation/js/jsvalidation.js')}}"></script>

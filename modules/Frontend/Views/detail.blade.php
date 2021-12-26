@@ -2,19 +2,21 @@
 
 @section("content")
     <section id="page-title" class="page-title-parallax page-title-dark"
-             style="background-image: url({{ asset('storage/upload/Frontend/landing1.jpg') }}); padding: 120px 0;"
+             style="background-image: url({{ asset($banner) }}); background-size: cover; padding: 120px 0;"
              data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
 
         <div class="container">
-            <div class="d-flex justify-content-between">
-                <div class="w-50">
+            <div class="row">
+                <div class="col-md-6">
                     <h2 class="text-white">{{ $data->title }}</h2>
                 </div>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Tin tuyển dụng</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $data->title }}</li>
-                </ol>
+                <div class="col-md-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Tin tuyển dụng</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $data->title }}</li>
+                    </ol>
+                </div>
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-<footer id="footer" class="dark">
+<footer id="footer">
     <div id="copyrights">
         <div class="container clearfix">
             <div class="col_half">

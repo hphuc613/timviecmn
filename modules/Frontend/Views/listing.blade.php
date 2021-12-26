@@ -2,7 +2,7 @@
 
 @section("content")
     <section id="page-title" class="page-title-parallax page-title-dark"
-             style="background-image: url({{ asset('storage/upload/Frontend/landing1.jpg?_t=1639898986') }}); padding: 120px 0;"
+             style="background-image: url({{ asset($banner) }}); background-size: cover; padding: 120px 0;"
              data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
         <div class="container clearfix">
             <h1>Tin tuyển dụng</h1>
@@ -85,7 +85,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-secondary w-100 rounded-0">Tìm</button>
+                                        <button type="submit" class="btn main-bg-color-light w-100 rounded-0">Tìm</button>
                                     </form>
                                 </div>
                                 <div class="widget d-none d-md-block">

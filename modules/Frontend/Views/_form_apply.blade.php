@@ -11,7 +11,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="birthday">{{ trans('Birthday') }} <small>*</small></label>
-                <input type="text" name="birthday" id="birthday" class="form-control"/>
+                <input type="text" name="birthday" id="birthday" class="form-control date"/>
             </div>
         </div>
         <div class="col-md-12">

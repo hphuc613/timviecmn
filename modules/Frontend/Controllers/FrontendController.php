@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Modules\Banner\Models\Banner;
 use Modules\Applicant\Models\Applicant;
 use Modules\Base\Models\Status;
 use Modules\Career\Models\Career;
@@ -33,7 +34,8 @@ class FrontendController extends Controller {
      * @return Factory|View
      */
     public function index(Request $request) {
-        return view("Frontend::index");
+        $banner = Banner::getBanner(Banner::HOME_PAGE);
+        return view("Frontend::index", compact("banner"));
     }
 
     /**
@@ -62,10 +64,11 @@ class FrontendController extends Controller {
      */
     public function newsListing(Request $request) {
         $filter    = $request->all();
+        $banner    = Banner::getBanner(Banner::LISTING_PAGE);
         $data      = Post::filter($filter)->orderBy('created_at', 'desc')->paginate(5);
         $careers   = Career::query()->where('status', Status::STATUS_ACTIVE)->get();
         $positions = Position::query()->where('status', Status::STATUS_ACTIVE)->get();
-        return view('Frontend::listing', compact('data', 'careers', 'positions', 'filter'));
+        return view('Frontend::listing', compact('data', 'careers', 'positions', 'filter', 'banner'));
     }
 
     /**
@@ -88,7 +91,8 @@ class FrontendController extends Controller {
                 $positions[$item->id . '-' . $item->slug] = $item->name;
             }
         }
-        return view('Frontend::detail', compact('data', 'positions'));
+        $banner = Banner::getBanner(Banner::DETAIL_PAGE);
+        return view('Frontend::detail', compact('data', 'positions', 'banner'));
     }
 
 

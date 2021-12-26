@@ -2,6 +2,26 @@ body {
   font-family: "Piazzolla", serif;
 }
 
+.main-bg-color {
+  color: white;
+  background-color: #12584a;
+}
+
+.main-outline-bg-color {
+  color: #6c757d;
+  border-color: #12584a;
+}
+
+.main-bg-color-light {
+  color: white;
+  background-color: #1ABC9C;
+}
+
+.main-outline-bg-color-light {
+  color: #6c757d;
+  border-color: #1ABC9C;
+}
+
 header nav a {
   font-size: 18px !important;
   font-weight: normal !important;
@@ -38,20 +58,30 @@ header.dark nav a {
   }
 }
 .index-page .search-group button {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0);
   color: white;
   text-align: center;
   width: 3.75rem;
   height: 3.75rem;
   font-size: 20px;
+  border-color: white !important;
 }
 .index-page .search-group button.search-btn {
   width: 10rem;
-  background-color: black;
+  background-color: rgba(9, 89, 73, 0.88);
 }
 .index-page .search-group input {
+  background-color: rgba(255, 255, 255, 0) !important;
   color: white !important;
+  border-color: white !important;
   font-size: 20px;
+}
+.index-page .search-group input:active, .index-page .search-group input:focus {
+  border-color: white !important;
+}
+.index-page .search-group input::placeholder {
+  color: white !important;
+  opacity: 1;
 }
 
 .news-listing .news {
@@ -127,13 +157,21 @@ header.dark nav a {
   align-items: center;
 }
 
-.select2-container {
+.select2-container--open {
   z-index: 9999;
 }
+
 .select2-container .select2-dropdown {
   border-color: #aaaaaa73;
 }
 
+footer {
+  background-color: #12584a !important;
+}
+footer #copyrights {
+  color: white;
+  background-color: #12584a !important;
+}
 footer .social-icon i {
   font-size: 18px;
 }

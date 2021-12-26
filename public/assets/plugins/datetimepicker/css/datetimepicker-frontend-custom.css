@@ -10,7 +10,7 @@
   border-spacing: 0;
 }
 .datetimepicker.dropdown-menu table thead {
-  background-color: #03a9f3;
+  background-color: #1ABC9C;
 }
 .datetimepicker.dropdown-menu table thead tr {
   color: white;
@@ -26,7 +26,7 @@
   width: 50px;
 }
 .datetimepicker.dropdown-menu table thead tr:first-child th:hover {
-  background-color: #03a9f3;
+  background-color: #1ABC9C;
 }
 .datetimepicker.dropdown-menu table td, .datetimepicker.dropdown-menu table th {
   text-align: center;
@@ -36,10 +36,10 @@
 .datetimepicker.dropdown-menu table tfoot th {
   border-radius: unset;
   color: white;
-  background-image: linear-gradient(to bottom, #03a9f3, rgba(3, 169, 243, 0.62));
+  background-image: linear-gradient(to bottom, #1ABC9C, #0ae1d1);
 }
 .datetimepicker.dropdown-menu table tfoot th:hover {
-  background-image: linear-gradient(to bottom, rgba(3, 169, 243, 0.62), #03a9f3);
+  background-image: linear-gradient(to bottom, #0ae1d1, #1ABC9C);
 }
 .datetimepicker.dropdown-menu .datetimepicker-minutes tbody td, .datetimepicker.dropdown-menu .datetimepicker-hours tbody td, .datetimepicker.dropdown-menu .datetimepicker-months tbody td, .datetimepicker.dropdown-menu .datetimepicker-years tbody td {
   color: grey;
@@ -58,12 +58,12 @@
 }
 .datetimepicker.dropdown-menu .datetimepicker-minutes tbody td span.active, .datetimepicker.dropdown-menu .datetimepicker-minutes tbody td span.active:hover, .datetimepicker.dropdown-menu .datetimepicker-hours tbody td span.active, .datetimepicker.dropdown-menu .datetimepicker-hours tbody td span.active:hover, .datetimepicker.dropdown-menu .datetimepicker-months tbody td span.active, .datetimepicker.dropdown-menu .datetimepicker-months tbody td span.active:hover, .datetimepicker.dropdown-menu .datetimepicker-years tbody td span.active, .datetimepicker.dropdown-menu .datetimepicker-years tbody td span.active:hover {
   color: white;
-  background-image: linear-gradient(to bottom, #03a9f3, rgba(3, 169, 243, 0.62));
+  background-image: linear-gradient(to bottom, #0ae1d1, #1ABC9C);
   border: none;
 }
 .datetimepicker.dropdown-menu .datetimepicker-minutes tbody td span:hover, .datetimepicker.dropdown-menu .datetimepicker-hours tbody td span:hover, .datetimepicker.dropdown-menu .datetimepicker-months tbody td span:hover, .datetimepicker.dropdown-menu .datetimepicker-years tbody td span:hover {
   background-image: linear-gradient(to bottom, white, white);
-  border: 1px solid #03a9f3;
+  border: 1px solid #1ABC9C;
 }
 .datetimepicker.dropdown-menu .datetimepicker-days tbody td {
   width: 50px;
@@ -79,15 +79,15 @@
 }
 .datetimepicker.dropdown-menu .datetimepicker-days tbody td.active, .datetimepicker.dropdown-menu .datetimepicker-days tbody td.active:hover {
   color: white;
-  background-image: linear-gradient(to bottom, #03a9f3, rgba(3, 169, 243, 0.62));
+  background-image: linear-gradient(to bottom, #0ae1d1, #1ABC9C);
 }
 .datetimepicker.dropdown-menu .datetimepicker-days tbody td:hover {
   background-image: linear-gradient(to bottom, white, white);
-  border: 1px solid rgba(3, 169, 243, 0.62);
+  border: 1px solid #0ae1d1;
 }
 
 [class*=" datetimepicker-dropdown"]:after {
-  border-bottom: 6px solid rgba(3, 169, 243, 0.62);
+  border-bottom: 6px solid #0ae1d1;
 }
 
-/*# sourceMappingURL=datetimepicker-custom.css.map */
+/*# sourceMappingURL=datetimepicker-frontend-custom.css.map */
