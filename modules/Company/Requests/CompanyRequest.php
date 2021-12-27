@@ -25,8 +25,8 @@ class CompanyRequest extends FormRequest{
         switch ($method){
             default:
                 return [
-                    'name'      => 'required|validate_unique:companys',
-                    'slug'      => 'validate_unique:companys',
+                    'name'      => 'required|validate_unique:companies',
+                    'slug'      => 'validate_unique:companies',
                     'email'     => 'required',
                     'phone'     => 'required',
                     'address'   => 'required',
@@ -38,8 +38,8 @@ class CompanyRequest extends FormRequest{
                 break;
             case "update":
                 return [
-                    'name'      => 'required|validate_unique:companys,' . $this->id,
-                    'slug'      => 'validate_unique:companys,' . $this->id,
+                    'name'      => 'required|validate_unique:companies,' . $this->id,
+                    'slug'      => 'validate_unique:companies,' . $this->id,
                     'email'     => 'required',
                     'phone'     => 'required',
                     'address'   => 'required',
@@ -73,7 +73,7 @@ class CompanyRequest extends FormRequest{
             'address'   => trans('Address'),
             'status'    => trans('Status'),
             'career_id' => trans('Career'),
-            'city_id'   => trans('Career'),
+            'city_id'   => trans('City'),
             'logo'      => trans('Logo')
         ];
     }

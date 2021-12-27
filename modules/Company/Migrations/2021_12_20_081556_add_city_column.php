@@ -11,7 +11,7 @@ class AddCityColumn extends Migration {
      * @return void
      */
     public function up() {
-        Schema::table('companys', function (Blueprint $table) {
+        Schema::table('companies', function (Blueprint $table) {
             $table->unsignedBigInteger('city_id')->nullable();
         });
     }
@@ -22,7 +22,7 @@ class AddCityColumn extends Migration {
      * @return void
      */
     public function down() {
-        Schema::table('companys', function (Blueprint $table) {
+        Schema::table('companies', function (Blueprint $table) {
             $table->dropColumn('city_id');
         });
     }

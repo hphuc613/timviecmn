@@ -114,6 +114,8 @@
                                     <a href="{{ route('get.contact_recruitment.update', $item->id) }}" class="btn btn-primary"
                                        data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Detail") }}">
                                         <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="{{ route('get.contact_recruitment.view', $item->id) }}"
+                                       class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                     <a href="{{ route('get.contact_recruitment.delete', $item->id) }}"
                                        class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>

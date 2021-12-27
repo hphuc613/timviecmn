@@ -7,21 +7,24 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Modules\Base\Models\Status;
 use Modules\Career\Models\Career;
+use Modules\City\Models\City;
+use Modules\Company\Models\Company;
 use Modules\ContactRecruitment\Models\ContactRecruitment;
 
-class ContactRecruitmentController extends Controller{
+class ContactRecruitmentController extends Controller {
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct(){
+    public function __construct() {
         # parent::__construct();
     }
 
-    public function index(Request $request){
+    public function index(Request $request) {
         $filter   = $request->all();
         $statuses = ContactRecruitment::getStatuses();
         $careers  = Career::getArray();
@@ -37,16 +40,38 @@ class ContactRecruitmentController extends Controller{
      *
      * @return Factory|View
      */
-    public function getUpdate(Request $request, $id){
-        $data    = ContactRecruitment::query()->find($id);
-        $statuses = ContactRecruitment::getStatuses();
+    public function getView(Request $request, $id) {
+        $cr_data     = ContactRecruitment::query()->find($id);
+        $statuses    = Status::getStatuses();
+        $cr_statuses = ContactRecruitment::getStatuses();
+        $careers     = Career::getArray(Status::STATUS_ACTIVE);
+        $cities      = City::getArray(Status::STATUS_ACTIVE);
+        $data        = Company::query()
+                              ->where([
+                                  'phone' => $cr_data->phone,
+                                  'email' => $cr_data->email,
+                                  'deleted_at' => NULL
+                              ])->first();
 
-        if (!$request->ajax()){
+        return view("ContactRecruitment::backend.contact-recruitment.view", compact("cr_data", "cr_statuses", "statuses", "careers", "cities", "data"));
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return Factory|View
+     */
+    public function getUpdate(Request $request, $id) {
+        $cr_data     = ContactRecruitment::query()->find($id);
+        $cr_statuses = ContactRecruitment::getStatuses();
+
+        if (!$request->ajax()) {
             return redirect()->back();
         }
 
         return view("ContactRecruitment::backend.contact-recruitment.form",
-            compact("data", "statuses"));
+            compact("cr_data", "cr_statuses"));
     }
 
     /**
@@ -55,7 +80,7 @@ class ContactRecruitmentController extends Controller{
      *
      * @return RedirectResponse
      */
-    public function postUpdate(Request $request, $id){
+    public function postUpdate(Request $request, $id) {
         ContactRecruitment::query()->find($id)->update($request->all());
         $request->session()->flash('success', trans('Updated successfully.'));
 
@@ -68,7 +93,7 @@ class ContactRecruitmentController extends Controller{
      *
      * @return RedirectResponse
      */
-    public function delete(Request $request, $id){
+    public function delete(Request $request, $id) {
         ContactRecruitment::query()->find($id)->delete();
         $request->session()->flash('success', trans('Deleted successfully.'));
 

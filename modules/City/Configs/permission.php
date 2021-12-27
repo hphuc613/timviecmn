@@ -5,15 +5,15 @@ return [
     'group'        => [
         [
             'name'         => 'city-create',
-            'display_name' => trans('Create Career'),
+            'display_name' => trans('Create City'),
         ],
         [
             'name'         => 'city-update',
-            'display_name' => trans('Update Career'),
+            'display_name' => trans('Update City'),
         ],
         [
             'name'         => 'city-delete',
-            'display_name' => trans('Delete Career'),
+            'display_name' => trans('Delete City'),
         ],
     ]
 ];

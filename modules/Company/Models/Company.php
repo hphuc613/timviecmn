@@ -12,7 +12,7 @@ use Modules\City\Models\City;
 class Company extends BaseModel {
     use SoftDeletes;
 
-    protected $table = "companys";
+    protected $table = "companies";
 
     protected $primaryKey = "id";
 
