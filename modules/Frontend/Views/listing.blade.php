@@ -5,12 +5,12 @@
              style="background-image: url({{ asset($banner) }}); background-size: cover; padding: 120px 0;"
              data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
         <div class="container clearfix">
-            <h1>Tin tuyển dụng</h1>
-            <span>Các công việc mơ ước của bạn đều ở đây</span>
+            <h1>{{ trans('Recruitment') }}</h1>
+            <span>{{ trans('Your dream job is here') }}</span>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Tin tuyển dụng</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Tìm kiếm</li>
+                <li class="breadcrumb-item"><a href="#">{{ trans('Recruitment') }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ trans('Listing') }}</li>
             </ol>
         </div>
     </section>
@@ -22,7 +22,7 @@
                     <div class="col-md-3">
                         <div class="sidebar-widgets-wrap">
                             <div class="widget clearfix">
-                                <h4>Bộ lọc</h4>
+                                <h4>{{ trans('Filter') }}</h4>
                                 <div id="form-search">
                                     <form action="{{ route('get.frontend.listing') }}" method="get">
                                         <div class="header-title" data-bs-toggle="collapse"
@@ -30,19 +30,20 @@
                                              aria-expanded="false" aria-controls="search-more">
                                             <div class="form-group">
                                                 <input type="text" name="title" class="form-control" autocomplete="off"
-                                                       placeholder="Tên công việc bạn muốn ứng tuyển...">
+                                                       placeholder="{{ trans('Job name...') }}">
                                             </div>
                                         </div>
                                         <div id="search-more" class="collapse">
                                             <div class="form-group">
                                                 <input type="text" name="company" class="form-control"
-                                                       placeholder="Công ty...">
+                                                       placeholder="{{ trans('Company name...') }}">
                                             </div>
                                             <div class="form-group">
                                                 <select name="career" id="career" class="form-control select2">
-                                                    <option value="">- Ngành nghề  -</option>
+                                                    <option value="">- {{ trans('Career') }} -</option>
                                                     @foreach($careers as $career)
-                                                        <option value="{{ $career->slug }}" @if($career->slug == ($filter['career'] ?? null)) selected @endif>
+                                                        @php($selected = $career->slug == ($filter['career'] ?? null) ? 'selected' : null )
+                                                        <option value="{{ $career->slug }}" {{ $selected }}>
                                                             {{ $career->name }}
                                                         </option>
                                                     @endforeach
@@ -50,10 +51,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <select name="city" id="city" class="form-control select2">
-                                                    <option value="">Thành phố</option>
-                                                    <option value="1">Cần Thơ</option>
-                                                    <option value="2">Hồ Chí Minh</option>
-                                                    <option value="3">Hà Nội</option>
+                                                    <option value="">- {{ trans('City') }} -</option>
+                                                    @foreach($cities as $city)
+                                                        @php($selected = $city->slug == ($filter['city'] ?? null) ? 'selected' : null )
+                                                        <option value="{{ $city->slug }}" {{ $selected }}>
+                                                            {{ $city->name }}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -68,24 +72,19 @@
                                             </div>
                                             <div class="form-group">
                                                 <select name="position" id="position" class="form-control select2">
-                                                    <option value="">- Vị trí - Chức vụ  -</option>
+                                                    <option value="">- {{ trans('Position') }} -</option>
                                                     @foreach($positions as $position)
-                                                        <option value="{{ $position->slug }}" @if($position->slug == ($filter['position'] ?? null)) selected @endif>
-                                                                    {{ $position->name }}
-                                                                    </option>
+                                                        @php($selected = $position->slug == ($filter['position'] ?? null) ? 'selected' : null )
+                                                        <option value="{{ $position->slug }}" {{ $selected }}>
+                                                            {{ $position->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <select name="salary" id="salary" class="form-control select2">
-                                                    <option value="">Mức lương</option>
-                                                    <option value="1">Dưới 100 triệu</option>
-                                                    <option value="1">100 - 500 triệu</option>
-                                                    <option value="1">Trên 500 triệu</option>
-                                                </select>
-                                            </div>
                                         </div>
-                                        <button type="submit" class="btn main-bg-color-light w-100 rounded-0">Tìm</button>
+                                        <button type="submit"class="btn main-bg-color-light w-100 rounded-0">
+                                            {{ trans('Search') }}
+                                        </button>
                                     </form>
                                 </div>
                                 <div class="widget d-none d-md-block">
@@ -161,13 +160,16 @@
                                         </div>
                                         <div class="flex-grow-1 ms-3">
                                             <div class="title">
-                                                <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}"><h2>{{ $item->title }}</h2></a>
+                                                <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}">
+                                                    <h2>{{ $item->title }}</h2></a>
                                             </div>
-                                            <div class="time">{{ formatDate(strtotime($item->created_at), 'd/m/Y H:i') }}</div>
+                                            <div
+                                                class="time">{{ formatDate(strtotime($item->created_at), 'd/m/Y H:i') }}</div>
                                             <div class="description mb-3">
                                                 {{ $item->description }}
                                             </div>
-                                            <div class="time float-end text-uppercase">{{ $item->company->name ?? NULL }}</div>
+                                            <div
+                                                class="time float-end text-uppercase">{{ $item->company->name ?? NULL }}</div>
                                         </div>
                                     </div>
                                     <hr>

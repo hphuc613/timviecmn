@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Modules\Base\Models\BaseModel;
 use Modules\Career\Models\Career;
+use Modules\City\Models\City;
 use Modules\Company\Models\Company;
 use Modules\Position\Models\Position;
 use Modules\Tag\Models\Tag;
@@ -70,6 +71,14 @@ class Post extends BaseModel{
                 $career = Career::query()->where('slug', $filter['career'])->first();
                 if(!empty($career)){
                     $c->where('career_id', $career->id);
+                }
+            });
+        }
+        if (isset($filter['city'])) {
+            $data = $data->whereHas('company', function ($c) use ($filter) {
+                $city = City::query()->where('slug', $filter['city'])->first();
+                if(!empty($city)){
+                    $c->where('city_id', $city->id);
                 }
             });
         }

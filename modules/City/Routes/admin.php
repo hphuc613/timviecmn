@@ -9,9 +9,12 @@ Route::prefix("admin")->group(function () {
             Route::post("/create", "CityController@postCreate")->name("post.city.create");
         });
         Route::middleware('can:city-update')->group(function () {
+            Route::get("/sync-api", "CityController@syncApi")->name("get.city.syncApi");
             Route::get("/update/{id}", "CityController@getUpdate")->name("get.city.update");
             Route::post("/update/{id}", "CityController@postUpdate")->name("post.city.update");
         });
         Route::get("/delete/{id}", "CityController@delete")->name("get.city.delete")->middleware('can:city-delete');
+
+
     });
 });

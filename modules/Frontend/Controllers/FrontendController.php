@@ -12,6 +12,7 @@ use Modules\Banner\Models\Banner;
 use Modules\Applicant\Models\Applicant;
 use Modules\Base\Models\Status;
 use Modules\Career\Models\Career;
+use Modules\City\Models\City;
 use Modules\ContactRecruitment\Models\ContactRecruitment;
 use Modules\Frontend\Requests\ApplyRequest;
 use Modules\Frontend\Requests\RecruitmentRequest;
@@ -66,9 +67,10 @@ class FrontendController extends Controller {
         $filter    = $request->all();
         $banner    = Banner::getBanner(Banner::LISTING_PAGE);
         $data      = Post::filter($filter)->orderBy('created_at', 'desc')->paginate(5);
+        $cities    = City::query()->where('status', Status::STATUS_ACTIVE)->get();
         $careers   = Career::query()->where('status', Status::STATUS_ACTIVE)->get();
         $positions = Position::query()->where('status', Status::STATUS_ACTIVE)->get();
-        return view('Frontend::listing', compact('data', 'careers', 'positions', 'filter', 'banner'));
+        return view('Frontend::listing', compact('data', 'careers', 'positions', 'filter', 'banner', 'cities'));
     }
 
     /**

@@ -16,6 +16,9 @@
             </div>
         </div>
         <div class="mb-3 d-flex justify-content-end group-btn">
+            <a href="{{ route('get.city.syncApi') }}" class="btn btn-info mr-2">
+                <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;
+            </a>
             <a href="{{ route('get.city.create') }}" class="btn btn-primary" data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Create City") }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; {{ trans("Add New") }}
             </a>
@@ -64,7 +67,7 @@
                         <tr>
                             <th>#</th>
                             <th>{{ trans('Name') }}</th>
-                            <th>{{ trans('Description') }}</th>
+                            <th>{{ trans('Slug') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
                             <th>{{ trans('Updated At') }}</th>
@@ -77,7 +80,7 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
-                                <td>{{ isset($item->description) ? trans($item->description) : NULL }}</td>
+                                <td>{{ $item->slug }}</td>
                                 <td>{{ \Modules\Base\Models\Status::getStatus($item->status) ?? NULL }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y H:i:s')}}</td>

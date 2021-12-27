@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Tin tuyển dụng</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{ trans('Recruitment') }}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ $data->title }}</li>
                     </ol>
                 </div>
