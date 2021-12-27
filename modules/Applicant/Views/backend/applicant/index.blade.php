@@ -57,6 +57,12 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
+                                <label for="text-input">{{ trans("Post name") }}</label>
+                                <input type="text" class="form-control" id="text-input" name="post_name" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
                                 <label for="text-input">{{ trans('Status') }}</label>
                                 {!! Form::select('status', $prompt + $statuses, $filter['status'] ?? NULL, ['class' => 'select2 form-control']) !!}
                             </div>
@@ -82,12 +88,13 @@
                         <tr>
                             <th>#</th>
                             <th>{{ trans('Name') }}</th>
+                            <th>{{ trans('Post') }}</th>
+                            <th>{{ trans('CV') }}</th>
                             <th>{{ trans('Email') }}</th>
                             <th>{{ trans('Phone') }}</th>
                             <th>{{ trans('Address') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
-                            <th>{{ trans('Updated At') }}</th>
                             <th class="action">{{ trans('Action') }}</th>
                         </tr>
                         </thead>
@@ -97,12 +104,23 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
+                                <td>
+                                    @if(!empty($item->post_id))
+                                        <a href="{{ route('get.frontend.detail', [$item->post_id, $item->post->slug]) }}" class="w-100" target="_blank">{{ $item->post->title }}</a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(!empty($item->file))
+                                        <a href="{{ asset($item->file) }}" class="w-100" target="_blank">{{ trans('CV file') }}</a>
+                                    @endif
+                                </td>
                                 <td>{{ trans($item->email) }}</td>
                                 <td>{{ trans($item->phone) }}</td>
                                 <td>{{ trans($item->address) }}</td>
-                                <td>{{ \Modules\Base\Models\Status::getStatus($item->status) ?? NULL }}</td>
+                                <td>
+                                    {!! Form::select('status', $statuses, $item->status ?? NULL, ['class' => 'select2 form-control', 'data-id' => $item->id]) !!}
+                                </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y H:i:s')}}</td>
                                 <td class="link-action">
                                     <a href="{{ route('get.applicant.update', $item->id) }}" class="btn btn-primary" data-title="{{ trans("Update Applicant") }}">
                                         <i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -121,3 +139,17 @@
     </div>
     {!! getModal(["class" => "modal-ajax"]) !!}
 @endsection
+<style>
+    .select2-container {
+        max-width: 115px !important;
+    }
+</style>
+@push('js')
+    <script !src="">
+        $(document).ready(function () {
+            $('select[name="status"]').on('change', function(){
+                window.location.href = "{{ route('get.applicant.updateStatus', '') }}/"+ $(this).attr("data-id") +"?status="+ $(this).val();
+            })
+        })
+    </script>
+@endpush

@@ -3,7 +3,6 @@
 namespace Modules\Post\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +14,8 @@ use Modules\Position\Models\Position;
 use Modules\Tag\Models\Tag;
 use Modules\User\Models\User;
 
-class Post extends BaseModel {
+class Post extends BaseModel{
+
     use SoftDeletes;
 
     protected $table = "posts";
@@ -26,7 +26,15 @@ class Post extends BaseModel {
 
     protected $guarded = [];
 
-    public $timestamps = true;
+    public $timestamps = TRUE;
+
+    const HTLV_FULL_TIME = "FULL_TIME";
+
+    const HTLV_PART_TIME = "PART_TIME";
+
+    const HTLV_INTERN = "INTERN";
+
+    const HTLV_REMOTE = "REMOTE";
 
     protected static function boot() {
         parent::boot();
@@ -44,6 +52,7 @@ class Post extends BaseModel {
 
     /**
      * @param $filter
+     *
      * @return Builder
      */
     public static function filter($filter) {
@@ -119,5 +128,26 @@ class Post extends BaseModel {
      */
     public function updatedBy() {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+
+    public static function getWorkTypes(){
+        return [
+            self::HTLV_FULL_TIME => trans('Full Time'),
+            self::HTLV_PART_TIME => trans('Part Time'),
+            self::HTLV_INTERN    => trans('Intern'),
+            self::HTLV_REMOTE    => trans('Remote'),
+        ];
+    }
+
+    /**
+     * @param $key
+     *
+     * @return string
+     */
+    public static function getWorkType($key){
+        if (array_key_exists($key, self::getWorkTypes())){
+            return self::getWorkTypes()[$key];
+        }
     }
 }

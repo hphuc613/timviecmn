@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label for="birthday" class="title">{{ trans('CV File') }}</label>
                 <br>
-                <input type="file" class="form-control" name="file">
+                <input type="file" class="form-control" name="file" value="{{$data->file ?? NULL}}">
                 @if(isset($data))
                     <a href="{{ asset($data->file) }}" class="w-100" target="_blank">{{ trans('CV file link') }}</a>
                 @endif

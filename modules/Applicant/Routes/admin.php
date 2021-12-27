@@ -13,6 +13,7 @@ Route::prefix("admin")->group(function (){
         Route::middleware('can:applicant-update')->group(function (){
             Route::get("/update/{id}", "ApplicantController@getUpdate")->name("get.applicant.update");
             Route::post("/update/{id}", "ApplicantController@postUpdate")->name("post.applicant.update");
+            Route::get("/update-status/{id}", "ApplicantController@getUpdateStatus")->name("get.applicant.updateStatus");
         });
         Route::get("/delete/{id}", "ApplicantController@delete")->name("get.applicant.delete")->middleware('can:applicant-delete');
     });

@@ -99,4 +99,19 @@ class ContactRecruitmentController extends Controller {
 
         return back();
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param $id
+     *
+     * @return RedirectResponse
+     */
+    public function getUpdateStatus(Request $request, $id) {
+        $data = ContactRecruitment::query()->find($id);
+        $data->status = $request->status;
+        $data->save();
+        $request->session()->flash('success', trans('Update Status successfully.'));
+
+        return back();
+    }
 }

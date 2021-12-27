@@ -27,6 +27,7 @@ class PostRequest extends FormRequest {
             'position_ids' => 'required',
             'company_id'   => 'required',
             'image'        => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'work_type'    => 'required',
         ];
     }
 
@@ -35,11 +36,11 @@ class PostRequest extends FormRequest {
      */
     public function messages() {
         return [
-            'required'         => ':attribute' . trans(' can not be empty.'),
-            'cate_id.required' => trans('Please select ') . ':attribute',
-            'image'            => ':attribute' . trans(' must be an image.'),
-            'mimes'            => ':attribute' .
-                trans(' extention must be one of the following: jpeg, png, jpg, gif, svg.'),
+            'required'              => ':attribute' . trans(' can not be empty.'),
+            'cate_id.required'      => trans('Please select ') . ':attribute',
+            'position_ids.required' => trans('Please select ') . ':attribute',
+            'image'                 => ':attribute' . trans(' must be an image.'),
+            'mimes'                 => ':attribute' . trans(' extention must be one of the following: jpeg, png, jpg, gif, svg.'),
         ];
     }
 
@@ -48,12 +49,13 @@ class PostRequest extends FormRequest {
      */
     public function attributes() {
         return [
-            'title'       => trans('Title'),
-            'status'      => trans('Status'),
+            'title'        => trans('Title'),
+            'status'       => trans('Status'),
             //            'cate_id'     => trans('Category'),
-            'company_id'  => trans('Company'),
+            'company_id'   => trans('Company'),
             'position_ids' => trans('required'),
-            'image'       => trans('Image')
+            'image'        => trans('Image'),
+            'work_type'    => trans('Work Type')
         ];
     }
 }

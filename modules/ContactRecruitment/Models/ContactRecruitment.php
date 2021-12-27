@@ -23,9 +23,7 @@ class ContactRecruitment extends Model{
     public $timestamps = TRUE;
 
     const STATUS_NEW = 1;
-
     const STATUS_PROCESSING = 2;
-
     const STATUS_APPROVED = 3;
 
     /**

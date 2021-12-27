@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Modules\Applicant\Models\Applicant;
 use Modules\Applicant\Requests\ApplicantRequest;
 use Modules\Base\Models\Status;
-use Modules\Career\Models\Career;
 use Modules\Position\Models\Position;
 use Modules\Post\Models\Post;
 
@@ -28,7 +27,7 @@ class ApplicantController extends Controller {
 
     public function index(Request $request) {
         $filter   = $request->all();
-        $statuses = Status::getStatuses();
+        $statuses = Applicant::getStatuses();
         $data     = Applicant::filter($filter)->orderBy("created_at", "DESC")->paginate(20);
 
         return view("Applicant::backend.applicant.index", compact("data", "statuses"));
@@ -41,7 +40,7 @@ class ApplicantController extends Controller {
      * @return Factory|View
      */
     public function getCreate() {
-        $statuses  = Status::getStatuses();
+        $statuses  = Applicant::getStatuses();
         $positions = Position::getArray(Status::STATUS_ACTIVE);
         $posts     = Post::query()->where('status', Status::STATUS_ACTIVE)->pluck('title', 'id')->toArray();
 
@@ -74,7 +73,7 @@ class ApplicantController extends Controller {
      * @return Factory|View
      */
     public function getUpdate($id) {
-        $statuses  = Status::getStatuses();
+        $statuses  = Applicant::getStatuses();
         $data      = Applicant::query()->find($id);
         $positions = Position::getArray(Status::STATUS_ACTIVE);
         $post      = Post::query()->find($data->post_id);
@@ -105,6 +104,21 @@ class ApplicantController extends Controller {
     public function delete(Request $request, $id) {
         Applicant::query()->find($id)->delete();
         $request->session()->flash('success', trans('Deleted successfully.'));
+
+        return back();
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param $id
+     *
+     * @return RedirectResponse
+     */
+    public function getUpdateStatus(Request $request, $id) {
+        $data = Applicant::query()->find($id);
+        $data->status = $request->status;
+        $data->save();
+        $request->session()->flash('success', trans('Update Status successfully.'));
 
         return back();
     }

@@ -38,6 +38,6 @@ class Banner extends Model {
      * @return mixed
      */
     public static function getBanner($page_id) {
-        return self::query()->where('page_id', $page_id)->first()->image;
+        return self::query()->where('page_id', $page_id)->first()->image ?? 'assets/backend/images/background/dark.jpg';
     }
 }

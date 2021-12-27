@@ -5,24 +5,23 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="title" class="title">{{ trans('Title') }}</label>
-                <input type="text" class="form-control form-control-line" id="title" name="title"
-                       value="{{ $data->title ?? null }}">
+                <input type="text" class="form-control form-control-line" id="title" name="title" value="{{ $data->title ?? NULL }}">
             </div>
         </div>
         <div class="col-md-3 form-group">
-            <label for="input-file-now-custom-1" class="title">{{ trans('Position') }} <a href="javascript:"
-                                                                                          id="position-refresh"><i
-                        class="fa fa-refresh"></i></a></label>
+            <label for="position" class="title">{{ trans('Position') }}
+                <a href="javascript:" id="position-refresh"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+            </label>
             @php($position_selected = isset($data) ? json_decode(!empty($data->position_ids) ? $data->position_ids : "[]", 1) : NULL)
             {!! Form::select('position_ids[]', $positions, $position_selected, [
-                'id' => 'position',
-                'multiple' => 'multiple',
-                'class' => 'tag-select2 form-control w-100']) !!}
+                            'id' => 'position',
+                            'multiple' => 'multiple',
+                            'class' => 'select2 form-control w-100']) !!}
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="status" class="title">{{ trans('Status') }}</label>
-                {!! Form::select('status', $prompt + $statuses, $data->status ?? NULL, [
+                {!! Form::select('status', $statuses, $data->status ?? NULL, [
                     'id' => 'status',
                     'class' => 'select2 form-control w-100']) !!}
             </div>
@@ -30,7 +29,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="slug" class="title">{{ trans('Slug') }}</label>
-                <input type="text" class="form-control" id="slug" value="{{ $data->slug ?? null }}" readonly>
+                <input type="text" class="form-control" id="slug" value="{{ $data->slug ?? NULL }}" readonly>
             </div>
         </div>
         <div class="col-md-6">
@@ -44,15 +43,13 @@
         <div class="col-md-9">
             <div class="form-group">
                 <label for="description" class="title">{{ trans('Description') }}</label>
-                <textarea name="description" id="description" class="form-control"
-                          rows="10">{{ $data->description ?? NULL }}</textarea>
+                <textarea name="description" id="description" class="form-control" rows="10">{{ $data->description ?? NULL }}</textarea>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="image" class="title">{{ trans('Image') }}</label>
-                <input type="file" id="image" class="dropify" name="image"
-                       data-default-file="{{ asset($data->image ?? null) }}"/>
+                <input type="file" id="image" class="dropify" name="image" data-default-file="{{ asset($data->image ?? NULL) }}"/>
             </div>
         </div>
         <div class="col-md-9">
@@ -69,6 +66,12 @@
                     'id' => 'tags',
                     'multiple' => 'multiple',
                     'class' => 'tag-select2 form-control']) !!}
+            </div>
+            <div class="form-group">
+                <label for="work_type" class="work_type">{{ trans('Work Type') }}</label>
+                {!! Form::select('work_type', $prompt + $work_type, $data->work_type ?? NULL, [
+                    'id' => 'work_type',
+                    'class' => 'select2 form-control']) !!}
             </div>
             @if(isset($data))
                 <div class="form-group">

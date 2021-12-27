@@ -53,13 +53,15 @@ class PostController extends Controller {
         $tags       = Tag::getTagArray();
         $companies  = Company::getArray();
         $positions  = Position::getArray();
+        $work_type  = Post::getWorkTypes();
 
-        return view("Post::backend.post.create", compact("statuses", "categories", "tags", "companies", "positions"));
+        return view("Post::backend.post.create", compact("statuses", "categories", "tags", "companies", "positions", "work_type"));
     }
 
     /**
      * @param PostRequest $request
-     * @return string
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function postCreate(PostRequest $request) {
         $data = $request->all();
@@ -91,12 +93,15 @@ class PostController extends Controller {
         $tags       = Tag::getTagArray();
         $companies  = Company::getArray();
         $positions  = Position::getArray();
+        $work_type  = Post::getWorkTypes();
 
-        return view("Post::backend.post.update", compact("data", "statuses", "categories", "tags", "companies", "positions"));
+        return view("Post::backend.post.update", compact("data", "statuses", "categories", "tags", "companies", "positions", "work_type"));
     }
 
     /**
      * @param PostRequest $request
+     * @param $id
+     *
      * @return string
      */
     public function postUpdate(PostRequest $request, $id) {
@@ -135,6 +140,9 @@ class PostController extends Controller {
     }
 
 
+    /**
+     * @return false|string
+     */
     public function updatePositionDropdown() {
         $data = Position::query()->where('status', Status::STATUS_ACTIVE)->orderBy('name')->get();
 

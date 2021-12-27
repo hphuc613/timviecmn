@@ -3,7 +3,7 @@ return [
     'name' => trans('Setting'),
     'route' => route('get.setting.list'),
     'sort' => 11,
-    'active'=> TRUE,
+    'active'=> FALSE,
     'id'=> 'setting',
     'icon' => '<i class="fa fa-cog"></i>',
     'middleware' => [],

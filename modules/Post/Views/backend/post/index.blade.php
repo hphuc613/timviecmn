@@ -25,8 +25,7 @@
     <!--Search box-->
     <div class="search-box">
         <div class="card">
-            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false"
-                 aria-controls="form-search-box">
+            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false" aria-controls="form-search-box">
                 <div class="title">{{ trans("Search") }}</div>
             </div>
             <div class="card-body collapse show" id="form-search-box">
@@ -35,8 +34,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="title">{{ trans("Title") }}</label>
-                                <input type="text" class="form-control" id="title" name="title"
-                                       value="{{ $filter['title'] ?? null }}">
+                                <input type="text" class="form-control" id="title" name="title" value="{{ $filter['title'] ?? NULL }}">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -105,17 +103,19 @@
                                 <td>{{$key++}}</td>
                                 <td>{{ $item->title }}</td>
                                 <td class="image-box">
-                                    <div class="image-item image-in-listing">
-                                        <a href="{{ asset($item->image) }}" target="">
-                                            <img src="{{ asset($item->image) }}" width="120" alt="{{ $item->title }}">
-                                        </a>
-                                    </div>
+                                    @if(!empty($item->image))
+                                        <div class="image-item image-in-listing">
+                                            <a href="{{ asset($item->image) }}" target="">
+                                                <img src="{{ asset($item->image) }}" width="120" alt="{{ $item->title }}">
+                                            </a>
+                                        </div>
+                                    @endif
                                 </td>
                                 <td>{{ $item->company->name ?? NULL }}</td>
                                 <?php
                                 $status = $statuses[$item->status] ?? null;
                                 $color = 'text-danger';
-                                if ($item->status == Modules\Base\Models\Status::STATUS_ACTIVE) {
+                                if ($item->status == Modules\Base\Models\Status::STATUS_ACTIVE){
                                     $color = 'text-success';
                                 }
                                 ?>
@@ -139,9 +139,8 @@
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s')}}</td>
                                 <td class="link-action">
                                     <a href="{{ route('get.post.update', $item->id) }}" class="btn btn-primary">
-                                        <i class="fa fa-pencil"></i></a>
-                                    <a href="{{ route('get.post.delete', $item->id) }}"
-                                       class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></a>
+                                        <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a href="{{ route('get.post.delete', $item->id) }}" class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach
