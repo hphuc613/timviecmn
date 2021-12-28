@@ -33,6 +33,21 @@ label, .title {
   min-width: 120px;
 }
 
+/** Input file **/
+input[type=file] {
+  display: none;
+}
+
+.upload-style + label {
+  background-color: #03a9f3;
+  width: 165px;
+  padding: 10px 20px;
+  color: white;
+}
+.upload-style + label:hover {
+  background-color: rgba(3, 169, 243, 0.62);
+}
+
 .form-control {
   padding: 2px;
 }

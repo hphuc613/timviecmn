@@ -16,6 +16,8 @@
             </div>
         </div>
         <div class="d-flex justify-content-end mb-3 btn-group">
+            <a href="{{ route('get.company.list', array_merge(request()->query(), ['export' => true])) }}"
+               class="btn btn-warning mr-2">{{ trans('Export') }}</a>
             <a href="{{ route('get.company.create') }}" class="btn btn-primary">
                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; {{ trans("Add New") }}
             </a>
@@ -25,7 +27,8 @@
     @php($prompt = ['' => trans('Select')])
     <div class="search-box">
         <div class="card">
-            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false" aria-controls="form-search-box">
+            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false"
+                 aria-controls="form-search-box">
                 <div class="title">{{ trans("Search") }}</div>
             </div>
             <div class="card-body collapse show" id="form-search-box">
@@ -120,9 +123,11 @@
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y H:i:s')}}</td>
                                 <td class="link-action">
-                                    <a href="{{ route('get.company.update', $item->id) }}" class="btn btn-primary" data-title="{{ trans("Update Company") }}">
+                                    <a href="{{ route('get.company.update', $item->id) }}" class="btn btn-primary"
+                                       data-title="{{ trans("Update Company") }}">
                                         <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    <a href="{{ route('get.company.delete', $item->id) }}" class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="{{ route('get.company.delete', $item->id) }}"
+                                       class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach

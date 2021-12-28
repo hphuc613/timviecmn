@@ -23,7 +23,7 @@ class Export implements FromCollection, WithHeadings{
      * @param array $array
      * @return array
      */
-    public function headings(){
+    public function headings(): array{
         if(isset($this->headings)){
             return $this->headings;
         }

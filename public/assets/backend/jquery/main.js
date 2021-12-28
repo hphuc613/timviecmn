@@ -73,7 +73,6 @@ $(document).on('click', '.select-all', function () {
     if (class_child !== '') {
         var child = $('input.' + class_child);
         if (child.length > 0) {
-            console.log('cl');
             child.not(this).prop('checked', this.checked);
         } else {
             if (!$(this).hasClass('select-all-with-other-child')) {
@@ -81,9 +80,14 @@ $(document).on('click', '.select-all', function () {
             }
         }
     } else {
-        console.log('ccl');
         $('input.checkbox-item').not(this).prop('checked', this.checked);
     }
+});
+
+/** Upload Style**/
+$(document).on('change', 'input[type="file"]', function (e) {
+    var file_name = e.target.files[0].name;
+    $(this).siblings('label#upload-display').html('<i class="fa fa-upload"></i> ' + file_name);
 });
 
 /*********** Datetime Picker *************/

@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Position\Models\Position;
 use Modules\Post\Models\Post;
 
-class Applicant extends Model{
-
+class Applicant extends Model
+{
     use SoftDeletes;
 
     protected $table = "applicants";
@@ -28,7 +29,6 @@ class Applicant extends Model{
 
     /**
      * @param $filter
-     *
      * @return Builder
      */
     public static function filter($filter){
@@ -42,7 +42,7 @@ class Applicant extends Model{
         if (isset($filter['phone'])){
             $data = $data->where('phone', 'LIKE', '%' . $filter['phone'] . '%');
         }
-        if (isset($filter['status'])){
+        if (isset($filter['status'])) {
             $data = $data->where('status', $filter['status']);
         }
         if (isset($filter['post_name'])){
@@ -77,5 +77,12 @@ class Applicant extends Model{
      */
     public function post(){
         return $this->belongsTo(Post::class, 'post_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function position() {
+        return $this->belongsTo(Position::class, 'position_id');
     }
 }
