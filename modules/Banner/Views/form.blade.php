@@ -22,6 +22,7 @@
                     </button>
                 </div>
             </div>
+            <span class="text-success">Size: 1920x1080</span>
         </div>
     </div>
     <div class="form-group row">

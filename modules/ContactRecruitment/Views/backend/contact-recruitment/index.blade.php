@@ -93,7 +93,7 @@
                             <th>{{ trans('Email') }}</th>
                             <th>{{ trans('Phone') }}</th>
                             <th>{{ trans('Address') }}</th>
-                            <th>{{ trans('Status') }}</th>
+                            <th style="width: 200px;">{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
                             <th class="action">{{ trans('Action') }}</th>
                         </tr>
@@ -109,7 +109,7 @@
                                 <td>{{ trans($item->phone) }}</td>
                                 <td>{{ trans($item->address) }}</td>
                                 <td>
-                                    {!! Form::select('status', $statuses, $item->status ?? NULL, ['class' => 'select2 form-control', 'data-id' => $item->id]) !!}
+                                    {!! Form::select('status', $statuses, $item->status ?? NULL, ['class' => 'select2 update-status form-control', 'data-id' => $item->id]) !!}
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
                                 <td class="link-action">
@@ -132,17 +132,12 @@
             </div>
         </div>
     </div>
-    {!! getModal(["class" => "modal-ajax"]) !!}
+    {!! getModal(["class" => "modal-ajax", "size" => "modal-lg"]) !!}
 @endsection
-<style>
-    .select2-container {
-        max-width: 115px !important;
-    }
-</style>
 @push('js')
     <script !src="">
         $(document).ready(function () {
-            $('select[name="status"]').on('change', function(){
+            $('.update-status').on('change', function(){
                 window.location.href = "{{ route('get.contact_recruitment.updateStatus', '') }}/"+ $(this).attr("data-id") +"?status="+ $(this).val();
             })
         })

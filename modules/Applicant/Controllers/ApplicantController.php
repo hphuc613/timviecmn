@@ -34,8 +34,6 @@ class ApplicantController extends Controller {
     public function index(Request $request) {
         $filter   = $request->all();
         $statuses = Applicant::getStatuses();
-        $data     = Applicant::filter($filter)->orderBy("created_at", "DESC")->paginate(20);
-        $statuses = Status::getStatuses();
         $data     = Applicant::filter($filter);
         if (isset($request->export)) {
             $query       = clone $data;
@@ -153,9 +151,11 @@ class ApplicantController extends Controller {
      */
     public function getUpdateStatus(Request $request, $id) {
         $data = Applicant::query()->find($id);
-        $data->status = $request->status;
-        $data->save();
-        $request->session()->flash('success', trans('Update Status successfully.'));
+        if (!empty($data)) {
+            $data->status = $request->status;
+            $data->save();
+            $request->session()->flash('success', trans('Update Status successfully.'));
+        }
 
         return back();
     }
@@ -230,7 +230,7 @@ class ApplicantController extends Controller {
 
             if (!empty($error_data)) {
                 array_push($header, 'error_messages');
-                $export = new Export;
+                $export             = new Export;
                 $export->collection = collect($error_data);
                 $export->headings   = $header;
                 $request->session()->flash('success', trans('There are some record insert fail.'));

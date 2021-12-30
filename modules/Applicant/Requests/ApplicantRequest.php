@@ -26,31 +26,15 @@ class ApplicantRequest extends FormRequest{
      * @return array
      */
     public function rules(){
-        $method = segmentUrl(2);
-        switch ($method){
-            default:
-                return [
-                    'name'        => 'required',
-                    'birthday'    => 'required',
-                    'email'       => 'required|email',
-                    'phone'       => 'digits:10|required',
-                    'address'     => 'required',
-                    'position_id' => 'required',
-                    'file'        => 'required|mimes:pdf',
-                ];
-                break;
-            case "update":
-                return [
-                    'name'        => 'required',
-                    'birthday'    => 'required',
-                    'email'       => 'required|email',
-                    'phone'       => 'digits:10|required',
-                    'address'     => 'required',
-                    'position_id' => 'required',
-                    'file'        => 'mimes:pdf',
-                ];
-                break;
-        }
+        return [
+            'name'        => 'required',
+            'birthday'    => 'required',
+            'email'       => 'email',
+            'phone'       => 'digits:10|required',
+            'address'     => 'required',
+            'position_id' => 'required',
+            'file'        => 'mimes:pdf',
+        ];
     }
 
     /**

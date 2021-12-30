@@ -34,7 +34,7 @@ label, .title {
 }
 
 /** Input file **/
-input[type=file] {
+.upload-style {
   display: none;
 }
 
@@ -53,6 +53,10 @@ input[type=file] {
 }
 .form-control.form-control-line {
   border-bottom: 1px solid #d7d7d88c !important;
+}
+
+.select2-container {
+  width: 100% !important;
 }
 
 .image-box {
@@ -86,6 +90,10 @@ input[type=file] {
   border-radius: 50%;
 }
 
+.select2 {
+  width: 100% !important;
+}
+
 .form-group {
   align-items: center;
 }
@@ -98,9 +106,6 @@ input[type=file] {
 .form-group .invalid-feedback {
   color: red;
   font-size: 90%;
-}
-.form-group .select2 {
-  width: 100% !important;
 }
 
 .status-box {

@@ -17,13 +17,14 @@
         </div>
         <div class="mb-3 d-flex justify-content-end group-btn">
             <a href="{{route('get.applicant.import')}}" class="btn btn-info mr-2" data-toggle="modal"
-               data-title="{{ trans("Import Client") }}" data-target="#form-modal">
+               data-title="{{ trans("Import") }}" data-target="#form-modal">
                 <i class="fa fa-plus"></i>
-                {{ trans("Import Client") }}
+                {{ trans("Import") }}
             </a>
             <a href="{{ route('get.applicant.list', array_merge(request()->query(), ['export' => true])) }}"
                class="btn btn-warning mr-2">{{ trans('Export') }}</a>
-            <a href="{{ route('get.applicant.create') }}" class="btn btn-primary" data-title="{{ trans("Create Applicant") }}">
+            <a href="{{ route('get.applicant.create') }}" class="btn btn-primary"
+               data-title="{{ trans("Create Applicant") }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; {{ trans("Add New") }}
             </a>
         </div>
@@ -32,7 +33,8 @@
     @php($prompt = ['' => trans('Select')])
     <div class="search-box">
         <div class="card">
-            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false" aria-controls="form-search-box">
+            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false"
+                 aria-controls="form-search-box">
                 <div class="title">{{ trans("Search") }}</div>
             </div>
             <div class="card-body collapse show" id="form-search-box">
@@ -71,7 +73,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="text-input">{{ trans('Status') }}</label>
-                                {!! Form::select('status', $prompt + $statuses, $filter['status'] ?? NULL, ['class' => 'select2 form-control']) !!}
+                                {!! Form::select('status', $prompt + $statuses, $filter['status'] ?? NULL, ['class' => 'select2 form-control w-100']) !!}
                             </div>
                         </div>
                     </div>
@@ -112,26 +114,30 @@
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
                                 <td>
-                                    @if(!empty($item->post_id))
-                                        <a href="{{ route('get.frontend.detail', [$item->post_id, $item->post->slug]) }}" class="w-100" target="_blank">{{ $item->post->title }}</a>
+                                    @if(!empty($item->post_id) && !empty($item->post) && isset($item->post))
+                                        <a href="{{ route('get.frontend.detail', [$item->post_id, $item->post->slug]) }}"
+                                           class="w-100" target="_blank">{{ $item->post->title }}</a>
                                     @endif
                                 </td>
                                 <td>
                                     @if(!empty($item->file))
-                                        <a href="{{ asset($item->file) }}" class="w-100" target="_blank">{{ trans('CV file') }}</a>
+                                        <a href="{{ asset($item->file) }}" class="w-100"
+                                           target="_blank">{{ trans('CV file') }}</a>
                                     @endif
                                 </td>
                                 <td>{{ trans($item->email) }}</td>
                                 <td>{{ trans($item->phone) }}</td>
                                 <td>{{ trans($item->address) }}</td>
                                 <td>
-                                    {!! Form::select('status', $statuses, $item->status ?? NULL, ['class' => 'select2 form-control', 'data-id' => $item->id]) !!}
+                                    {!! Form::select('status', $statuses, $item->status ?? NULL, ['class' => 'select2 update-status form-control', 'data-id' => $item->id]) !!}
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
                                 <td class="link-action">
-                                    <a href="{{ route('get.applicant.update', $item->id) }}" class="btn btn-primary" data-title="{{ trans("Update Applicant") }}">
+                                    <a href="{{ route('get.applicant.update', $item->id) }}" class="btn btn-primary"
+                                       data-title="{{ trans("Update Applicant") }}">
                                         <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    <a href="{{ route('get.applicant.delete', $item->id) }}" class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="{{ route('get.applicant.delete', $item->id) }}"
+                                       class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -146,16 +152,11 @@
     </div>
     {!! getModal(["class" => "modal-ajax"]) !!}
 @endsection
-<style>
-    .select2-container {
-        max-width: 115px !important;
-    }
-</style>
 @push('js')
     <script !src="">
         $(document).ready(function () {
-            $('select[name="status"]').on('change', function(){
-                window.location.href = "{{ route('get.applicant.updateStatus', '') }}/"+ $(this).attr("data-id") +"?status="+ $(this).val();
+            $('.update-status').on('change', function () {
+                window.location.href = "{{ route('get.applicant.updateStatus', '') }}/" + $(this).attr("data-id") + "?status=" + $(this).val();
             })
         })
     </script>

@@ -1,4 +1,4 @@
-@php($action = (isset($data) && !empty($data)) ? route('post.company.update', $data->id) : route('post.company.create'))
+    @php($action = (isset($data) && !empty($data)) ? route('post.company.update', $data->id) : route('post.company.create'))
 <form action="{{ $action }}" method="post" class="" id="company-form" enctype=multipart/form-data>
     @csrf
     @php($prompt = ['' => trans('Select')])
