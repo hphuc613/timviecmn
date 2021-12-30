@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row recruit-form-modal">
     <div class="col-md-5 p-0">
-        <img src="https://thucanh.vn/wp-content/uploads/2021/08/Hinh-soi-3D-sieu-dep-ngau-va-chat-nhat-16.jpg"
+        <img src="{{ $banner }}"
              width="100%" alt="" style="background-repeat: no-repeat; background-size: cover;">
     </div>
     <div class="col-md-7 pt-5 position-relative">

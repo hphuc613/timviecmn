@@ -5,6 +5,7 @@ namespace Modules\Base\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 
 class BaseController extends Controller{
@@ -16,6 +17,9 @@ class BaseController extends Controller{
      */
     public function __construct(){
         # parent::__construct();
+        if (empty(App::getLocale())){
+            request()->session()->put('locale', config('app.fallback_locale'));
+        }
     }
 
     /**

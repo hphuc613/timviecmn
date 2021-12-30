@@ -21,6 +21,7 @@ class Banner extends Model {
     const HOME_PAGE    = 'HOME_PAGE';
     const LISTING_PAGE = 'LISTING_PAGE';
     const DETAIL_PAGE  = 'DETAIL_PAGE';
+    const RECRUIT_FORM = 'RECRUIT_FORM';
 
     /**
      * @return array
@@ -29,7 +30,8 @@ class Banner extends Model {
         return [
             self::HOME_PAGE    => trans("Home Page"),
             self::LISTING_PAGE => trans("Listing Page"),
-            self::DETAIL_PAGE  => trans("Detail Page")
+            self::DETAIL_PAGE  => trans("Detail Page"),
+            self::RECRUIT_FORM => trans("Recruit Form"),
         ];
     }
 

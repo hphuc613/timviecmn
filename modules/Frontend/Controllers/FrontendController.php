@@ -8,8 +8,10 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Modules\Banner\Models\Banner;
 use Modules\Applicant\Models\Applicant;
+use Modules\Base\Controllers\BaseController;
 use Modules\Base\Models\Status;
 use Modules\Career\Models\Career;
 use Modules\City\Models\City;
@@ -18,8 +20,9 @@ use Modules\Frontend\Requests\ApplyRequest;
 use Modules\Frontend\Requests\RecruitmentRequest;
 use Modules\Position\Models\Position;
 use Modules\Post\Models\Post;
+use Illuminate\Support\Facades\App;
 
-class FrontendController extends Controller {
+class FrontendController extends BaseController {
 
     /**
      * Create a new authentication controller instance.
@@ -27,7 +30,7 @@ class FrontendController extends Controller {
      * @return void
      */
     public function __construct() {
-        # parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -36,6 +39,7 @@ class FrontendController extends Controller {
      */
     public function index(Request $request) {
         $banner = Banner::getBanner(Banner::HOME_PAGE);
+
         return view("Frontend::index", compact("banner"));
     }
 
@@ -44,7 +48,8 @@ class FrontendController extends Controller {
      */
     public function getRecruit() {
         $careers = Career::getArray(Status::STATUS_ACTIVE);
-        return view('Frontend::_form_recruit', compact('careers'))->render();
+        $banner  = Banner::getBanner(Banner::RECRUIT_FORM);
+        return view('Frontend::_form_recruit', compact('careers', 'banner'))->render();
     }
 
     /**
@@ -64,13 +69,19 @@ class FrontendController extends Controller {
      * @return Factory|View
      */
     public function newsListing(Request $request) {
-        $filter    = $request->all();
-        $banner    = Banner::getBanner(Banner::LISTING_PAGE);
-        $data      = Post::filter($filter)->orderBy('created_at', 'desc')->paginate(5);
-        $cities    = City::query()->where('status', Status::STATUS_ACTIVE)->get();
-        $careers   = Career::query()->where('status', Status::STATUS_ACTIVE)->get();
-        $positions = Position::query()->where('status', Status::STATUS_ACTIVE)->get();
-        return view('Frontend::listing', compact('data', 'careers', 'positions', 'filter', 'banner', 'cities'));
+        $filter     = $request->all();
+        $banner     = Banner::getBanner(Banner::LISTING_PAGE);
+        $data       = Post::filter($filter)->orderBy('created_at', 'desc')->paginate(15);
+        $new_posts  = Post::query()
+                          ->where('status', Status::STATUS_ACTIVE)
+                          ->orderBy('created_at', 'desc')
+                          ->limit(4)
+                          ->get();
+        $cities     = City::query()->where('status', Status::STATUS_ACTIVE)->get();
+        $careers    = Career::query()->where('status', Status::STATUS_ACTIVE)->get();
+        $positions  = Position::query()->where('status', Status::STATUS_ACTIVE)->get();
+        $work_types = Post::getWorkTypes();
+        return view('Frontend::listing', compact('data', 'careers', 'positions', 'filter', 'banner', 'cities', 'work_types', 'new_posts'));
     }
 
     /**
@@ -116,7 +127,7 @@ class FrontendController extends Controller {
             $data                = $request->all();
             $data['post_id']     = $post->id;
             $data['position_id'] = $position->id;
-            $data['birthday'] = formatDate(strtotime($request->birthday), 'Y-m-d');
+            $data['birthday']    = formatDate(strtotime($request->birthday), 'Y-m-d');
             if ($request->has('file')) {
                 $file         = $request->file;
                 $file_name    = Helper::slug($request->name) . '-' . $request->phone . '-' . formatDate(time(), 'd-m-y-H-i-s') . '.' . $file->getClientOriginalExtension();
@@ -126,7 +137,8 @@ class FrontendController extends Controller {
             Applicant::query()->create($data);
             $request->session()->flash('success', trans('Successfully applied'));
         } else {
-            $request->session()->flash('danger', trans('The Recruitment Post cannot be found or something went wrong.'));
+            $request->session()
+                    ->flash('danger', trans('The Recruitment Post cannot be found or something went wrong.'));
         }
 
         return redirect()->back();

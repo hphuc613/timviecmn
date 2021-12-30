@@ -61,13 +61,15 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <select name="working_style" id="working_style"
+                                                <select name="working_form" id="working_form"
                                                         class="form-control select2">
-                                                    <option value="">Hình thức làm việc</option>
-                                                    <option value="1">Toàn thời gian</option>
-                                                    <option value="2">Bán thời gian</option>
-                                                    <option value="3">Thực tập</option>
-                                                    <option value="4">Remote - Làm từ xa</option>
+                                                    <option value="">- {{ trans('Working form') }} -</option>
+                                                    @foreach($work_types as $key => $work_type)
+                                                        @php($selected = $key == ($filter['working_form'] ?? null) ? 'selected' : null )
+                                                        <option value="{{ $key}}" {{ $selected }}>
+                                                            {{ $work_type }}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -82,66 +84,35 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <button type="submit"class="btn main-bg-color-light w-100 rounded-0">
+                                        <button type="submit" class="btn main-bg-color-light w-100 rounded-0">
                                             {{ trans('Search') }}
                                         </button>
                                     </form>
                                 </div>
                                 <div class="widget d-none d-md-block">
-                                    <h4>Upcoming Events</h4>
-                                    <div id="post-list-footer">
-                                        <div class="spost clearfix">
-                                            <div class="entry-image">
-                                                <a href="#" class="nobg"><img src="images/logo.png" alt=""></a>
-                                            </div>
-                                            <div class="entry-c">
-                                                <div class="entry-title">
-                                                    <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
+                                    <h4>{{ trans('New Recruitment') }}</h4>
+                                    <div id="post-list-footer" class="new-post-list">
+                                        @foreach($new_posts as $post)
+                                            <div class="spost clearfix">
+                                                <div class="entry-image">
+                                                    <a href="{{ route('get.frontend.detail', ['id' => $post->id, 'slug' => $post->slug]) }}">
+                                                        <img src="{{ $post->image }}" width="100%" alt="">
+                                                    </a>
                                                 </div>
-                                                <ul class="entry-meta">
-                                                    <li>10th July 2014</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="spost clearfix">
-                                            <div class="entry-image">
-                                                <a href="#" class="nobg"><img src="images/logo.png" alt=""></a>
-                                            </div>
-                                            <div class="entry-c">
-                                                <div class="entry-title">
-                                                    <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
+                                                <div class="entry-c">
+                                                    <div class="entry-title">
+                                                        <h4>
+                                                            <a href="{{ route('get.frontend.detail', ['id' => $post->id, 'slug' => $post->slug]) }}">
+                                                                {{ $post->title }}
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <ul class="entry-meta">
+                                                        <li>{{ formatDate(strtotime($post->created_at), 'd/m/Y H:i') }}</li>
+                                                    </ul>
                                                 </div>
-                                                <ul class="entry-meta">
-                                                    <li>10th July 2014</li>
-                                                </ul>
                                             </div>
-                                        </div>
-                                        <div class="spost clearfix">
-                                            <div class="entry-image">
-                                                <a href="#" class="nobg"><img src="images/logo.png" alt=""></a>
-                                            </div>
-                                            <div class="entry-c">
-                                                <div class="entry-title">
-                                                    <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
-                                                </div>
-                                                <ul class="entry-meta">
-                                                    <li>10th July 2014</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="spost clearfix">
-                                            <div class="entry-image">
-                                                <a href="#" class="nobg"><img src="images/logo.png" alt=""></a>
-                                            </div>
-                                            <div class="entry-c">
-                                                <div class="entry-title">
-                                                    <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
-                                                </div>
-                                                <ul class="entry-meta">
-                                                    <li>10th July 2014</li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

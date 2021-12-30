@@ -180,6 +180,22 @@ header {
     }
 }
 
+.recruit-form-modal {
+    img{
+        max-width: 100%;
+        height: 847px;
+        object-fit: cover;
+    }
+}
+
+.new-post-list {
+    img {
+        width: 3rem;
+        height: 3rem;
+        object-fit: cover;
+    }
+}
+
 .btn-close {
     color: black;
 

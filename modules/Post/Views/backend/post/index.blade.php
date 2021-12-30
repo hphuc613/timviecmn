@@ -88,6 +88,7 @@
                             <th>{{ trans('Title') }}</th>
                             <th>{{ trans('Image') }}</th>
                             <th>{{ trans('Company') }}</th>
+                            <th>{{ trans('Working Form') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Author') }}</th>
                             <th>{{ trans('Updated By') }}</th>
@@ -112,6 +113,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $item->company->name ?? NULL }}</td>
+                                <td>{{ \Modules\Post\Models\Post::getWorkType($item->work_type) }}</td>
                                 <?php
                                 $status = $statuses[$item->status] ?? null;
                                 $color = 'text-danger';

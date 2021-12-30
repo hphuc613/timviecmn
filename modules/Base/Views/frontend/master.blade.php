@@ -56,10 +56,13 @@
 <script src="{{ asset('assets/frontend/js/modal.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 <script src="{{ asset('assets/plugins/jsvalidation/js/jsvalidation.js')}}"></script>
+<script src="{{ asset('assets/plugins/toast/toast.js') }}" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@include('Base::frontend.flash_noti')
+
 <script>
     $(document).ready(function () {
         $('.select2').select2();

@@ -15,7 +15,7 @@ use Modules\Position\Models\Position;
 use Modules\Tag\Models\Tag;
 use Modules\User\Models\User;
 
-class Post extends BaseModel{
+class Post extends BaseModel {
 
     use SoftDeletes;
 
@@ -69,7 +69,7 @@ class Post extends BaseModel{
         if (isset($filter['career'])) {
             $data = $data->whereHas('company', function ($c) use ($filter) {
                 $career = Career::query()->where('slug', $filter['career'])->first();
-                if(!empty($career)){
+                if (!empty($career)) {
                     $c->where('career_id', $career->id);
                 }
             });
@@ -77,15 +77,18 @@ class Post extends BaseModel{
         if (isset($filter['city'])) {
             $data = $data->whereHas('company', function ($c) use ($filter) {
                 $city = City::query()->where('slug', $filter['city'])->first();
-                if(!empty($city)){
+                if (!empty($city)) {
                     $c->where('city_id', $city->id);
                 }
             });
         }
+        if (isset($filter['working_form'])) {
+            $data = $data->where('work_type', $filter['working_form']);
+        }
         if (isset($filter['position'])) {
             $position = Position::query()->where('slug', $filter['position'])->first();
-            if(!empty($position)){
-                $data     = $data->where('position_id', $position->id);
+            if (!empty($position)) {
+                $data = $data->where('position_id', $position->id);
             }
         }
         if (isset($filter['company_id'])) {
@@ -140,7 +143,7 @@ class Post extends BaseModel{
     }
 
 
-    public static function getWorkTypes(){
+    public static function getWorkTypes() {
         return [
             self::HTLV_FULL_TIME => trans('Full Time'),
             self::HTLV_PART_TIME => trans('Part Time'),
@@ -154,8 +157,8 @@ class Post extends BaseModel{
      *
      * @return string
      */
-    public static function getWorkType($key){
-        if (array_key_exists($key, self::getWorkTypes())){
+    public static function getWorkType($key) {
+        if (array_key_exists($key, self::getWorkTypes())) {
             return self::getWorkTypes()[$key];
         }
     }
