@@ -2,8 +2,6 @@
 
 namespace Modules\Setting\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Models\BaseModel;
 
 class Setting extends BaseModel {
@@ -18,7 +16,8 @@ class Setting extends BaseModel {
 
     /**
      * @param $key
-     * @return |null
+     *
+     * @return \Illuminate\Database\Eloquent\HigherOrderBuilderProxy|mixed|null
      */
     public static function getValueByKey($key) {
 

@@ -21,8 +21,7 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ trans('Email Setting') }}</h3>
                         <p class="card-text">{{ trans('To configuration the site email and SMTP.') }}</p>
-                        <a href="{{ route("get.setting.emailConfig") }}"
-                           class="btn btn-success">{{ trans('Go to config') }}</a>
+                        <a href="{{ route("get.setting.emailConfig") }}" class="btn btn-success">{{ trans('Go to config') }}</a>
                     </div>
                 </div>
             </div>
@@ -31,8 +30,7 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ trans('Website Setting') }}</h3>
                         <p class="card-text">{{ trans('To configuration the website.') }}</p>
-                        <a href="#"
-                           class="btn btn-success">{{ trans('Go to config') }}</a>
+                        <a href="{{ route("get.setting.websiteConfig") }}" class="btn btn-success">{{ trans('Go to config') }}</a>
                     </div>
                 </div>
             </div>

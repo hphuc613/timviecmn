@@ -27,6 +27,14 @@
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css') }}" type="text/css"/>
     <title>Index</title>
+    <?php
+    use Illuminate\Support\Facades\DB;
+    $settings = DB::table('settings')->where('key', \Modules\Setting\Models\WebsiteConfig::WEBSITE_FAVICON)->first();
+    $favicon = $settings->value ?? '';
+    if (!empty($favicon)) {
+        echo '<link rel="icon" type="image/png" sizes="192x192"  href="'.asset($favicon).'">';
+    }
+    ?>
 
 </head>
 

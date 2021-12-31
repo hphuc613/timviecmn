@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Setting\Models\MailConfig;
+use Modules\Setting\Models\WebsiteConfig;
 
 class SettingController extends Controller {
 
@@ -56,6 +57,39 @@ class SettingController extends Controller {
         }
 
         return view("Setting::setting.email", compact('mail_config'));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Factory|View|RedirectResponse
+     */
+    public function websiteConfig(Request $request){
+        $post = $request->all();
+        $website_config = WebsiteConfig::getWebsiteConfig();
+        if ($post){
+            unset($post['_token']);
+            foreach ($post as $key => $value){
+                $website_config = WebsiteConfig::query()->where('key', $key)->first();
+                if ($key == (WebsiteConfig::WEBSITE_LOGO || WebsiteConfig::WEBSITE_FAVICON)){
+                    $value = Helper::storageFile($value, time() . '_' . $value->getClientOriginalName(), 'WebsiteConfig/' . $key);
+                }
+                if (!empty($website_config)){
+                    $website_config->update(['value' => $value]);
+                }else{
+                    $website_config        = new WebsiteConfig();
+                    $website_config->key   = $key;
+                    $website_config->value = $value;
+                    $website_config->save();
+                }
+            }
+
+            $request->session()->flash('success', 'Updated successfully.');
+
+            return redirect()->back();
+        }
+
+        return view("Setting::setting.website", compact('website_config'));
     }
 
     /**

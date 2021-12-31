@@ -123,13 +123,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+{{--                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>--}}
+{{--                        <div class="dropdown-divider"></div>--}}
+                        <a href="{{route('get.user.update', auth('admin')->user()->id)}}" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account
-                            Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ route("admin.get.logout") }}" class="dropdown-item"><i
-                                class="fa fa-power-off"></i> {{ trans('Logout') }}</a>
+                        <a href="{{ route("admin.get.logout") }}" class="dropdown-item"><i class="fa fa-power-off"></i> {{ trans('Logout') }}</a>
                     </div>
                 </li>
                 {{--                <li class="nav-item right-side-toggle"><a class="nav-link  waves-effect waves-light"--}}
