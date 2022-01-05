@@ -95,7 +95,7 @@
                             <th>{{ trans('Address') }}</th>
                             <th style="width: 200px;">{{ trans('Status') }}</th>
                             <th>{{ trans('Created At') }}</th>
-                            <th class="action">{{ trans('Action') }}</th>
+                            <th class="action text-center" style="width: 200px;">{{ trans('Action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -112,7 +112,7 @@
                                     {!! Form::select('status', $statuses, $item->status ?? NULL, ['class' => 'select2 update-status form-control', 'data-id' => $item->id]) !!}
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i:s')}}</td>
-                                <td class="link-action">
+                                <td class="link-action text-center">
                                     <a href="{{ route('get.contact_recruitment.update', $item->id) }}" class="btn btn-primary"
                                        data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Detail") }}">
                                         <i class="fa fa-eye" aria-hidden="true"></i></a>

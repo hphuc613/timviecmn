@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 
 if (!function_exists('get_directories')) {
     /**
@@ -9,7 +10,7 @@ if (!function_exists('get_directories')) {
      */
     function get_directories($path) {
         $directories = [];
-        $items = scandir($path);
+        $items       = scandir($path);
         foreach ($items as $item) {
             if ($item == '..' || $item == '.') {
                 continue;
@@ -28,12 +29,13 @@ if (!function_exists('config_permission_merge')) {
      * @return array
      */
     function config_permission_merge() {
+        App::setLocale('en');
         $modules = get_directories(base_path('modules'));
-        $files = [];
-        $i = 0;
+        $files   = [];
+        $i       = 0;
         foreach ($modules as $key => $value) {
             $urlPath = $value . '/Configs/permission.php';
-            $file = base_path('modules') . '/' . $urlPath;
+            $file    = base_path('modules') . '/' . $urlPath;
             if (file_exists($file)) {
                 $files[(int)filemtime($file) + $i] = $file;
                 $i++;
@@ -54,7 +56,7 @@ if (!function_exists('config_menu_merge')) {
      * @return array
      */
     function config_menu_merge() {
-        $modules = get_directories(base_path('modules'));
+        $modules    = get_directories(base_path('modules'));
         $activeMenu = [];
         foreach ($modules as $key => $value) {
             $urlPath = $value . '/Configs/menu.php';
@@ -109,11 +111,11 @@ if (!function_exists('getModal')) {
      */
     function getModal($array = []) {
         if (!empty($array)) {
-            $class = $array['class'] ?? null;
-            $id = $array['id'] ?? 'form-modal';
+            $class    = $array['class'] ?? null;
+            $id       = $array['id'] ?? 'form-modal';
             $tabindex = $array['tabindex'] ?? '-1';
-            $size = $array['size'] ?? null;
-            $title = $array['title'] ?? 'Title';
+            $size     = $array['size'] ?? null;
+            $title    = $array['title'] ?? 'Title';
             if ($tabindex !== false) {
                 $html = '<div class="modal fade ' . $class . '" id="' . $id . '" tabindex="' . $tabindex
                     . '" role="dialog" aria-hidden="true">';
@@ -182,15 +184,15 @@ if (!function_exists('segmentUrl')) {
     }
 }
 
-if(!function_exists('moneyFormat')){
+if (!function_exists('moneyFormat')) {
     /**
      * @param $number
      * @param bool $has_unit
      * @return string
      */
-    function moneyFormat($number, $has_unit = true){
+    function moneyFormat($number, $has_unit = true) {
         $unit = "HK$";
-        if(is_numeric($number)){
+        if (is_numeric($number)) {
             return ($has_unit) ? $unit . number_format($number) : number_format($number);
         }
 

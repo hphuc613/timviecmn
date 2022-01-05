@@ -2,7 +2,6 @@
 
 namespace Modules\Banner\Requests;
 
-use App\AppHelpers\Helper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BannerRequest extends FormRequest {
@@ -25,6 +24,7 @@ class BannerRequest extends FormRequest {
             'name'   => 'required',
             'status' => 'required',
             'image'  => 'required',
+            'page_id'  => 'required',
         ];
     }
 
@@ -37,9 +37,10 @@ class BannerRequest extends FormRequest {
 
     public function attributes() {
         return [
-            'name'   => trans('Name'),
-            'status' => trans('Status'),
-            'image'  => trans('Image'),
+            'name'    => trans('Name'),
+            'status'  => trans('Status'),
+            'image'   => trans('Image'),
+            'page_id' => trans('Page'),
         ];
     }
 }
