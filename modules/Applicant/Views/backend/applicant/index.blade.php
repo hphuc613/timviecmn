@@ -98,7 +98,7 @@
                             <th>#</th>
                             <th>{{ trans('Name') }}</th>
                             <th>{{ trans('Post') }}</th>
-                            <th>{{ trans('CV') }}</th>
+                            <th style="width: 100px">{{ trans('CV') }}</th>
                             <th>{{ trans('Email') }}</th>
                             <th>{{ trans('Phone') }}</th>
                             <th>{{ trans('Address') }}</th>

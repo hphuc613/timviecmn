@@ -20,17 +20,17 @@ $(document).on('click', '.btn-delete', function (e) {
     e.preventDefault();
     var action = $(this).attr('href');
     var lang = $('html').attr('lang');
-    var title = (lang !== 'en') ? "你確定嗎?" : "Are you sure?";
-    var text = (lang !== 'en') ? "您将无法还原此内容!" : "You won't be able to revert this!";
+    var title = (lang !== 'en') ? "Bạn chắc chứ?" : "Are you sure?";
+    var text = (lang !== 'en') ? "Không thể phục hồi mục này!" : "You won't be able to revert this!";
 
     swal.fire({
         title: title,
         text: text,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: (lang !== 'en') ? '刪除' : 'Delete',
+        confirmButtonText: (lang !== 'en') ? 'Xóa' : 'Delete',
         confirmButtonColor: "#d33",
-        cancelButtonText: (lang !== 'en') ? '取消' : 'Cancel',
+        cancelButtonText: (lang !== 'en') ? 'Hủy' : 'Cancel',
     }).then((willDelete) => {
         if (willDelete.isConfirmed) {
             window.location.replace(action);
