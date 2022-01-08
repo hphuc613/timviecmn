@@ -12,6 +12,7 @@ Route::prefix("admin")->group(function () {
         Route::middleware('can:post-update')->group(function () {
             Route::get("/update/{id}", "PostController@getUpdate")->name("get.post.update");
             Route::post("/update/{id}", "PostController@postUpdate")->name("post.post.update");
+            Route::get("/set-is-hot/{id}", "PostController@setIsHot")->name("get.post.setIsHot");
         });
         Route::get("/delete/{id}", "PostController@delete")->name("get.post.delete")->middleware('can:post-delete');
 

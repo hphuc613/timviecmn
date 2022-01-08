@@ -73,6 +73,15 @@
                     'id' => 'work_type',
                     'class' => 'select2 form-control']) !!}
             </div>
+            <div class="form-group">
+                <label for="is_hot" class="title">{{ trans('Hot Post') }}</label>
+                <div class="w-100">
+                    <label class="switch mb-0">
+                        <input type="checkbox" name="is_hot" value="1" {{isset($data->is_hot) && $data->is_hot == 1 ? 'checked' : ''}}>
+                        <span class="slider-round"></span>
+                    </label>
+                </div>
+            </div>
             @if(isset($data))
                 <div class="form-group">
                     <label for="tags" class="title">{{ trans('Updated By') }}</label>

@@ -117,6 +117,11 @@ class PostController extends Controller {
             }
             $data['image'] = Helper::storageFile($image, time() . '_' . $image->getClientOriginalName(), 'Post/' . $post->id);
         }
+        if($request->has('is_hot')){
+            $post->is_hot = 1;
+        }else{
+            $post->is_hot = 0;
+        }
         $data['slug'] = Helper::slug($request->title);
         $post->update($data);
         $post->tags()->sync($tag_ids);
@@ -154,4 +159,20 @@ class PostController extends Controller {
         return json_encode($array);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return RedirectResponse
+     */
+    public function setIsHot(Request $request, $id) {
+        $data = Post::query()->find($id);
+        if (!empty($data)) {
+            $data->is_hot = !$data->is_hot;
+            $data->save();
+            $request->session()->flash('success', trans('Update Hot successfully.'));
+        }
+
+        return back();
+    }
 }

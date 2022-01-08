@@ -29,6 +29,7 @@ class Post extends BaseModel {
 
     public $timestamps = TRUE;
 
+    /*Hình thức làm việc*/
     const HTLV_FULL_TIME = "FULL_TIME";
 
     const HTLV_PART_TIME = "PART_TIME";
@@ -102,6 +103,9 @@ class Post extends BaseModel {
         }
         if (isset($filter['created_by'])) {
             $data = $data->where('created_by', $filter['created_by']);
+        }
+        if (isset($filter['hot'])) {
+            $data = $data->where('is_hot', $filter['hot']);
         }
 
         return $data;

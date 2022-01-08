@@ -102,8 +102,11 @@
                                                 <div class="entry-c">
                                                     <div class="entry-title">
                                                         <h4>
-                                                            <a href="{{ route('get.frontend.detail', ['id' => $post->id, 'slug' => $post->slug]) }}">
+                                                            <a class="" href="{{ route('get.frontend.detail', ['id' => $post->id, 'slug' => $post->slug]) }}">
                                                                 {{ $post->title }}
+                                                                @if($post->is_hot == 1)
+                                                                    <span class="is-hot-badges"></span>
+                                                                @endif
                                                             </a>
                                                         </h4>
                                                     </div>
@@ -132,7 +135,13 @@
                                         <div class="flex-grow-1 ms-3">
                                             <div class="title">
                                                 <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}">
-                                                    <h2>{{ $item->title }}</h2></a>
+                                                    <h2 class="">
+                                                        {{ $item->title }}
+                                                        @if($item->is_hot == 1)
+                                                            <span class="is-hot-badges"></span>
+                                                        @endif
+                                                    </h2>
+                                                </a>
                                             </div>
                                             <div
                                                 class="time">{{ formatDate(strtotime($item->created_at), 'd/m/Y H:i') }}</div>

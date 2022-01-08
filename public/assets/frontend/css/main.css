@@ -186,4 +186,21 @@ footer .social-icon i {
   font-size: 18px;
 }
 
+.is-hot-badges {
+  position: relative;
+}
+.is-hot-badges:after {
+  content: "HOT";
+  background-color: red;
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  font-size: 8px;
+  line-height: 1;
+  color: white;
+  padding: 2.5px 10px 2.5px 5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 5px;
+}
+
 /*# sourceMappingURL=main.css.map */

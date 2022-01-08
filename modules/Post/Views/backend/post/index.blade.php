@@ -65,6 +65,10 @@
                                 {!! Form::select('status', $prompt + $statuses, $filter['status'] ?? NULL, ['class' => 'select2 form-control']) !!}
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <label for="is_hot" class="title">{{ trans('Hot Post') }}</label>
+                            {!! Form::select('hot',  ['' => "All", 0 => "No Hot", 1 => "Hot"], $filter['hot'] ?? NULL, ['class' => 'select2 form-control']) !!}
+                        </div>
                     </div>
                     <div class="input-group">
                         <button type="submit" class="btn btn-info mr-2">{{ trans("Search") }}</button>
@@ -90,8 +94,7 @@
                             <th>{{ trans('Company') }}</th>
                             <th>{{ trans('Working Form') }}</th>
                             <th>{{ trans('Status') }}</th>
-                            <th>{{ trans('Author') }}</th>
-                            <th>{{ trans('Updated By') }}</th>
+                            <th>{{ trans('Hot') }}</th>
                             <th>{{ trans('Created At') }}</th>
                             <th>{{ trans('Updated At') }}</th>
                             <th class="action">{{ trans('Action') }}</th>
@@ -123,19 +126,10 @@
                                 ?>
                                 <td><b class="{{$color}}">{{ $status }}</b></td>
                                 <td>
-                                    @if(isset($item->author))
-                                        <a href="{{ route('get.user.update', $item->created_by) }}">{{ $item->author->name }}</a>
-                                    @else
-                                        N/A
-                                    @endif
-                                </td>
-
-                                <td>
-                                    @if(isset($item->updatedBy))
-                                        <a href="{{ route('get.user.update', $item->updated_by) }}">{{ $item->updatedBy->name }}</a>
-                                    @else
-                                        N/A
-                                    @endif
+                                    <label class="switch small mb-0">
+                                        <input type="checkbox" name="is_hot" value="1" {{$item->is_hot == 1 ? 'checked' : ''}} data-id="{{$item->id}}">
+                                        <span class="slider-round"></span>
+                                    </label>
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s')}}</td>
@@ -157,3 +151,12 @@
     </div>
     {!! getModal(["class" => "modal-ajax"]) !!}
 @endsection
+@push('js')
+    <script !src="">
+        $(document).ready(function () {
+            $('input[name="is_hot"]').change(function () {
+                window.location.href = "{{ route('get.post.setIsHot', '') }}/" + $(this).attr("data-id");
+            });
+        })
+    </script>
+@endpush
