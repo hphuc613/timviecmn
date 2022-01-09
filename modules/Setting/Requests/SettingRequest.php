@@ -2,19 +2,18 @@
 
 namespace Modules\Setting\Requests;
 
-use App\AppHelpers\Helper;
 use Illuminate\Foundation\Http\FormRequest;
+use Modules\Setting\Models\WebsiteConfig;
 
-class SettingRequest extends FormRequest
-{
+class SettingRequest extends FormRequest{
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return true;
+    public function authorize(){
+        return TRUE;
     }
 
     /**
@@ -22,26 +21,26 @@ class SettingRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
-        $method = Helper::segment(2);
-        switch ($method) {
-            default:
-                return [];
-                break;
-            case "update":
-                return [];
-                break;
-        }
+    public function rules(){
+        return [
+            WebsiteConfig::WEBSITE_EMAIL                => 'email',
+            WebsiteConfig::WEBSITE_PHONE_FOR_RECRUIMENT => 'digits:10',
+            WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT  => 'digits:10',
+        ];
     }
 
-    public function messages()
-    {
-        return [];
+    public function messages(){
+        return [
+            'email'  => ':attribute' . trans(' must be the email.'),
+            'digits' => ':attribute' . trans(' must be 10 digits.'),
+        ];
     }
 
-    public function attributes()
-    {
-        return [];
+    public function attributes(){
+        return [
+            WebsiteConfig::WEBSITE_EMAIL                => trans('Email'),
+            WebsiteConfig::WEBSITE_PHONE_FOR_RECRUIMENT => trans('Phone'),
+            WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT  => trans('Phone'),
+        ];
     }
 }

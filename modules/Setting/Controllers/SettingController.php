@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Setting\Models\MailConfig;
 use Modules\Setting\Models\WebsiteConfig;
+use Modules\Setting\Requests\SettingRequest;
 
 class SettingController extends Controller {
 
@@ -60,18 +61,19 @@ class SettingController extends Controller {
     }
 
     /**
-     * @param Request $request
+     * @param \Modules\Setting\Requests\SettingRequest $request
      *
      * @return Factory|View|RedirectResponse
      */
-    public function websiteConfig(Request $request){
+    public function websiteConfig(SettingRequest $request){
         $post = $request->all();
         $website_config = WebsiteConfig::getWebsiteConfig();
         if ($post){
             unset($post['_token']);
             foreach ($post as $key => $value){
                 $website_config = WebsiteConfig::query()->where('key', $key)->first();
-                if ($key == (WebsiteConfig::WEBSITE_LOGO || WebsiteConfig::WEBSITE_FAVICON)){
+                if ($key == WebsiteConfig::WEBSITE_LOGO && $request->hasFile(WebsiteConfig::WEBSITE_LOGO) ||
+                    $key == WebsiteConfig::WEBSITE_FAVICON && $request->hasFile(WebsiteConfig::WEBSITE_LOGO)){
                     $value = Helper::storageFile($value, time() . '_' . $value->getClientOriginalName(), 'WebsiteConfig/' . $key);
                 }
                 if (!empty($website_config)){
@@ -108,5 +110,4 @@ class SettingController extends Controller {
         }
         return redirect()->back();
     }
-
 }
