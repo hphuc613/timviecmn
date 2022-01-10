@@ -157,7 +157,7 @@ header.dark nav a {
 }
 
 .select2 {
-  width: 100% !important;
+  width: 100%;
 }
 .select2 .select2-selection {
   border-color: #aaaaaa73;
@@ -201,6 +201,23 @@ footer .social-icon i {
   top: 50%;
   transform: translateY(-50%);
   margin-left: 5px;
+}
+
+.form-search .select2 .select2-selection {
+  height: 40px;
+}
+.form-search .select2 .select2-selection__arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.form-search form input, .form-search form .btn {
+  height: 40px;
+}
+@media (max-width: 739px) {
+  .form-search form .btn {
+    display: block;
+    margin: auto;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

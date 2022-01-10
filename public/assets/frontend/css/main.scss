@@ -204,7 +204,7 @@ header {
 }
 
 .select2 {
-    width: 100% !important;
+    width: 100%;
 
     .select2-selection {
         border-color: #aaaaaa73;
@@ -255,5 +255,31 @@ footer {
         top: 50%;
         transform: translateY(-50%);
         margin-left: 5px;
+    }
+}
+
+.form-search {
+    .select2 {
+        .select2-selection {
+            height: 40px;
+        }
+
+        .select2-selection__arrow {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    form {
+        input, .btn {
+            height: 40px;
+        }
+
+        .btn {
+            @include mobile {
+                display: block;
+                margin: auto;
+            }
+        }
     }
 }
