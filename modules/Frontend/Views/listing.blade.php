@@ -1,8 +1,6 @@
 @extends("Base::frontend.master")
 @section("content")
-    <section id="page-title" class="page-title-parallax page-title-dark"
-             style="background-image: url({{ asset($banner) }}); background-size: cover; padding: 120px 0;"
-             data-bottom-top="background-position:0 px 300px;" data-top-bottom="background-position:0px -300px;">
+    <section id="page-title" class="page-title-parallax page-title-dark" style="background-image: url({{ asset($banner) }}); background-size: cover; padding: 120px 0;" data-bottom-top="background-position:0 px 300px;" data-top-bottom="background-position:0px -300px;">
         <div class="container clearfix">
             <h1>{{ trans('Recruitment') }}</h1>
             <span>{{ trans('Your dream job is here') }}</span>
@@ -21,14 +19,12 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="text" name="title" class="form-control" autocomplete="off"
-                                   placeholder="{{ trans('Job name...') }}">
+                            <input type="text" name="title" class="form-control" value="{{$filter['title'] ?? NULL}}" autocomplete="off" placeholder="{{ trans('Job name...') }}">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="text" name="company" class="form-control"
-                                   placeholder="{{ trans('Company name...') }}">
+                            <input type="text" name="company" class="form-control" value="{{$filter['company'] ?? NULL}}" autocomplete="off" placeholder="{{ trans('Company name...') }}">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -98,90 +94,31 @@
         </div>
     </section>
 
-    <section id="news-listing" class="news-listing">
-        <div class="content-wrap">
-            <div class="container-fluid clearfix">
-                <div class="row">
-                    {{--<div class="col-md-3">
-                        <div class="sidebar-widgets-wrap">
-                            <div class="widget clearfix">
-                                <div class="widget d-none d-md-block">
-                                    <h4>{{ trans('New Recruitment') }}</h4>
-                                    <div id="post-list-footer" class="new-post-list">
-                                        @foreach($new_posts as $post)
-                                            <div class="spost clearfix">
-                                                <div class="entry-image">
-                                                    <a href="{{ route('get.frontend.detail', ['id' => $post->id, 'slug' => $post->slug]) }}">
-                                                        <img src="{{ $post->image }}" width="100%" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="entry-c">
-                                                    <div class="entry-title">
-                                                        <h4>
-                                                            <a class="" href="{{ route('get.frontend.detail', ['id' => $post->id, 'slug' => $post->slug]) }}">
-                                                                {{ $post->title }}
-                                                                @if($post->is_hot == 1)
-                                                                    <span class="is-hot-badges"></span>
-                                                                @endif
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <ul class="entry-meta">
-                                                        <li>{{ formatDate(strtotime($post->created_at), 'd/m/Y H:i') }}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
+    <section id="news-listing" class="news-listing py-5">
+        <div class="container">
+            <div class="row">
+                @foreach($data as $item)
+                    <div class="col-md-4">
+                        <a class="news-item" href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}">
+                            <div class="image">
+                                <img src="{{ $item->image }}" class="img-fluid w-100" alt="">
                             </div>
-                        </div>
-                    </div>--}}
-                    <div class="col-md-12">
-                        <div class="news">
-                            <div class="listing row">
-                                @foreach($data as $item)
-                                    <div class="col-md-4">
-                                        <div class="news-item">
-                                            <div class="flex-shrink-0 image">
-                                                <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}">
-                                                    <img src="{{ $item->image }}" width="100%" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="flex-grow-1 ms-3 news-info">
-                                                <div class="info-news">
-                                                    <h5 class="title mb-2">
-                                                        <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}">
-                                                            {{ $item->title }}
-                                                        </a>
-                                                        <div class="hot-label">
-                                                            @if($item->is_hot == 1)
-                                                                <span class="is-hot-badges">HOT</span>
-                                                            @endif
-                                                        </div>
-                                                    </h5>
-                                                    <div class="time">
-                                                        {{ formatDate(strtotime($item->created_at), 'd/m/Y H:i') }}
-                                                    </div>
-                                                    <div class="description mb-3">
-                                                        {{ $item->company->city->name ?? NULL }}
-                                                    </div>
-                                                </div>
-
-                                                <div class="company text-uppercase">
-                                                    {{ $item->company->name ?? NULL }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                @endforeach
+                            <div class="info">
+                                <h5 class="title text-truncate mb-2">
+                                    {{ $item->title }}
+                                    @if($item->is_hot == 1)
+                                        <div><span class="is-hot-badges">HOT</span></div>
+                                    @endif
+                                </h5>
+                                <div class="font-italic">{{ formatDate(strtotime($item->created_at), 'd/m/Y H:i') }}</div>
+                                <div class="mb-2">{{ $item->company->city->name ?? NULL }}</div>
+                                <div class="text-uppercase text-truncate">{{ $item->company->name ?? NULL }}</div>
                             </div>
-                            {{ $data->withQueryString()->render('vendor/pagination/frontend_news_listing') }}
-                        </div>
+                        </a>
                     </div>
-                </div>
+                @endforeach
             </div>
+            {{ $data->withQueryString()->render('vendor/pagination/frontend_news_listing') }}
         </div>
     </section>
 @endsection

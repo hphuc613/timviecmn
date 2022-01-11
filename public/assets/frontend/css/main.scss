@@ -116,75 +116,21 @@ header {
 }
 
 .news-listing {
-    .news {
-        padding: 0 3rem;
+    .news-item {
+        display: flex;
+        margin-bottom: 3rem;
 
-        .listing {
-            margin-bottom: 5rem;
-
-            .news-item {
-                display: flex;
-
-                .image {
-                    margin-right: 1rem;
-
-                    img {
-                        width: 5rem;
-                    }
-                }
-
-                .news-info {
-                    height: 128px;
-
-                    .company, .title {
-                        white-space: nowrap;
-                        width: 85%;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
-
-                    .time {
-                        font-style: italic;
-                    }
-
-                    .description {
-                        font-size: 1rem;
-                        max-height: 82px;
-                        line-height: 20px;
-                        overflow: hidden;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 4;
-                        -webkit-box-orient: vertical;
-                        text-overflow: ellipsis;
-                    }
-                }
-
-                .info-news{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    min-height: 6.5rem;
-                }
-
-                @include mobile {
-                    .image {
-                        margin-right: 0;
-                        width: 25%;
-                    }
-
-                    .company, .title{
-                        width: 90%;
-                    }
-
-                    .time, .description {
-                        font-size: 13px;
-                    }
-                }
-            }
+        .image {
+            width: 25%;
         }
 
-        @include mobile {
-            padding: inherit;
+        .info {
+            width: 75%;
+            margin-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 128px;
         }
     }
 }
