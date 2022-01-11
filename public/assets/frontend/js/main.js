@@ -1,3 +1,12 @@
+/***** Action Clear Search *****/
+$(document).on('click', 'button.btn-clear', function (event) {
+    event.preventDefault();
+    var form = $(this).parents('form');
+    form.find('input').attr('disabled', 'disabled');
+    form.find('select').attr('disabled', 'disabled');
+    form.trigger('submit');
+});
+
 var lang = $('html').attr('lang');
 //VIETNAM CALENDAR
 $.fn.datetimepicker.dates['vi'] = {

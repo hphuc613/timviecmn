@@ -17,7 +17,7 @@
                                     <button class="input-group-text border-end-0 d-block">
                                         <i class="fas fa-search"></i>
                                     </button>
-                                    <input type="text" name="name" class="border-start-0 form-control"
+                                    <input type="text" name="title" class="border-start-0 form-control"
                                            placeholder="Tìm việc cho tương lai của bạn...">
                                     <button class="input-group-text d-block search-btn" type="submit">Tìm</button>
                                 </div>

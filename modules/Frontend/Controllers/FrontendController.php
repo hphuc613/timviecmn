@@ -19,17 +19,19 @@ use Modules\ContactRecruitment\Models\ContactRecruitment;
 use Modules\Frontend\Requests\ApplyRequest;
 use Modules\Frontend\Requests\RecruitmentRequest;
 use Modules\Position\Models\Position;
+use Modules\Post\Controllers\PostController;
 use Modules\Post\Models\Post;
 use Illuminate\Support\Facades\App;
+use Modules\Post\Models\TopSetting;
 
-class FrontendController extends BaseController {
+class FrontendController extends BaseController{
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct(){
         parent::__construct();
     }
 
@@ -37,7 +39,7 @@ class FrontendController extends BaseController {
      * @param Request $request
      * @return Factory|View
      */
-    public function index(Request $request) {
+    public function index(Request $request){
         $banner = Banner::getBanner(Banner::HOME_PAGE);
 
         return view("Frontend::index", compact("banner"));
@@ -46,7 +48,7 @@ class FrontendController extends BaseController {
     /**
      * @return string
      */
-    public function getRecruit() {
+    public function getRecruit(){
         $careers = Career::getArray(Status::STATUS_ACTIVE);
         $banner  = Banner::getBanner(Banner::RECRUIT_FORM);
         return view('Frontend::_form_recruit', compact('careers', 'banner'))->render();
@@ -56,7 +58,7 @@ class FrontendController extends BaseController {
      * @param RecruitmentRequest $request
      * @return RedirectResponse
      */
-    public function postRecruit(RecruitmentRequest $request) {
+    public function postRecruit(RecruitmentRequest $request){
         $data = new ContactRecruitment();
         $data->create($request->all());
         $request->session()->flash('success', trans('Sent successfully'));
@@ -68,10 +70,33 @@ class FrontendController extends BaseController {
      * @param Request $request
      * @return Factory|View
      */
-    public function newsListing(Request $request) {
-        $filter     = $request->all();
-        $banner     = Banner::getBanner(Banner::LISTING_PAGE);
-        $data       = Post::filter($filter)->orderBy('created_at', 'desc')->paginate(15);
+    public function newsListing(Request $request){
+        $filter = $request->all();
+        $banner = Banner::getBanner(Banner::LISTING_PAGE);
+        $posts  = Post::filter($filter);
+
+        $post_controller = new PostController();
+        $top             = TopSetting::query();
+        /** Get post top 1 */
+        $top1          = clone $top;
+        $top1_posts    = $post_controller->getTopPost($top1, TopSetting::TOP_1, $posts);
+        $top1_post_ids = $top1_posts['post_ids'];
+        $top1_posts    = $top1_posts['posts'];
+
+        /** Get post top 2 */
+        $top2          = clone $top;
+        $top2_posts    = $post_controller->getTopPost($top2, TopSetting::TOP_2, $posts);
+        $top2_post_ids = $top2_posts['post_ids'];
+        $top2_posts    = $top2_posts['posts'];
+
+        $posts        = $posts->where('status', Status::STATUS_ACTIVE)
+                              ->whereNotIn('id', array_merge($top2_post_ids, $top1_post_ids))
+                              ->orderBy('created_at', 'desc')
+                              ->get();
+        $data_collect = $top1_posts->merge($top2_posts)->merge($posts);
+        $data         = $this->paginate($data_collect, 18);
+
+
         $new_posts  = Post::query()
                           ->where('status', Status::STATUS_ACTIVE)
                           ->orderBy('created_at', 'desc')
@@ -90,17 +115,17 @@ class FrontendController extends BaseController {
      * @param $slug
      * @return Factory|View
      */
-    public function newsDetail(Request $request, $id, $slug) {
+    public function newsDetail(Request $request, $id, $slug){
         $data         = Post::query()->where('id', $id)->where('slug', $slug)->first();
         $position_ids = json_decode(!empty($data->position_ids) ? $data->position_ids : "[]", 1);
         $positions    = [];
-        if (!empty($position_ids)) {
+        if(!empty($position_ids)){
             $position_query = Position::query()->whereIn('id', $position_ids)
                                       ->where('status', Status::STATUS_ACTIVE)
                                       ->orderBy("name")
                                       ->get();
 
-            foreach ($position_query as $key => $item) {
+            foreach($position_query as $key => $item){
                 $positions[$item->id . '-' . $item->slug] = $item->name;
             }
         }
@@ -115,7 +140,7 @@ class FrontendController extends BaseController {
      * @param $slug
      * @return RedirectResponse
      */
-    public function postApplyJob(ApplyRequest $request, $id, $slug) {
+    public function postApplyJob(ApplyRequest $request, $id, $slug){
         $post          = Post::query()->where(['id' => $id, 'slug' => $slug])->first();
         $position_data = explode("-", $request->position_id);
         $position_id   = $position_data[0];
@@ -123,12 +148,12 @@ class FrontendController extends BaseController {
         $position_slug = implode('-', $position_data);
         $position      = Position::query()->where(['id' => $position_id, 'slug' => $position_slug])->first();
 
-        if (!empty($post) && !empty($position)) {
+        if(!empty($post) && !empty($position)){
             $data                = $request->all();
             $data['post_id']     = $post->id;
             $data['position_id'] = $position->id;
             $data['birthday']    = formatDate(strtotime($request->birthday), 'Y-m-d');
-            if ($request->has('file')) {
+            if($request->has('file')){
                 $file         = $request->file;
                 $file_name    = Helper::slug($request->name) . '-' . $request->phone . '-' . formatDate(time(), 'd-m-y-H-i-s') . '.' . $file->getClientOriginalExtension();
                 $data['file'] = Helper::storageFile($file, $file_name, 'CV File');
@@ -136,7 +161,7 @@ class FrontendController extends BaseController {
 
             Applicant::query()->create($data);
             $request->session()->flash('success', trans('Successfully applied'));
-        } else {
+        }else{
             $request->session()
                     ->flash('danger', trans('The Recruitment Post cannot be found or something went wrong.'));
         }

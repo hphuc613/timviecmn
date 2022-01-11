@@ -170,23 +170,15 @@ class PostController extends Controller{
         $top = TopSetting::query();
         /** Get post top 1 */
         $top1          = clone $top;
-        $top1          = $top1->where('top_option', TopSetting::TOP_1)->first();
-        $top1_post_ids = [];
-        if(!empty($top)){
-            $top1_post_ids = json_decode(!empty($top1->post_ids) ? $top1->post_ids : '[]', 1);
-        }
-        $top1_posts = clone $posts;
-        $top1_posts = $top1_posts->whereIn('id', $top1_post_ids)->get();
+        $top1_posts    = $this->getTopPost($top1, TopSetting::TOP_1, $posts);
+        $top1_post_ids = $top1_posts['post_ids'];
+        $top1_posts    = $top1_posts['posts'];
 
         /** Get post top 2 */
-        $top2          = clone $top;
-        $top2          = $top2->where('top_option', TopSetting::TOP_2)->first();
-        $top2_post_ids = [];
-        if(!empty($top)){
-            $top2_post_ids = json_decode(!empty($top2->post_ids) ? $top2->post_ids : '[]', 1);
-        }
-        $top2_posts = clone $posts;
-        $top2_posts = $top2_posts->whereIn('id', $top2_post_ids)->get();
+        $top2       = clone $top;
+        $top2_posts = $this->getTopPost($top2, TopSetting::TOP_2, $posts);
+        $top2_post_ids = $top2_posts['post_ids'];
+        $top2_posts    = $top2_posts['posts'];
 
         $posts = $posts->where('status', Status::STATUS_ACTIVE)
                        ->whereNotIn('id', array_merge($top2_post_ids, $top1_post_ids))
@@ -195,6 +187,24 @@ class PostController extends Controller{
                        ->toArray();
 
         return view('Post::backend.post._top_setting', compact('posts', 'top_options', 'top1_posts', 'top2_posts'));
+    }
+
+    /**
+     * @param $top
+     * @param $top_option
+     * @param $posts_query
+     * @return array
+     */
+    public function getTopPost($top, $top_option, $posts_query){
+        $top      = $top->where('top_option', $top_option)->first();
+        $post_ids = [];
+        if(!empty($top)){
+            $post_ids = json_decode(!empty($top->post_ids) ? $top->post_ids : '[]', 1);
+        }
+        $top_posts = clone $posts_query;
+        $posts     = $top_posts->whereIn('id', $post_ids)->get();
+
+        return compact('posts', 'post_ids');
     }
 
     /**
@@ -249,9 +259,9 @@ class PostController extends Controller{
      *
      * @return RedirectResponse
      */
-    public function setIsHot(Request $request, $id) {
+    public function setIsHot(Request $request, $id){
         $data = Post::query()->find($id);
-        if (!empty($data)) {
+        if(!empty($data)){
             $data->is_hot = !$data->is_hot;
             $data->save();
             $request->session()->flash('success', trans('Update Hot successfully.'));

@@ -129,29 +129,41 @@ header {
                     margin-right: 1rem;
 
                     img {
-                        width: 12rem;
+                        width: 5rem;
                     }
                 }
 
-                .title a h2 {
-                    font-weight: 600;
-                    line-height: 1.2;
-                    margin-bottom: 1rem;
+                .news-info {
+                    height: 128px;
+
+                    .company, .title {
+                        white-space: nowrap;
+                        width: 85%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .time {
+                        font-style: italic;
+                    }
+
+                    .description {
+                        font-size: 1rem;
+                        max-height: 82px;
+                        line-height: 20px;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 4;
+                        -webkit-box-orient: vertical;
+                        text-overflow: ellipsis;
+                    }
                 }
 
-                .time {
-                    font-style: italic;
-                }
-
-                .description {
-                    font-size: 1rem;
-                    max-height: 82px;
-                    line-height: 20px;
-                    overflow: hidden;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 4;
-                    -webkit-box-orient: vertical;
-                    text-overflow: ellipsis;
+                .info-news{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    min-height: 6.5rem;
                 }
 
                 @include mobile {
@@ -160,9 +172,8 @@ header {
                         width: 25%;
                     }
 
-                    .title a h2 {
-                        font-size: 20px;
-                        font-weight: 600;
+                    .company, .title{
+                        width: 90%;
                     }
 
                     .time, .description {
@@ -241,21 +252,13 @@ footer {
 }
 
 .is-hot-badges {
-    position: relative;
-
-    &:after {
-        content: 'HOT';
-        background-color: red;
-        clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
-        font-size: 8px;
-        line-height: 1;
-        color: white;
-        padding: 2.5px 10px 2.5px 5px;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        margin-left: 5px;
-    }
+    background-color: red;
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+    font-size: 8px;
+    line-height: 1;
+    color: white;
+    padding: 2.5px 10px 2.5px 5px;
+    margin-left: 5px;
 }
 
 .form-search {
