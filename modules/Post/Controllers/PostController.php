@@ -13,18 +13,19 @@ use Modules\Company\Models\Company;
 use Modules\Position\Models\Position;
 use Modules\Post\Models\Post;
 use Modules\Post\Models\PostCategory;
+use Modules\Post\Models\TopSetting;
 use Modules\Post\Requests\PostRequest;
 use Modules\Tag\Models\Tag;
 use Modules\User\Models\User;
 
-class PostController extends Controller {
+class PostController extends Controller{
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct(){
         # parent::__construct();
     }
 
@@ -32,7 +33,7 @@ class PostController extends Controller {
      * @param Request $request
      * @return Factory|View
      */
-    public function index(Request $request) {
+    public function index(Request $request){
         $filter    = $request->all();
         $statuses  = Status::getStatuses();
         $authors   = User::query()->orderBy("name")->pluck('name', 'id')->toArray();
@@ -47,7 +48,7 @@ class PostController extends Controller {
      * @param Request $request
      * @return Factory|View
      */
-    public function getCreate(Request $request) {
+    public function getCreate(Request $request){
         $statuses   = Status::getStatuses();
         $categories = PostCategory::getArray();
         $tags       = Tag::getTagArray();
@@ -61,9 +62,9 @@ class PostController extends Controller {
     /**
      * @param PostRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function postCreate(PostRequest $request) {
+    public function postCreate(PostRequest $request){
         $data = $request->all();
         unset($data['tags']);
         unset($data['image']);
@@ -71,7 +72,7 @@ class PostController extends Controller {
         $tag_ids              = Tag::createTags($request->tags ?? []);
         $data['slug']         = Helper::slug($request->title);
         $post                 = Post::query()->create($data);
-        if ($request->hasFile('image')) {
+        if($request->hasFile('image')){
             $image       = $request->image;
             $post->image = Helper::storageFile($image, time() . '_' . $image->getClientOriginalName(), 'Post/' . $post->id);
         }
@@ -86,7 +87,7 @@ class PostController extends Controller {
      * @param $id
      * @return Factory|View
      */
-    public function getUpdate($id) {
+    public function getUpdate($id){
         $data       = Post::query()->find($id);
         $statuses   = Status::getStatuses();
         $categories = PostCategory::getArray();
@@ -104,23 +105,18 @@ class PostController extends Controller {
      *
      * @return string
      */
-    public function postUpdate(PostRequest $request, $id) {
+    public function postUpdate(PostRequest $request, $id){
         $data = $request->all();
         unset($data['tags']);
         $data['position_ids'] = json_encode($data['position_ids']);
         $tag_ids              = Tag::createTags($request->tags ?? []);
         $post                 = Post::query()->find($id);
-        if ($request->hasFile('image')) {
+        if($request->hasFile('image')){
             $image = $request->image;
-            if (file_exists($post->image)) {
+            if(file_exists($post->image)){
                 unlink($post->image);
             }
             $data['image'] = Helper::storageFile($image, time() . '_' . $image->getClientOriginalName(), 'Post/' . $post->id);
-        }
-        if($request->has('is_hot')){
-            $post->is_hot = 1;
-        }else{
-            $post->is_hot = 0;
         }
         $data['slug'] = Helper::slug($request->title);
         $post->update($data);
@@ -135,7 +131,7 @@ class PostController extends Controller {
      * @param $id
      * @return RedirectResponse
      */
-    public function delete(Request $request, $id) {
+    public function delete(Request $request, $id){
         $post = Post::query()->find($id);
         $post->tags()->sync([]);
         $post->delete();
@@ -148,15 +144,103 @@ class PostController extends Controller {
     /**
      * @return false|string
      */
-    public function updatePositionDropdown() {
+    public function updatePositionDropdown(){
         $data = Position::query()->where('status', Status::STATUS_ACTIVE)->orderBy('name')->get();
 
         $array = [];
-        foreach ($data as $item) {
+        foreach($data as $item){
             $array[] = ['id' => $item->id, 'text' => $item->name];
         }
 
         return json_encode($array);
+    }
+
+    /**
+     * @param Request $request
+     * @return Factory|View|RedirectResponse
+     */
+    public function getTopSetting(Request $request){
+        if(!$request->ajax()){
+            return redirect()->back();
+        }
+
+        $top_options = TopSetting::getTopOption();
+        $posts       = Post::query();
+
+        $top = TopSetting::query();
+        /** Get post top 1 */
+        $top1          = clone $top;
+        $top1          = $top1->where('top_option', TopSetting::TOP_1)->first();
+        $top1_post_ids = [];
+        if(!empty($top)){
+            $top1_post_ids = json_decode(!empty($top1->post_ids) ? $top1->post_ids : '[]', 1);
+        }
+        $top1_posts = clone $posts;
+        $top1_posts = $top1_posts->whereIn('id', $top1_post_ids)->get();
+
+        /** Get post top 2 */
+        $top2          = clone $top;
+        $top2          = $top2->where('top_option', TopSetting::TOP_2)->first();
+        $top2_post_ids = [];
+        if(!empty($top)){
+            $top2_post_ids = json_decode(!empty($top2->post_ids) ? $top2->post_ids : '[]', 1);
+        }
+        $top2_posts = clone $posts;
+        $top2_posts = $top2_posts->whereIn('id', $top2_post_ids)->get();
+
+        $posts = $posts->where('status', Status::STATUS_ACTIVE)
+                       ->whereNotIn('id', array_merge($top2_post_ids, $top1_post_ids))
+                       ->orderBy('title')
+                       ->pluck('title', 'id')
+                       ->toArray();
+
+        return view('Post::backend.post._top_setting', compact('posts', 'top_options', 'top1_posts', 'top2_posts'));
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function postTopSetting(Request $request){
+        if(!in_array($request->top_option, [TopSetting::TOP_1, TopSetting::TOP_2]) || !isset($request->post_id) || empty($request->post_id)){
+            $request->session()->flash('danger', 'Cannot select Top Option');
+        }else{
+            $top_setting = TopSetting::query()->where('top_option', $request->top_option)->first();
+            $post_id     = [$request->post_id];
+            if(empty($top_setting)){
+                $top_setting             = new TopSetting();
+                $top_setting->top_option = $request->top_option;
+                $top_setting->post_ids   = "";
+            }
+            $post_ids = json_decode(!empty($top_setting->post_ids) ? $top_setting->post_ids : '[]', 1);
+            if(!in_array($request->post_id, $post_ids)){
+                $top_setting->post_ids = json_encode(array_merge($post_ids, $post_id));
+            }
+            $top_setting->save();
+
+            $request->session()->flash('danger', 'Added Successfully.');
+        }
+
+        return redirect()->route('get.post.top_setting');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function deletePostTopSetting(Request $request, $top_option){
+        $top_setting = TopSetting::query()->where('top_option', $top_option)->first();
+        $post_ids    = json_decode(!empty($top_setting->post_ids) ? $top_setting->post_ids : '[]', 1);
+        if(($key = array_search($request->post_id, $post_ids)) !== false){
+            unset($post_ids[$key]);
+        }
+        $top_setting->post_ids = json_encode($post_ids);
+        $top_setting->save();
+
+        $request->session()->flash('danger', 'Removed Successfully.');
+
+        return redirect()->route('get.post.top_setting');
     }
 
     /**

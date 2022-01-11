@@ -17,6 +17,10 @@
             </div>
         </div>
         <div class="d-flex justify-content-end mb-3 btn-group">
+            <a href="{{ route('get.post.top_setting') }}" class="btn btn-outline-primary mr-2" data-toggle="modal"
+               data-target="#form-modal" data-title="{{ trans("Top Post Setting") }}">
+                <i class="fa fa-cog"></i>&nbsp; {{ trans("Top Setting") }}
+            </a>
             <a href="{{ route('get.post.create') }}" class="btn btn-primary">
                 <i class="fa fa-plus"></i>&nbsp; {{ trans("Add New") }}
             </a>
@@ -25,7 +29,8 @@
     <!--Search box-->
     <div class="search-box">
         <div class="card">
-            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false" aria-controls="form-search-box">
+            <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false"
+                 aria-controls="form-search-box">
                 <div class="title">{{ trans("Search") }}</div>
             </div>
             <div class="card-body collapse show" id="form-search-box">
@@ -34,7 +39,8 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="title">{{ trans("Title") }}</label>
-                                <input type="text" class="form-control" id="title" name="title" value="{{ $filter['title'] ?? NULL }}">
+                                <input type="text" class="form-control" id="title" name="title"
+                                       value="{{ $filter['title'] ?? NULL }}">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -110,7 +116,8 @@
                                     @if(!empty($item->image))
                                         <div class="image-item image-in-listing">
                                             <a href="{{ asset($item->image) }}" target="">
-                                                <img src="{{ asset($item->image) }}" width="120" alt="{{ $item->title }}">
+                                                <img src="{{ asset($item->image) }}" width="120"
+                                                     alt="{{ $item->title }}">
                                             </a>
                                         </div>
                                     @endif
@@ -120,7 +127,7 @@
                                 <?php
                                 $status = $statuses[$item->status] ?? null;
                                 $color = 'text-danger';
-                                if ($item->status == Modules\Base\Models\Status::STATUS_ACTIVE){
+                                if ($item->status == Modules\Base\Models\Status::STATUS_ACTIVE) {
                                     $color = 'text-success';
                                 }
                                 ?>
@@ -136,7 +143,8 @@
                                 <td class="link-action">
                                     <a href="{{ route('get.post.update', $item->id) }}" class="btn btn-primary">
                                         <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    <a href="{{ route('get.post.delete', $item->id) }}" class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="{{ route('get.post.delete', $item->id) }}"
+                                       class="btn btn-danger btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -149,14 +157,49 @@
             </div>
         </div>
     </div>
-    {!! getModal(["class" => "modal-ajax"]) !!}
+    {!! getModal(["class" => "modal-ajax", "size" => "modal-lg"]) !!}
 @endsection
 @push('js')
-    <script !src="">
+    <script>
         $(document).ready(function () {
             $('input[name="is_hot"]').change(function () {
                 window.location.href = "{{ route('get.post.setIsHot', '') }}/" + $(this).attr("data-id");
             });
-        })
+
+            $(document).on('submit', '#add-top-post', function (e) {
+                e.preventDefault();
+                let url = $(this).attr('action');
+                let data = $(this).serialize();
+                let top_listing = $(this).find('#top-listing');
+                let post_dropdown = $(this).find('#post-dropdown');
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data
+                }).done(function (response) {
+                    top_listing.html($(response).find('#top-listing').html());
+                    post_dropdown.html($(response).find('#post-dropdown').html());
+                    post_dropdown.find('.select2').select2();
+                });
+            });
+
+            $(document).on('click', '.delete-post', function (e) {
+                e.preventDefault();
+                let form = $(this).parents('#add-top-post');
+                let url = $(this).attr('href');
+                let top_listing = form.find('#top-listing');
+                let post_dropdown = form.find('#post-dropdown');
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                }).done(function (response) {
+                    top_listing.html($(response).find('#top-listing').html());
+                    post_dropdown.html($(response).find('#post-dropdown').html());
+                    post_dropdown.find('.select2').select2();
+                });
+            });
+        });
     </script>
 @endpush

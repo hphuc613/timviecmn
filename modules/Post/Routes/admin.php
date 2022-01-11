@@ -18,6 +18,11 @@ Route::prefix("admin")->group(function () {
 
         Route::get("/update-position-dropdown", "PostController@updatePositionDropdown")
              ->name('get.post.updatePositionDropdown');
+
+
+        Route::get('top-setting', "PostController@getTopSetting")->name('get.post.top_setting');
+        Route::post('top-setting', "PostController@postTopSetting")->name('post.post.top_setting');
+        Route::get('delete-top-setting/{top_option}', "PostController@deletePostTopSetting")->name('get.post.delete_post_top_setting');
     });
 
     Route::prefix("post-category")->group(function () {
