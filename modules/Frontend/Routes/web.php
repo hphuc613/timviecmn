@@ -8,3 +8,6 @@ Route::post('recruit', 'FrontendController@postRecruit')->name('post.frontend.re
 Route::post('apply-job/{id}-{slug}', 'FrontendController@postApplyJob')->name('post.frontend.apply');
 Route::get('news', 'FrontendController@newsListing')->name('get.frontend.listing');
 Route::get('news/detail/{id}-{slug}', 'FrontendController@newsDetail')->name('get.frontend.detail');
+
+Route::get('contact-us', 'PageController@getContactUsPage')->name('get.page.contact_us');
+Route::get('price-list', 'PageController@getPriceListPage')->name('get.page.price_list');

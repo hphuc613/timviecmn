@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\DB;
-$settings = DB::table('settings')->where('key', \Modules\Setting\Models\WebsiteConfig::WEBSITE_LOGO)->first();
+use Modules\Setting\Models\WebsiteConfig;
+
+$settings = DB::table('settings')->where('key', WebsiteConfig::WEBSITE_LOGO)->first();
 $logo = $settings->value ?? '';
 ?>
 <header id="header" class="transparent-header dark full-header no-sticky">
@@ -19,8 +21,9 @@ $logo = $settings->value ?? '';
             @endif
             <nav id="primary-menu">
                 <ul>
-                    <li><a href="#">Gần bạn</a></li>
                     <li><a href="{{ route('get.frontend.listing') }}">Tin tuyển dụng</a></li>
+                    <li><a href="{{ route('get.page.contact_us') }}">{{ trans('Contact Us') }}</a></li>
+                    <li><a href="{{ route('get.page.price_list') }}">{{ trans('Price List') }}</a></li>
                     <li><a href="#form-modal" data-url="{{ route('get.frontend.recruit') }}" data-bs-toggle="modal">Đăng tuyển</a></li>
                 </ul>
             </nav>
