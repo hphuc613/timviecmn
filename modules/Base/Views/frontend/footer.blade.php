@@ -1,27 +1,54 @@
+<?php
+
+use Modules\Setting\Models\Setting;
+
+$setting = Setting::query()->pluck('value', 'key');
+?>
+
 <footer id="footer">
-    <div id="copyrights">
-        <div class="container clearfix">
-            <div class="col_half">
-                Copyrights &copy; 2014 by HP.<br>
+    <div class="container clearfix py-5">
+        <div class="text-center">
+            <div class="logo">
+                <img src="{{ asset($setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_LOGO] ?? NULL) }}"
+                     width="100px"
+                     alt="Timviectoanquoc">
             </div>
-            <div class="col_half col_last tright">
-                <div class="fright clearfix">
-                    <a href="#" class="social-icon si-small si-borderless si-facebook">
-                        <i class="fab fa-facebook"></i>
+            <div class="text-white">
+                <i class="fas fa-phone"></i>
+                {{ trans('Phone for Recruiment') }}:
+                <span>
+                    <a href="tel:{{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_PHONE_FOR_RECRUIMENT] ?? NULL }}">
+                        {{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_PHONE_FOR_RECRUIMENT] ?? NULL }}
                     </a>
-                    <a href="#" class="social-icon si-small si-borderless si-twitter">
-                        <i class="fab fa-twitter-square"></i>
+                </span>
+            </div>
+            <div class="text-white">
+                <i class="fas fa-phone"></i>
+                {{ trans('Phone for Applicant') }}:
+                <span>
+                    <a href="tel:{{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT] ?? NULL }}">
+                        {{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT] ?? NULL }}
                     </a>
-                    <a href="#" class="social-icon si-small si-borderless si-linkedin">
-                        <i class="fab fa-linkedin"></i>
+                </span>
+            </div>
+            <div class="text-white">
+                <i class="far fa-envelope"></i>
+                Email:
+                <span>
+                    <a href="mailto:{{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_EMAIL] ?? NULL }}">
+                        {{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_EMAIL] ?? NULL }}
                     </a>
-                </div>
-                <div class="clear"></div>
-                <i class="far fa-envelope"></i> phelanhp@gmail.com
-                <span class="middot">&middot;</span>
-                <i class="fas fa-phone"></i> +84-364-669-810
-                <span class="middot">&middot;</span>
-                <i class="fab fa-skype"></i> Phelan HP
+                </span>
+            </div>
+
+            <div class="text-white">
+                <i class="fas fa-map-marked-alt"></i>
+                {{ trans('Address') }}:
+                <span>
+                    <a href="mailto:{{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_ADDRESS] ?? NULL }}">
+                        {{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_ADDRESS] ?? NULL }}
+                    </a>
+                </span>
             </div>
         </div>
     </div>

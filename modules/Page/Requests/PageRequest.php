@@ -2,18 +2,15 @@
 
 namespace Modules\Page\Requests;
 
-use App\AppHelpers\Helper;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PageRequest extends FormRequest
-{
+class PageRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
 
@@ -22,20 +19,27 @@ class PageRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
+        $segment = segmentUrl(2);
+        if($segment == 'create'){
+            return [
+                'name'    => 'required|validate_unique:pages',
+                'status'  => 'required',
+                'image'   => 'image|mimes:jpeg,png,jpg,gif,svg',
+            ];
+        }
+
         return [
-            'name'    => 'required',
+            'name'    => 'required|validate_unique:pages,' . $this->id,
             'status'  => 'required',
-            'page_id' => 'required',
             'image'   => 'image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 
-    public function messages()
-    {
+    public function messages(){
         return [
             'required'         => ':attribute' . trans(' can not be empty.'),
+            'validate_unique'  => ':attribute' . trans(' was exist.'),
             'page_id.required' => trans('Please select ') . ':attribute',
             'image'            => ':attribute' . trans(' must be an image.'),
             'mimes'            => ':attribute' .
@@ -43,12 +47,10 @@ class PageRequest extends FormRequest
         ];
     }
 
-    public function attributes()
-    {
+    public function attributes(){
         return [
             'name'    => trans('Name'),
             'status'  => trans('Status'),
-            'page_id' => trans('Page'),
             'image'   => trans('Image'),
         ];
     }

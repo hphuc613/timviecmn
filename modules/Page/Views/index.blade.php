@@ -41,12 +41,6 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="text-input">{{ trans('Page') }}</label>
-                                {!! Form::select('page_id', $prompt + $page_list, $filter['page_id'] ?? NULL, ['class' => 'select2 form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
                                 <label for="text-input">{{ trans('Author') }}</label>
                                 {!! Form::select('created_by', $prompt + $authors, $filter['created_by'] ?? NULL, ['class' => 'select2 form-control']) !!}
                             </div>
@@ -77,9 +71,8 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{ trans('Name') }}</th>
-                            <th>{{ trans('Image') }}</th>
                             <th>{{ trans('Page') }}</th>
+                            <th>{{ trans('Image') }}</th>
                             <th>{{ trans('Status') }}</th>
                             <th>{{ trans('Author') }}</th>
                             <th>{{ trans('Updated By') }}</th>
@@ -104,7 +97,6 @@
                                         </div>
                                     @endif
                                 </td>
-                                <td>{{ $page_list[$item->page_id] }}</td>
                                 <?php
                                 $status = $statuses[$item->status] ?? null;
                                 $color = 'text-danger';

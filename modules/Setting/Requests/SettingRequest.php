@@ -23,24 +23,25 @@ class SettingRequest extends FormRequest{
      */
     public function rules(){
         return [
-            WebsiteConfig::WEBSITE_EMAIL                => 'email',
-            WebsiteConfig::WEBSITE_PHONE_FOR_RECRUIMENT => 'digits:10',
-            WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT  => 'digits:10',
+            WebsiteConfig::WEBSITE_EMAIL                => 'required|email',
+            WebsiteConfig::WEBSITE_PHONE_FOR_RECRUIMENT => 'required|digits:10',
+            WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT  => 'required|digits:10',
         ];
     }
 
     public function messages(){
         return [
-            'email'  => ':attribute' . trans(' must be the email.'),
-            'digits' => ':attribute' . trans(' must be 10 digits.'),
+            'required' => ':attribute' . trans(' cannot be empty.'),
+            'email'    => ':attribute' . trans(' must be the email.'),
+            'digits'   => ':attribute' . trans(' must be 10 digits.'),
         ];
     }
 
     public function attributes(){
         return [
             WebsiteConfig::WEBSITE_EMAIL                => trans('Email'),
-            WebsiteConfig::WEBSITE_PHONE_FOR_RECRUIMENT => trans('Phone'),
-            WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT  => trans('Phone'),
+            WebsiteConfig::WEBSITE_PHONE_FOR_RECRUIMENT => trans('Phone for Recruiment'),
+            WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT  => trans('Phone for Applicant'),
         ];
     }
 }

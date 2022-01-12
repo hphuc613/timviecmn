@@ -9,5 +9,5 @@ Route::post('apply-job/{id}-{slug}', 'FrontendController@postApplyJob')->name('p
 Route::get('news', 'FrontendController@newsListing')->name('get.frontend.listing');
 Route::get('news/detail/{id}-{slug}', 'FrontendController@newsDetail')->name('get.frontend.detail');
 
-Route::get('contact-us', 'PageController@getContactUsPage')->name('get.page.contact_us');
-Route::get('price-list', 'PageController@getPriceListPage')->name('get.page.price_list');
+Route::get('contact-us', 'PageController@getContactUsPage')->name('get.frontend.contact_us');
+Route::get('page/{slug}', 'PageController@getPage')->name('get.frontend.page');
