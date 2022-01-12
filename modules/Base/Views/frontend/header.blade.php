@@ -6,7 +6,7 @@ use Modules\Setting\Models\WebsiteConfig;
 $settings = DB::table('settings')->where('key', WebsiteConfig::WEBSITE_LOGO)->first();
 $logo     = $settings->value ?? '';
 ?>
-<header id="header" class="transparent-header dark full-header no-sticky">
+<header id="header" class="transparent-header full-header">
     <div id="header-wrap">
         <div class="container clearfix">
             <div id="primary-menu-trigger"><i class="fas fa-bars" aria-hidden="true"></i></div>

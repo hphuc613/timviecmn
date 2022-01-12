@@ -23,6 +23,7 @@ body {
 }
 
 header nav a {
+  color: white !important;
   font-size: 18px !important;
   font-weight: normal !important;
   text-transform: capitalize !important;
@@ -38,14 +39,16 @@ header nav .recruit-modal {
   justify-content: center;
   align-items: center;
 }
-header nav .recruit-modal a {
-  color: black;
-}
 header.sticky-header .recruit-modal {
   height: 3.75rem;
 }
-header.dark nav a {
-  color: white;
+header.sticky-header nav a {
+  color: inherit !important;
+}
+@media (max-width: 739px) {
+  header nav a {
+    color: #12584a !important;
+  }
 }
 
 .form-group {

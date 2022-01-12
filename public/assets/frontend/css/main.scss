@@ -29,6 +29,7 @@ body {
 header {
     nav {
         a {
+            color: white !important;
             font-size: 18px !important;
             font-weight: normal !important;
             text-transform: capitalize !important;
@@ -45,10 +46,6 @@ header {
             display: flex;
             justify-content: center;
             align-items: center;
-
-            a {
-                color: black;
-            }
         }
     }
 
@@ -56,12 +53,18 @@ header {
         .recruit-modal {
             height: 3.75rem;
         }
-    }
 
-    &.dark {
         nav {
             a {
-                color: white;
+                color: inherit !important;
+            }
+        }
+    }
+
+    @include mobile {
+        nav {
+            a {
+                color: $main_color !important;
             }
         }
     }
