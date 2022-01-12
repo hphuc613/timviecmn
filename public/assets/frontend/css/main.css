@@ -86,18 +86,25 @@ header.dark nav a {
 
 .news-listing .news-item {
   display: flex;
-  margin-bottom: 3rem;
 }
-.news-listing .news-item .image {
+.news-listing .news-item .news-image {
+  display: flex;
+  align-items: center;
   width: 25%;
 }
-.news-listing .news-item .info {
+.news-listing .news-item .news-info {
   width: 75%;
-  margin-left: 1rem;
   display: flex;
+  padding-left: 0.5rem;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 128px;
+  height: 7.5rem;
+}
+.news-listing .news-item .news-info .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: red;
+  margin-bottom: 0;
 }
 
 .recruit-form-modal img {
