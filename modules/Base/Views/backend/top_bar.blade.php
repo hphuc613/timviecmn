@@ -1,16 +1,20 @@
+<?php
+
+use Illuminate\Support\Facades\DB;
+use Modules\Setting\Models\WebsiteConfig;
+
+$settings = DB::table('settings')->where('key', WebsiteConfig::WEBSITE_LOGO)->first();
+$logo     = $settings->value ?? '';
+?>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <!-- Logo -->
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ route('get.frontend.home') }}">
                 <!-- Dark Logo icon -->
-                <img width="30%"
-                     src="https://s3-ap-southeast-1.amazonaws.com/homepage-media/wp-content/uploads/2019/11/06160433/laravel-logo_s.png"
-                     alt="homepage" class="dark-logo"/>
+                <img width="100px" src="{{ asset($logo) }}" alt="homepage" class="dark-logo"/>
                 <!-- Light Logo icon -->
-                <img width="30%"
-                     src="https://s3-ap-southeast-1.amazonaws.com/homepage-media/wp-content/uploads/2019/11/06160433/laravel-logo_s.png"
-                     alt="homepage" class="light-logo"/>
+                <img width="100px" src="{{ asset($logo) }}" alt="homepage" class="light-logo"/>
             </a>
         </div>
         <div class="navbar-collapse">

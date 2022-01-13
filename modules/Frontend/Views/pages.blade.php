@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>{{ $data->name  ?? NULL}}</h2>
+                    <h1>{{ $data->name  ?? NULL}}</h1>
                 </div>
                 <div class="col-md-6">
                     <ol class="breadcrumb">
@@ -80,7 +80,9 @@
                         </tbody>
                     </table>
                 @else
-                    {!! $data->content ?? NULL !!}
+                    <div class="page-section">
+                        {!! $data->content ?? NULL !!}
+                    </div>
                 @endif
             </div>
         </div>

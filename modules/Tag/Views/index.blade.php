@@ -17,8 +17,8 @@
         </div>
         <div class="mb-3 d-flex justify-content-end group-btn">
             <a href="#" class="btn btn-primary"
-               data-toggle="modal" data-target="#form-modal" data-title="{{ trans("CreateTag") }}">
-                <i class="fa fa-plus"></i>&nbsp; {{ trans("Add New") }}
+               data-toggle="modal" data-target="#form-modal" data-title="{{ trans("Create Tag") }}">
+                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; {{ trans("Add New") }}
             </a>
         </div>
     </div>

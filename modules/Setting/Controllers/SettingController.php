@@ -80,7 +80,7 @@ class SettingController extends Controller{
         foreach($post as $key => $value){
             $website_config = WebsiteConfig::query()->where('key', $key)->first();
             if($key == WebsiteConfig::WEBSITE_LOGO && $request->hasFile(WebsiteConfig::WEBSITE_LOGO) ||
-                $key == WebsiteConfig::WEBSITE_FAVICON && $request->hasFile(WebsiteConfig::WEBSITE_LOGO)){
+                $key == WebsiteConfig::WEBSITE_FAVICON && $request->hasFile(WebsiteConfig::WEBSITE_FAVICON)){
                 $value = Helper::storageFile($value, time() . '_' . $value->getClientOriginalName(), 'WebsiteConfig/' . $key);
             }
             if(!empty($website_config)){

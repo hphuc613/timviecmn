@@ -1,4 +1,7 @@
 @extends("Base::frontend.master")
+
+@section("title", trans('Recruitment News'))
+
 @section("content")
     <section id="page-title" class="page-title-parallax page-title-dark"
              style="background-image: url({{ asset($banner) }}); background-size: cover; padding: 120px 0;"

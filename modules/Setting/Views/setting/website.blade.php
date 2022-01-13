@@ -30,6 +30,16 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-6">
+                        <div class="form-group row align-items-start">
+                            <div class="col-md-4">
+                                <label for="WEBSITE_TITLE">{{ trans('Site Title') }}</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="WEBSITE_TITLE"
+                                       name="{{ \Modules\Setting\Models\WebsiteConfig::WEBSITE_TITLE }}"
+                                       value="{{ $website_config[\Modules\Setting\Models\WebsiteConfig::WEBSITE_TITLE]  ?? NULL }}">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col-md-4">
                                 <label for="name">{{ trans('Logo') }}</label>

@@ -14,10 +14,10 @@ $logo     = $settings->value ?? '';
                 <div id="logo">
                     <a href="{{ route('get.frontend.home') }}" class="standard-logo"
                        data-dark-logo="{{ asset($logo) }}">
-                        <img src="{{ asset($logo) }}" alt="Tim Viec Toan Quoc">
+                        <img width="100px" src="{{ asset($logo) }}" alt="Tim Viec Toan Quoc">
                     </a>
                     <a href="{{ route('get.frontend.home') }}" class="retina-logo" data-dark-logo="{{ asset($logo) }}">
-                        <img src="{{ asset($logo) }}" alt="Tim Viec Toan Quoc">
+                        <img width="100px" src="{{ asset($logo) }}" alt="Tim Viec Toan Quoc">
                     </a>
                 </div>
             @endif
@@ -27,11 +27,10 @@ $logo     = $settings->value ?? '';
                     <li><a href="{{ route('get.frontend.contact_us') }}">{{ trans('Contact Us') }}</a></li>
                     @foreach(\Modules\Page\Models\Page::getListActive() as $item)
                         <li>
-                            <a href="{{ route('get.frontend.page', $item->slug) }}">{{ trans('Price List') }}</a>
+                            <a href="{{ route('get.frontend.page', $item->slug) }}">{{ trans($item->name) }}</a>
                         </li>
                     @endforeach
-                    <li><a href="#form-modal" data-url="{{ route('get.frontend.recruit') }}" data-bs-toggle="modal">Đăng
-                            tuyển</a></li>
+                    <li><a href="#form-modal" data-url="{{ route('get.frontend.recruit') }}" data-bs-toggle="modal">Đăng tuyển</a></li>
                 </ul>
             </nav>
         </div>

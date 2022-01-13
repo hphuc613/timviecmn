@@ -9,6 +9,8 @@ namespace Modules\Setting\Models;
  */
 class WebsiteConfig extends Setting{
 
+    const WEBSITE_TITLE = 'WEBSITE_TITLE';
+
     const WEBSITE_LOGO = 'WEBSITE_LOGO';
 
     const WEBSITE_FAVICON = 'WEBSITE_FAVICON';
@@ -22,6 +24,7 @@ class WebsiteConfig extends Setting{
     const WEBSITE_ADDRESS = 'WEBSITE_ADDRESS';
 
     const WEBSITE_CONFIG = [
+        self::WEBSITE_TITLE,
         self::WEBSITE_LOGO,
         self::WEBSITE_FAVICON,
         self::WEBSITE_PHONE_FOR_RECRUIMENT,
