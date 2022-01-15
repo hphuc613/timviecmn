@@ -2,6 +2,7 @@
 
 $main_color: #12584a;
 $main_color_light: #1ABC9C;
+
 body {
     font-family: 'Piazzolla', serif;
 }
@@ -27,6 +28,13 @@ body {
 }
 
 header {
+    .logo {
+        img {
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+
     nav {
         a {
             color: white !important;
@@ -173,11 +181,10 @@ header {
 }
 
 .select2 {
-    width: 100% !important;
+    max-width: 100%;
 
     .select2-selection {
         border-color: #aaaaaa73;
-        border-radius: 0;
         height: 38px;
         display: flex;
         align-items: center;

@@ -43,6 +43,8 @@ $site_title = $website_settings[WebsiteConfig::WEBSITE_TITLE];
     @if(!empty($favicon))
         <?= '<link rel="icon" type="image/png" sizes="192x192"  href="' . asset($favicon) . '">'; ?>
     @endif
+
+    @stack('css')
 </head>
 
 <body class="stretched">
@@ -61,7 +63,7 @@ $site_title = $website_settings[WebsiteConfig::WEBSITE_TITLE];
     @include('Base::frontend.footer')
 </div>
 <!-- Go To Top -->
-<div id="gotoTop" class="icon-angle-up"></div>
+<div id="gotoTop" class="icon-angle-up"><i class="fas fa-angle-up"></i></div>
 <script src="{{ asset('assets/frontend/library/js/jquery.js') }}"></script>
 <script src="{{ asset('assets/frontend/library/js/plugins.js') }}"></script>
 <script src="{{ asset('assets/frontend/library/js/functions.js') }}"></script>

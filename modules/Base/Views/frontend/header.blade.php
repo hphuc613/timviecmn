@@ -11,7 +11,7 @@ $logo     = $settings->value ?? '';
         <div class="container clearfix">
             <div id="primary-menu-trigger"><i class="fas fa-bars" aria-hidden="true"></i></div>
             @if(!empty($logo))
-                <div id="logo">
+                <div id="logo" class="logo">
                     <a href="{{ route('get.frontend.home') }}" class="standard-logo"
                        data-dark-logo="{{ asset($logo) }}">
                         <img width="100px" src="{{ asset($logo) }}" alt="Tim Viec Toan Quoc">

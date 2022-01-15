@@ -12,9 +12,9 @@ $logo     = $settings->value ?? '';
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ route('get.frontend.home') }}">
                 <!-- Dark Logo icon -->
-                <img width="100px" src="{{ asset($logo) }}" alt="homepage" class="dark-logo"/>
+                <img src="{{ asset($logo) }}" alt="homepage" class="dark-logo"/>
                 <!-- Light Logo icon -->
-                <img width="100px" src="{{ asset($logo) }}" alt="homepage" class="light-logo"/>
+                <img src="{{ asset($logo) }}" alt="homepage" class="light-logo"/>
             </a>
         </div>
         <div class="navbar-collapse">
