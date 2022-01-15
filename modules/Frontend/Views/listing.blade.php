@@ -48,7 +48,7 @@
                             </select>
                         </div>
                     </div>
-                    {{--<div class="col-md-3">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <select name="city" id="city" class="form-control select2 w-100">
                                 <option value="">- {{ trans('City') }} -</option>
@@ -86,7 +86,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>--}}
+                    </div>
                     <div class="col-md-3">
                         <button type="submit" class="btn main-bg-color-light rounded-0 w-100">
                             {{ trans('Search') }}
