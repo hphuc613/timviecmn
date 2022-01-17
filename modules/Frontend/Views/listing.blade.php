@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <button type="submit" class="btn main-bg-color-light rounded-0 w-100">
+                        <button type="submit" class="btn main-bg-color-light rounded-0 mb-2 mb-md-0 w-100">
                             {{ trans('Search') }}
                         </button>
                     </div>

@@ -16,7 +16,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item"><a href="#">{{ trans('Recruitment') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $data->title }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ trans('Detail') }}</li>
                     </ol>
                 </div>
             </div>

@@ -5,6 +5,7 @@ $main_color_light: #1ABC9C;
 
 body {
     font-family: 'Piazzolla', serif;
+    overflow-x: hidden;
 }
 
 .main-bg-color {
@@ -181,7 +182,7 @@ header {
 }
 
 .select2 {
-    max-width: 100%;
+    width: 100% !important;
 
     .select2-selection {
         border-color: #aaaaaa73;
