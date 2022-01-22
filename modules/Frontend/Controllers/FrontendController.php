@@ -23,6 +23,7 @@ use Modules\Post\Controllers\PostController;
 use Modules\Post\Models\Post;
 use Illuminate\Support\Facades\App;
 use Modules\Post\Models\TopSetting;
+use Modules\Setting\Models\WebsiteConfig;
 
 class FrontendController extends BaseController{
 
@@ -41,8 +42,10 @@ class FrontendController extends BaseController{
      */
     public function index(Request $request){
         $banner = Banner::getBanner(Banner::HOME_PAGE);
+        $website_title = WebsiteConfig::getWebsiteConfig()[WebsiteConfig::WEBSITE_TITLE] ?? "Việc Làm Toàn Quốc";
 
-        return view("Frontend::index", compact("banner"));
+
+        return view("Frontend::index", compact("banner", "website_title"));
     }
 
     /**
@@ -89,11 +92,17 @@ class FrontendController extends BaseController{
         $top2_post_ids = $top2_posts['post_ids'];
         $top2_posts    = $top2_posts['posts'];
 
+        /** Get post top 3 */
+        $top3          = clone $top;
+        $top3_posts    = $post_controller->getTopPost($top3, TopSetting::TOP_3, $posts);
+        $top3_post_ids = $top3_posts['post_ids'];
+        $top3_posts    = $top3_posts['posts'];
+
         $posts        = $posts->where('status', Status::STATUS_ACTIVE)
-                              ->whereNotIn('id', array_merge($top2_post_ids, $top1_post_ids))
+                              ->whereNotIn('id', array_merge($top2_post_ids, $top1_post_ids, $top3_post_ids))
                               ->orderBy('created_at', 'desc')
                               ->get();
-        $data_collect = $top1_posts->merge($top2_posts)->merge($posts);
+        $data_collect = $top1_posts->merge($top2_posts)->merge($top3_posts)->merge($posts);
         $data         = $this->paginate($data_collect, 18);
 
 

@@ -122,6 +122,7 @@
                                 @endif
                                 <div><i>{{ formatDate(strtotime($item->created_at), 'd-m-Y H:i') }}</i></div>
                                 <div class="mb-2">{{ $item->company->city->name ?? NULL }}</div>
+                                <div class="description">{{ $item->description }}</div>
                             </div>
                             <a href="{{ route('get.frontend.listing', ['company' => $item->company->name ?? NULL ]) }}"
                                title="{{ $item->company->name ?? NULL }}">

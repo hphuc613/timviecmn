@@ -49,7 +49,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="top-post-list">
+            <div class="top-post-list mb-5">
                 <h5>Top 2</h5>
                 <table class="table">
                     <thead>
@@ -66,6 +66,32 @@
                             <td>{{ $item->title }}</td>
                             <td class="text-center">
                                 <a href="{{ route('get.post.delete_post_top_setting', ['TOP_2', 'post_id' => $item->id]) }}"
+                                   class="btn btn-danger delete-post">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="top-post-list">
+                <h5>Top 3</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="width: 50px;">#</th>
+                        <th>{{ trans('Post') }}</th>
+                        <th style="width: 150px" class="text-center">{{ trans('Action') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($top3_posts as $key => $item)
+                        <tr>
+                            <td>{{ $key+1 }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td class="text-center">
+                                <a href="{{ route('get.post.delete_post_top_setting', ['TOP_3', 'post_id' => $item->id]) }}"
                                    class="btn btn-danger delete-post">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>

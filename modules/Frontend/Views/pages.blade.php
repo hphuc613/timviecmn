@@ -44,7 +44,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <i class="fas fa-phone"></i>
+                                    <i class="fas fa-map-marked-alt"></i>
                                     {{ trans('Address') }}
                                 </td>
                                 <td>
@@ -53,7 +53,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <i class="fas fa-phone"></i>
+                                    <i class="far fa-envelope"></i>
                                     {{ trans('Email') }}
                                 </td>
                                 <td>

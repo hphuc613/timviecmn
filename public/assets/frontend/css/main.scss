@@ -125,6 +125,18 @@ header {
             }
         }
     }
+
+    .recruit-open-modal{
+        a{
+            font-weight: 600;
+            border-bottom: 1px solid white;
+            color: white;
+
+            &:hover{
+                color: $main_color_light;
+            }
+        }
+    }
 }
 
 .news-listing {
@@ -143,13 +155,22 @@ header {
             padding-left: 0.5rem;
             flex-direction: column;
             justify-content: space-between;
-            height: 7.5rem;
+            height: 13rem;
 
             .title {
                 font-size: 15px;
                 font-weight: 600;
                 color: $main_color_light;
                 margin-bottom: 0;
+            }
+            .description{
+                text-overflow:ellipsis;
+                overflow:hidden;
+                // Addition lines for 2 line or multiline ellipsis
+                display: -webkit-box !important;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+                white-space: normal;
             }
         }
     }

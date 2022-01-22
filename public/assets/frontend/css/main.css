@@ -91,6 +91,14 @@ header.sticky-header nav a {
   color: white !important;
   opacity: 1;
 }
+.index-page .recruit-open-modal a {
+  font-weight: 600;
+  border-bottom: 1px solid white;
+  color: white;
+}
+.index-page .recruit-open-modal a:hover {
+  color: #1ABC9C;
+}
 
 .news-listing .news-item {
   display: flex;
@@ -106,13 +114,21 @@ header.sticky-header nav a {
   padding-left: 0.5rem;
   flex-direction: column;
   justify-content: space-between;
-  height: 7.5rem;
+  height: 13rem;
 }
 .news-listing .news-item .news-info .title {
   font-size: 15px;
   font-weight: 600;
   color: #1ABC9C;
   margin-bottom: 0;
+}
+.news-listing .news-item .news-info .description {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
 
 .recruit-form-modal img {

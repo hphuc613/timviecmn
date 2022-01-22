@@ -180,13 +180,19 @@ class PostController extends Controller{
         $top2_post_ids = $top2_posts['post_ids'];
         $top2_posts    = $top2_posts['posts'];
 
+        /** Get post top 2 */
+        $top3       = clone $top;
+        $top3_posts = $this->getTopPost($top3, TopSetting::TOP_3, $posts);
+        $top3_post_ids = $top3_posts['post_ids'];
+        $top3_posts    = $top3_posts['posts'];
+
         $posts = $posts->where('status', Status::STATUS_ACTIVE)
-                       ->whereNotIn('id', array_merge($top2_post_ids, $top1_post_ids))
+                       ->whereNotIn('id', array_merge($top2_post_ids, $top1_post_ids, $top3_post_ids))
                        ->orderBy('title')
                        ->pluck('title', 'id')
                        ->toArray();
 
-        return view('Post::backend.post._top_setting', compact('posts', 'top_options', 'top1_posts', 'top2_posts'));
+        return view('Post::backend.post._top_setting', compact('posts', 'top_options', 'top1_posts', 'top2_posts', 'top3_posts'));
     }
 
     /**
@@ -212,7 +218,7 @@ class PostController extends Controller{
      * @return RedirectResponse
      */
     public function postTopSetting(Request $request){
-        if(!in_array($request->top_option, [TopSetting::TOP_1, TopSetting::TOP_2]) || !isset($request->post_id) || empty($request->post_id)){
+        if(!in_array($request->top_option, TopSetting::TOP_LIST) || !isset($request->post_id) || empty($request->post_id)){
             $request->session()->flash('danger', 'Cannot select Top Option');
         }else{
             $top_setting = TopSetting::query()->where('top_option', $request->top_option)->first();

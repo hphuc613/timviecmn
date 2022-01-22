@@ -6,7 +6,8 @@
              style="background-image: url({{ asset($banner) }}); background-repeat: no-repeat; background-size: cover; background-position: 50% 0;">
             <div class="container clearfix">
                 <div class="slider-caption slider-caption-center">
-                    <h2 data-animate="fadeInDown" class="text-capitalize mb-5">Welcome to TimviecMN</h2>
+                    <h2 data-animate="fadeInDown" class="text-capitalize mb-5">Welcome to
+                        {{ $website_title }}</h2>
                     <div class="d-none d-sm-block mb-3" data-animate="fadeInUp" data-delay="400">
                         Việc làm Miền Nam tự hào 1 năm làm cầu nối cho hơn 1 lượt tuyển dụng và tìm việc thành công
                     </div>
@@ -23,6 +24,11 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    <div class="recruit-open-modal">
+                        <a href="#form-modal" data-url="{{ route('get.frontend.recruit') }}" data-bs-toggle="modal">
+                            {{ trans('Liên hệ đăng tin tuyển dụng') }}
+                        </a>
                     </div>
                 </div>
             </div>

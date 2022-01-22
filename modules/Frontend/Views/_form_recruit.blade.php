@@ -7,7 +7,7 @@
             <button type="button" class="btn-close position-absolute" style="top: 10px; right: 20px" data-bs-dismiss="modal" aria-label="Close"></button>
             <form action="" method="post" id="recruit-form" class="m-0">
                 @csrf
-                <div class="px-4">
+                <div class="px-4 pb-4">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="name">{{ trans('Company Name') }}</label>
@@ -38,12 +38,6 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-secondary text-uppercase w-25">{{ trans("Send") }}</button>
-                    <div class="py-3">
-                        <div class="text-danger">
-                            * Hoặc bạn có thể gọi trực tiếp cho chúng tôi tại Hotline: <a
-                                href="tel:+84-364-669-810">+84-364-669-810</a>
-                        </div>
-                    </div>
                 </div>
             </form>
         </div>
