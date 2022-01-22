@@ -20,9 +20,6 @@ class BaseController extends Controller{
      */
     public function __construct(){
         # parent::__construct();
-        if (empty(App::getLocale())){
-            request()->session()->put('locale', config('app.fallback_locale'));
-        }
     }
 
     /**

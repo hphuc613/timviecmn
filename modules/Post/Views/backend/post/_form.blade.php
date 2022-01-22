@@ -76,7 +76,7 @@
             <div class="form-group">
                 <label for="is_hot" class="title">{{ trans('Hot Post') }}</label>
                 <div class="w-100">
-                    <label class="switch mb-0">
+                    <label class="switch-hot mb-0">
                         <input type="checkbox" name="is_hot" value="1" {{isset($data->is_hot) && $data->is_hot == 1 ? 'checked' : ''}}>
                         <span class="slider-round"></span>
                     </label>

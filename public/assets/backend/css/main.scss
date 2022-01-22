@@ -77,6 +77,10 @@ label, .title {
     }
 }
 
+.select2 {
+    width: 100% !important;
+}
+
 .select2-container {
     width: 100% !important;
 }
@@ -115,11 +119,6 @@ label, .title {
             border-radius: 50%;
         }
     }
-}
-
-
-.select2 {
-    width: 100% !important;
 }
 
 .form-group {
@@ -201,7 +200,7 @@ label, .title {
     }
 }
 
-.switch {
+.switch-hot {
     position: relative;
     display: inline-block;
     width: 60px;

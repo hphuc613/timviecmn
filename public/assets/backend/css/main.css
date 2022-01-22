@@ -64,6 +64,10 @@ label, .title {
   border-bottom: 1px solid #d7d7d88c !important;
 }
 
+.select2 {
+  width: 100% !important;
+}
+
 .select2-container {
   width: 100% !important;
 }
@@ -97,10 +101,6 @@ label, .title {
   background-color: white;
   font-size: 16px;
   border-radius: 50%;
-}
-
-.select2 {
-  width: 100% !important;
 }
 
 .form-group {
@@ -164,29 +164,29 @@ label, .title {
   background-color: #e9ecef !important;
 }
 
-.switch {
+.switch-hot {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
-.switch input {
+.switch-hot input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-.switch input:checked + .slider-round {
+.switch-hot input:checked + .slider-round {
   background-color: #2196F3;
 }
-.switch input:focus + .slider-round {
+.switch-hot input:focus + .slider-round {
   box-shadow: 0 0 1px #2196F3;
 }
-.switch input:checked + .slider-round:before {
+.switch-hot input:checked + .slider-round:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-.switch .slider-round {
+.switch-hot .slider-round {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -198,7 +198,7 @@ label, .title {
   transition: 0.4s;
   border-radius: 34px;
 }
-.switch .slider-round:before {
+.switch-hot .slider-round:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -210,17 +210,17 @@ label, .title {
   transition: 0.4s;
   border-radius: 50%;
 }
-.switch.small {
+.switch-hot.small {
   width: 30px;
   height: 18px;
 }
-.switch.small .slider-round::before {
+.switch-hot.small .slider-round::before {
   left: 3px;
   bottom: 3px;
   height: 13px;
   width: 13px;
 }
-.switch.small input:checked + .slider-round:before {
+.switch-hot.small input:checked + .slider-round:before {
   -webkit-transform: translateX(11px);
   -ms-transform: translateX(11px);
   transform: translateX(11px);

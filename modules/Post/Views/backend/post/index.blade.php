@@ -133,7 +133,7 @@
                                 ?>
                                 <td><b class="{{$color}}">{{ $status }}</b></td>
                                 <td>
-                                    <label class="switch small mb-0">
+                                    <label class="switch-hot small mb-0">
                                         <input type="checkbox" name="is_hot" value="1" {{$item->is_hot == 1 ? 'checked' : ''}} data-id="{{$item->id}}">
                                         <span class="slider-round"></span>
                                     </label>

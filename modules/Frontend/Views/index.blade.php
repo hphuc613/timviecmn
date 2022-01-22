@@ -6,7 +6,7 @@
              style="background-image: url({{ asset($banner) }}); background-repeat: no-repeat; background-size: cover; background-position: 50% 0;">
             <div class="container clearfix">
                 <div class="slider-caption slider-caption-center">
-                    <h2 data-animate="fadeInDown" class="text-capitalize mb-5">Welcome to
+                    <h2 data-animate="fadeInDown" class="text-capitalize mb-5">
                         {{ $website_title }}</h2>
                     <div class="d-none d-sm-block mb-3" data-animate="fadeInUp" data-delay="400">
                         {{ $website_slogan }}
