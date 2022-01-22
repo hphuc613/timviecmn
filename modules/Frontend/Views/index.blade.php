@@ -9,7 +9,7 @@
                     <h2 data-animate="fadeInDown" class="text-capitalize mb-5">Welcome to
                         {{ $website_title }}</h2>
                     <div class="d-none d-sm-block mb-3" data-animate="fadeInUp" data-delay="400">
-                        Việc làm Miền Nam tự hào 1 năm làm cầu nối cho hơn 1 lượt tuyển dụng và tìm việc thành công
+                        {{ $website_slogan }}
                     </div>
                     <div class="search d-none d-sm-block mb-3">
                         <form action="{{ route('get.frontend.listing') }}" method="get">

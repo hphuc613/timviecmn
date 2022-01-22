@@ -2,6 +2,8 @@
 
 namespace Modules\Setting\Models;
 
+use function Symfony\Component\String\s;
+
 /**
  * Class WebsiteConfig
  *
@@ -23,6 +25,8 @@ class WebsiteConfig extends Setting{
 
     const WEBSITE_ADDRESS = 'WEBSITE_ADDRESS';
 
+    const WEBSITE_SLOGAN = 'WEBSITE_SLOGAN';
+
     const WEBSITE_CONFIG = [
         self::WEBSITE_TITLE,
         self::WEBSITE_LOGO,
@@ -30,7 +34,8 @@ class WebsiteConfig extends Setting{
         self::WEBSITE_PHONE_FOR_RECRUIMENT,
         self::WEBSITE_PHONE_FOR_APPLICANT,
         self::WEBSITE_EMAIL,
-        self::WEBSITE_ADDRESS
+        self::WEBSITE_ADDRESS,
+        self::WEBSITE_SLOGAN
     ];
 
     /**

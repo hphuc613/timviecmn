@@ -106,6 +106,15 @@
                                        value="{{ $website_config[\Modules\Setting\Models\WebsiteConfig::WEBSITE_ADDRESS]  ?? NULL }}">
                             </div>
                         </div>
+                        <div class="form-group row align-items-start">
+                            <div class="col-md-4">
+                                <label for="WEBSITE_SLOGAN">{{ trans('SLOGAN') }}</label>
+                            </div>
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="WEBSITE_SLOGAN" rows="5"
+                                          name="{{ \Modules\Setting\Models\WebsiteConfig::WEBSITE_SLOGAN }}">{{ $website_config[\Modules\Setting\Models\WebsiteConfig::WEBSITE_SLOGAN]  ?? NULL }}</textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6"></div>
                 </div>

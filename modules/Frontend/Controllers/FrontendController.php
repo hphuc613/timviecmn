@@ -41,11 +41,13 @@ class FrontendController extends BaseController{
      * @return Factory|View
      */
     public function index(Request $request){
-        $banner = Banner::getBanner(Banner::HOME_PAGE);
-        $website_title = WebsiteConfig::getWebsiteConfig()[WebsiteConfig::WEBSITE_TITLE] ?? "Việc Làm Toàn Quốc";
+        $banner         = Banner::getBanner(Banner::HOME_PAGE);
+        $website_config = WebsiteConfig::getWebsiteConfig();
+        $website_title  = $website_config[WebsiteConfig::WEBSITE_TITLE] ?? "Việc Làm Toàn Quốc";
+        $website_slogan = $website_config[WebsiteConfig::WEBSITE_SLOGAN] ?? NULL;
 
 
-        return view("Frontend::index", compact("banner", "website_title"));
+        return view("Frontend::index", compact("banner", "website_title", "website_slogan"));
     }
 
     /**
