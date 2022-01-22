@@ -218,7 +218,7 @@
     "Test Send Mail": "Test gửi mail",
     "Website Config": "Cấu hình trang web",
     "Site Title": "Tiêu đề trang web",
-    "Favicon": "Yêu thích",
+    "Favicon": "Favicon",
     "Create Tag": "Tạo thẻ",
     "Tag name": "Tên thẻ",
     "User": "Người dùng",
@@ -234,5 +234,6 @@
     "FORBIDDEN ERROR!": "LỖI!",
     "YOU DON'T HAVE PERMISSION TO ACCESS ON THIS FEATURE.": "BẠN KHÔNG ĐƯỢC PHÉP TRUY CẬP VÀO TÍNH NĂNG NÀY.",
     "Back to home": "Trở về Trang chủ",
-    "Page Not Found!": "Không tìm thấy trang!"
+    "Page Not Found!": "Không tìm thấy trang!",
+    " must have 10 digits.": " phải có 10 chữ số."
 }
