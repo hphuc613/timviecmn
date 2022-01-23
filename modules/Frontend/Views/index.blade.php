@@ -9,7 +9,7 @@
                     <h2 data-animate="fadeInDown" class="text-capitalize mb-5">
                         {{ $website_title }}</h2>
                     <div class="d-none d-sm-block mb-3" data-animate="fadeInUp" data-delay="400">
-                        {{ $website_slogan }}
+                        {!!  $website_slogan  !!}
                     </div>
                     <div class="search d-none d-sm-block mb-3">
                         <form action="{{ route('get.frontend.listing') }}" method="get">
@@ -26,8 +26,8 @@
                         </form>
                     </div>
                     <div class="recruit-open-modal">
-                        <a href="#form-modal" data-url="{{ route('get.frontend.recruit') }}" data-bs-toggle="modal">
-                            {{ trans('Liên hệ đăng tin tuyển dụng') }}
+                        <a href="{{ route('get.frontend.listing') }}">
+                            {{ trans('Click vào tìm việc') }}
                         </a>
                     </div>
                 </div>

@@ -125,9 +125,9 @@
                                            target="_blank">{{ trans('CV file') }}</a>
                                     @endif
                                 </td>
-                                <td>{{ trans($item->email) }}</td>
-                                <td>{{ trans($item->phone) }}</td>
-                                <td>{{ trans($item->address) }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->phone }}</td>
+                                <td>{{ $item->address }}</td>
                                 <td>
                                     {!! Form::select('status', $statuses, $item->status ?? NULL, ['class' => 'select2 update-status form-control', 'data-id' => $item->id]) !!}
                                 </td>

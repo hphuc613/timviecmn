@@ -23,6 +23,10 @@ body {
   border-color: #1ABC9C;
 }
 
+p {
+  margin-bottom: 0 !important;
+}
+
 header .logo img {
   width: 100%;
   object-fit: contain;
@@ -104,14 +108,12 @@ header.sticky-header nav a {
   display: flex;
 }
 .news-listing .news-item .news-image {
-  display: flex;
-  align-items: center;
   width: 25%;
 }
 .news-listing .news-item .news-info {
   width: 75%;
   display: flex;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   flex-direction: column;
   justify-content: space-between;
   height: 13rem;
@@ -129,6 +131,9 @@ header.sticky-header nav a {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   white-space: normal;
+}
+.news-listing .news-item .news-info .description p {
+  margin-bottom: 0 !important;
 }
 
 .recruit-form-modal img {

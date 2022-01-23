@@ -8,11 +8,10 @@
              data-bottom-top="background-position:0 px 300px;" data-top-bottom="background-position:0px -300px;">
         <div class="container clearfix">
             <h1>{{ trans('Recruitment') }}</h1>
-            <span>{{ trans('Your dream job is here') }}</span>
+            <span>{!! $website_slogan_recruit !!}</span>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">{{ trans('Recruitment') }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ trans('Listing') }}</li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ trans('Recruitment') }}</a></li>
             </ol>
         </div>
     </section>
@@ -103,37 +102,44 @@
     </section>
 
     <section id="news-listing" class="news-listing container py-5">
-        <div class="row">
-            @foreach($data as $item)
-                <div class="col-md-4">
-                    <div class="news-item">
-                        <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}"
-                           class="news-image">
-                            <img src="{{ $item->image }}" width="100%" class="me-3" alt="{{ $item->image }}">
-                        </a>
-                        <div class="news-info">
-                            <div class="info">
-                                <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}"
-                                   title="{{ $item->title }}">
-                                    <h5 class="title text-truncate">{{ $item->title }}</h5>
-                                </a>
-                                @if($item->is_hot == 1)
-                                    <div><span class="is-hot-badges">HOT</span></div>
-                                @endif
-                                <div><i>{{ formatDate(strtotime($item->created_at), 'd-m-Y H:i') }}</i></div>
-                                <div class="mb-2">{{ $item->company->city->name ?? NULL }}</div>
-                                <div class="description">{{ $item->description }}</div>
-                            </div>
-                            <a href="{{ route('get.frontend.listing', ['company' => $item->company->name ?? NULL ]) }}"
-                               title="{{ $item->company->name ?? NULL }}">
-                                <div class="text-uppercase text-truncate">{{ $item->company->name ?? NULL }}</div>
+
+        @if(!empty($data))
+            <div class="row">
+                @foreach($data as $item)
+                    <div class="col-md-4">
+                        <div class="news-item">
+                            <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}"
+                               class="news-image">
+                                <img src="{{ $item->image }}" width="100%" class="me-3" alt="{{ $item->image }}">
                             </a>
+                            <div class="news-info">
+                                <div class="info">
+                                    <a href="{{ route('get.frontend.detail', ['id' => $item->id, 'slug' => $item->slug]) }}"
+                                       title="{{ $item->title }}">
+                                        <h5 class="title text-truncate">{{ $item->title }}</h5>
+                                    </a>
+                                    @if($item->is_hot == 1)
+                                        <div><span class="is-hot-badges">HOT</span></div>
+                                    @endif
+                                    {{--<div><i>{{ formatDate(strtotime($item->created_at), 'd-m-Y H:i') }}</i></div>--}}
+                                    <div class="mb-2">{{ $item->company->city->name ?? NULL }}</div>
+                                    <div class="description">{!! $item->description !!}</div>
+                                </div>
+                                <a href="{{ route('get.frontend.listing', ['company' => $item->company->name ?? NULL ]) }}"
+                                   title="{{ $item->company->name ?? NULL }}">
+                                    <div class="text-uppercase text-truncate">{{ $item->company->name ?? NULL }}</div>
+                                </a>
+                            </div>
                         </div>
+                        <hr>
                     </div>
-                    <hr>
-                </div>
-            @endforeach
-        </div>
-        {{ $data->withQueryString()->render('vendor/pagination/frontend_news_listing') }}
+                @endforeach
+            </div>
+            {{ $data->withQueryString()->render('vendor/pagination/frontend_news_listing') }}
+        @else
+            <div>
+                <h4><i>{{ trans('Không tìm thấy bài đăng...') }}</i></h4>
+            </div>
+        @endif
     </section>
 @endsection

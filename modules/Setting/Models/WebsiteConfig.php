@@ -27,6 +27,8 @@ class WebsiteConfig extends Setting{
 
     const WEBSITE_SLOGAN = 'WEBSITE_SLOGAN';
 
+    const WEBSITE_SLOGAN_RECRUIT = 'WEBSITE_SLOGAN_RECRUIT';
+
     const WEBSITE_CONFIG = [
         self::WEBSITE_TITLE,
         self::WEBSITE_LOGO,
@@ -35,7 +37,8 @@ class WebsiteConfig extends Setting{
         self::WEBSITE_PHONE_FOR_APPLICANT,
         self::WEBSITE_EMAIL,
         self::WEBSITE_ADDRESS,
-        self::WEBSITE_SLOGAN
+        self::WEBSITE_SLOGAN,
+        self::WEBSITE_SLOGAN_RECRUIT
     ];
 
     /**

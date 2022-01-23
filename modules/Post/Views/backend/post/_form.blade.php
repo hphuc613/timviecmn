@@ -5,7 +5,8 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="title" class="title">{{ trans('Title') }}</label>
-                <input type="text" class="form-control form-control-line" id="title" name="title" value="{{ $data->title ?? NULL }}">
+                <input type="text" class="form-control form-control-line" id="title" name="title"
+                       value="{{ $data->title ?? NULL }}">
             </div>
         </div>
         <div class="col-md-3 form-group">
@@ -43,13 +44,14 @@
         <div class="col-md-9">
             <div class="form-group">
                 <label for="description" class="title">{{ trans('Description') }}</label>
-                <textarea name="description" id="description" class="form-control" rows="10">{{ $data->description ?? NULL }}</textarea>
+                <textarea name="description" id="description" rows="5">{{ $data->description ?? NULL }}</textarea>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label for="image" class="title">{{ trans('Image') }}</label>
-                <input type="file" id="image" class="dropify" name="image" data-default-file="{{ asset($data->image ?? NULL) }}"/>
+                <input type="file" id="image" class="dropify" name="image"
+                       data-default-file="{{ asset($data->image ?? NULL) }}"/>
             </div>
         </div>
         <div class="col-md-9">
@@ -77,7 +79,8 @@
                 <label for="is_hot" class="title">{{ trans('Hot Post') }}</label>
                 <div class="w-100">
                     <label class="switch-hot mb-0">
-                        <input type="checkbox" name="is_hot" value="1" {{isset($data->is_hot) && $data->is_hot == 1 ? 'checked' : ''}}>
+                        <input type="checkbox" name="is_hot"
+                               value="1" {{isset($data->is_hot) && $data->is_hot == 1 ? 'checked' : ''}}>
                         <span class="slider-round"></span>
                     </label>
                 </div>
@@ -115,6 +118,11 @@
             $('.dropify').dropify();
             $('.tag-select2').select2({
                 tags: true
+            });
+
+            CKEDITOR.replace('description', {
+                language: "{{ App::getLocale() }}".toLowerCase(),
+                height: 300
             });
 
             $(document).on('click', '#position-refresh', function () {

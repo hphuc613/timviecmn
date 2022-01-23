@@ -24,7 +24,7 @@
     " can not be empty.": "không được để trống.",
     " extension must be one of the following: xlsx, xls, csv, ods.": "phần mở rộng phải là một trong những phần sau: xlsx, xls, csv, ods.",
     "File": "Tập tin",
-    " cannot be empty": "không thể để trống",
+    " cannot be empty": " không thể để trống",
     " must be the email.": "phải là email.",
     " must be 10 digits.": "phải có 10 chữ số.",
     " must be pdf file.": "phải là tệp pdf.",
@@ -178,7 +178,7 @@
     "Part Time": "Bán thời gian",
     "Intern": "Thực tập sinh",
     "Remote": "Từ Xa",
-    "Title": "Chức vụ",
+    "Title": "Tiêu đề",
     "Category": "Loại",
     "required": "yêu cầu",
     "Work Type": "Loại công việc",
@@ -200,7 +200,7 @@
     "File Manager": "Quản lý tập tin",
     "Setting Basic": "Cài đặt Cơ bản",
     "Can not send email. Please check your Email config.": "Không thể gửi email. Vui lòng kiểm tra cấu hình Email của bạn.",
-    " cannot be empty.": "không được để trống.",
+    " cannot be empty.": " không được để trống.",
     "Email Setting": "Cài đặt Email",
     "To configuration the site email and SMTP.": "Để định cấu hình email và SMTP của trang web.",
     "Go to config": "Đi tới cấu hình",
@@ -235,5 +235,7 @@
     "YOU DON'T HAVE PERMISSION TO ACCESS ON THIS FEATURE.": "BẠN KHÔNG ĐƯỢC PHÉP TRUY CẬP VÀO TÍNH NĂNG NÀY.",
     "Back to home": "Trở về Trang chủ",
     "Page Not Found!": "Không tìm thấy trang!",
-    " must have 10 digits.": " phải có 10 chữ số."
+    " must have 10 digits.": " phải có 10 chữ số.",
+    "Apply Now": "Đăng ký ngay",
+    "And we'll get back to you within 48 hours.": "Và chúng tôi sẽ liên hệ lại với bạn trong vòng 48 giờ."
 }

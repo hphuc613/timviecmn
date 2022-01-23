@@ -117,7 +117,11 @@ class FrontendController extends BaseController{
         $careers    = Career::query()->where('status', Status::STATUS_ACTIVE)->get();
         $positions  = Position::query()->where('status', Status::STATUS_ACTIVE)->get();
         $work_types = Post::getWorkTypes();
-        return view('Frontend::listing', compact('data', 'careers', 'positions', 'filter', 'banner', 'cities', 'work_types', 'new_posts'));
+
+        $website_config = WebsiteConfig::getWebsiteConfig();
+        $website_slogan_recruit = $website_config[WebsiteConfig::WEBSITE_SLOGAN_RECRUIT] ?? NULL;
+
+        return view('Frontend::listing', compact('data', 'careers', 'positions', 'filter', 'banner', 'cities', 'work_types', 'new_posts','website_slogan_recruit'));
     }
 
     /**

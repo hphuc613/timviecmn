@@ -28,6 +28,10 @@ body {
     border-color: $main_color_light;
 }
 
+p{
+    margin-bottom: 0!important;
+}
+
 header {
     .logo {
         img {
@@ -144,15 +148,13 @@ header {
         display: flex;
 
         .news-image {
-            display: flex;
-            align-items: center;
             width: 25%;
         }
 
         .news-info {
             width: 75%;
             display: flex;
-            padding-left: 0.5rem;
+            padding-left: 1rem;
             flex-direction: column;
             justify-content: space-between;
             height: 13rem;
@@ -171,6 +173,9 @@ header {
                 -webkit-line-clamp: 4;
                 -webkit-box-orient: vertical;
                 white-space: normal;
+                p{
+                    margin-bottom: 0 !important;
+                }
             }
         }
     }

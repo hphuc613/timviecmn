@@ -23,11 +23,11 @@ class ApplyRequest extends FormRequest {
         return [
             'name'        => 'required',
             'birthday'    => 'required',
-            'email'       => 'email',
+            'email'       => 'nullable|email',
             'phone'       => 'digits:10|required',
             'address'     => 'required',
             'position_id' => 'required',
-            'file'        => 'mimes:pdf',
+            'file'        => 'nullable|mimes:pdf',
         ];
     }
 

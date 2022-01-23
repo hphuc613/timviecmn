@@ -49,8 +49,8 @@
                     </div>
                     <div class="col-md-5">
                         <div id="job-apply" class="heading-block highlight-me">
-                            <h2>Apply Now</h2>
-                            <span>And we'll get back to you within 48 hours.</span>
+                            <h2>{{ trans('Apply Now') }}</h2>
+                            <span>{{ trans("And we'll get back to you within 48 hours.") }}</span>
                         </div>
                         @include('Frontend::_form_apply')
                     </div>
