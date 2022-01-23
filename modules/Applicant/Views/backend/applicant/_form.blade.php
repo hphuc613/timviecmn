@@ -31,7 +31,7 @@
             <div class="form-group">
                 <label for="birthday" class="title">{{ trans('Birthday') }}</label>
                 <input type="text" class="form-control date" id="birthday" name="birthday"
-                       value="{{isset($data->birthday) ? date('Y-m-d',strtotime($data->birthday)) : NULL }}">
+                       value="{{isset($data->birthday) ? date('d-m-Y',strtotime($data->birthday)) : NULL }}">
             </div>
         </div>
         <div class="col-md-4">

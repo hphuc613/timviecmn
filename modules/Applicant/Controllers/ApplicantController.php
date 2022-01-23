@@ -20,26 +20,26 @@ use Modules\Position\Models\Position;
 use Modules\Post\Models\Post;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class ApplicantController extends Controller {
+class ApplicantController extends Controller{
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct(){
         # parent::__construct();
     }
 
-    public function index(Request $request) {
+    public function index(Request $request){
         $filter   = $request->all();
         $statuses = Applicant::getStatuses();
         $data     = Applicant::filter($filter);
-        if (isset($request->export)) {
+        if(isset($request->export)){
             $query       = clone $data;
             $data_export = [];
             $i           = 1;
-            foreach ($query->get() as $key => $item) {
+            foreach($query->get() as $key => $item){
                 $data_export[$i]['number']     = $i;
                 $data_export[$i]['name']       = $item->name;
                 $data_export[$i]['phone']      = $item->phone;
@@ -74,7 +74,7 @@ class ApplicantController extends Controller {
      *
      * @return Factory|View
      */
-    public function getCreate() {
+    public function getCreate(){
         $statuses  = Applicant::getStatuses();
         $positions = Position::getArray(Status::STATUS_ACTIVE);
         $posts     = Post::query()->where('status', Status::STATUS_ACTIVE)->pluck('title', 'id')->toArray();
@@ -87,10 +87,10 @@ class ApplicantController extends Controller {
      *
      * @return RedirectResponse
      */
-    public function postCreate(ApplicantRequest $request) {
+    public function postCreate(ApplicantRequest $request){
         $data             = $request->all();
         $data['birthday'] = formatDate(strtotime($request->birthday), 'Y-m-d');
-        if ($request->has('file')) {
+        if($request->has('file')){
             $file         = $request->file;
             $file_name    = Helper::slug($request->name) . '-' . $request->phone . '-' . formatDate(time(), 'd-m-y-H-i-s') . '.' . $file->getClientOriginalExtension();
             $data['file'] = Helper::storageFile($file, $file_name, 'CV File');
@@ -107,7 +107,7 @@ class ApplicantController extends Controller {
      *
      * @return Factory|View
      */
-    public function getUpdate($id) {
+    public function getUpdate($id){
         $statuses  = Applicant::getStatuses();
         $data      = Applicant::query()->find($id);
         $positions = Position::getArray(Status::STATUS_ACTIVE);
@@ -123,8 +123,10 @@ class ApplicantController extends Controller {
      *
      * @return RedirectResponse
      */
-    public function postUpdate(ApplicantRequest $request, $id) {
-        Applicant::query()->find($id)->update($request->all());
+    public function postUpdate(ApplicantRequest $request, $id){
+        $data             = $request->all();
+        $data['birthday'] = formatDate(strtotime($request->birthday), 'Y-m-d');
+        Applicant::query()->find($id)->update($data);
         $request->session()->flash('success', trans('Updated successfully.'));
 
         return back();
@@ -136,7 +138,7 @@ class ApplicantController extends Controller {
      *
      * @return RedirectResponse
      */
-    public function delete(Request $request, $id) {
+    public function delete(Request $request, $id){
         Applicant::query()->find($id)->delete();
         $request->session()->flash('success', trans('Deleted successfully.'));
 
@@ -149,9 +151,9 @@ class ApplicantController extends Controller {
      *
      * @return RedirectResponse
      */
-    public function getUpdateStatus(Request $request, $id) {
+    public function getUpdateStatus(Request $request, $id){
         $data = Applicant::query()->find($id);
-        if (!empty($data)) {
+        if(!empty($data)){
             $data->status = $request->status;
             $data->save();
             $request->session()->flash('success', trans('Update Status successfully.'));
@@ -164,8 +166,8 @@ class ApplicantController extends Controller {
      * @param Request $request
      * @return RedirectResponse|string
      */
-    public function getImport(Request $request) {
-        if (!$request->ajax()) {
+    public function getImport(Request $request){
+        if(!$request->ajax()){
             return redirect()->back();
         }
         return view('Applicant::backend.applicant._import_form')->render();
@@ -175,8 +177,8 @@ class ApplicantController extends Controller {
      * @param ApplicantImportRequest $request
      * @return RedirectResponse|BinaryFileResponse
      */
-    public function postImport(ApplicantImportRequest $request) {
-        if ($request->has('file')) {
+    public function postImport(ApplicantImportRequest $request){
+        if($request->has('file')){
             $file = $request->file;
             /** Get array data*/
             $array = Excel::toArray(new Import, $file);
@@ -192,7 +194,7 @@ class ApplicantController extends Controller {
 
             $error_data = [];
             $i          = 1;
-            foreach ($clients as $key => $applicant) {
+            foreach($clients as $key => $applicant){
                 $data                = array_combine($header, $applicant);
                 $data['birthday']    = formatDate(strtotime($data['birthday']), 'Y-m-d');
                 $data['post_id']     = Post::query()
@@ -212,23 +214,23 @@ class ApplicantController extends Controller {
                     'position_id' => 'required'
                 ], $rule->messages(), $rule->attributes());
                 $messages  = $validator->getMessageBag()->toArray();
-                if (!empty($messages)) {
+                if(!empty($messages)){
                     $data["#"] = $i;
                     $i++;
                     $data['error_messages'] = '';
-                    foreach ($messages as $message) {
+                    foreach($messages as $message){
                         $data['error_messages'] .= implode(" ", $message) . " ";
                     }
                     $error_data[] = $data;
                     continue;
-                } else {
+                }else{
                     unset($data["#"]); // leave column number
                     $member = new Applicant($data);
                     $member->save();
                 }
             }
 
-            if (!empty($error_data)) {
+            if(!empty($error_data)){
                 array_push($header, 'error_messages');
                 $export             = new Export;
                 $export->collection = collect($error_data);

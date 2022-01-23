@@ -28,8 +28,8 @@ class ApplicantRequest extends FormRequest{
     public function rules(){
         return [
             'name'        => 'required',
-            'birthday'    => 'required',
-            'email'       => 'email',
+            'email'       => 'nullable|email',
+            'birthday'    => 'required|dateFormatCustom:d-m-Y',
             'phone'       => 'digits:10|required',
             'address'     => 'required',
             'position_id' => 'required',
@@ -42,11 +42,12 @@ class ApplicantRequest extends FormRequest{
      */
     public function messages(){
         return [
-            'required' => ':attribute' . trans(' cannot be empty'),
-            'email'    => ':attribute' . trans(' must be the email.'),
-            'digits'   => ':attribute' . trans(' must be 10 digits.'),
-            'mimes'    => ':attribute' .
-                          trans(' must be pdf file.'),
+            'required'         => ':attribute' . trans(' cannot be empty'),
+            'email'            => ':attribute' . trans(' must be the email.'),
+            'digits'           => ':attribute' . trans(' must be 10 digits.'),
+            'dateFormatCustom' => ':attribute' . trans(' must be format day-month-year.'),
+            'mimes'            => ':attribute' .
+                trans(' must be pdf file.'),
         ];
     }
 

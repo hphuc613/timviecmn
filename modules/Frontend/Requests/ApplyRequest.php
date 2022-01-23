@@ -4,13 +4,13 @@ namespace Modules\Frontend\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApplyRequest extends FormRequest {
+class ApplyRequest extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize(){
         return true;
     }
 
@@ -19,10 +19,10 @@ class ApplyRequest extends FormRequest {
      *
      * @return array
      */
-    public function rules() {
+    public function rules(){
         return [
             'name'        => 'required',
-            'birthday'    => 'required',
+            'birthday'    => 'required|dateFormatCustom:d-m-Y',
             'email'       => 'nullable|email',
             'phone'       => 'digits:10|required',
             'address'     => 'required',
@@ -34,13 +34,14 @@ class ApplyRequest extends FormRequest {
     /**
      * @return array
      */
-    public function messages() {
+    public function messages(){
         return [
-            'required'        => ':attribute' . trans(' cannot be empty'),
-            'email'           => ':attribute' . trans(' must be the email.'),
-            'validate_unique' => ':attribute' . trans(' was exist.'),
-            'digits'          => ':attribute' . trans(' must be 10 digits.'),
-            'mimes'           => ':attribute' .
+            'required'         => ':attribute' . trans(' cannot be empty'),
+            'email'            => ':attribute' . trans(' must be the email.'),
+            'validate_unique'  => ':attribute' . trans(' was exist.'),
+            'digits'           => ':attribute' . trans(' must be 10 digits.'),
+            'dateFormatCustom' => ':attribute' . trans(' must be format day-month-year.'),
+            'mimes'            => ':attribute' .
                 trans(' must be pdf file.'),
         ];
     }
@@ -48,7 +49,7 @@ class ApplyRequest extends FormRequest {
     /**
      * @return array
      */
-    public function attributes() {
+    public function attributes(){
         return [
             'birthday'    => trans('Birthday'),
             'position_id' => trans('Position'),
