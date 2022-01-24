@@ -21,6 +21,8 @@ class WebsiteConfig extends Setting{
 
     const WEBSITE_PHONE_FOR_APPLICANT = 'WEBSITE_PHONE_FOR_APPLICANT';
 
+    const WEBSITE_COMPANY_NAME = 'WEBSITE_COMPANY_NAME';
+
     const WEBSITE_EMAIL = 'WEBSITE_EMAIL';
 
     const WEBSITE_ADDRESS = 'WEBSITE_ADDRESS';
@@ -35,6 +37,7 @@ class WebsiteConfig extends Setting{
         self::WEBSITE_FAVICON,
         self::WEBSITE_PHONE_FOR_RECRUIMENT,
         self::WEBSITE_PHONE_FOR_APPLICANT,
+        self::WEBSITE_COMPANY_NAME,
         self::WEBSITE_EMAIL,
         self::WEBSITE_ADDRESS,
         self::WEBSITE_SLOGAN,

@@ -70,6 +70,12 @@
                                value="{{ $website_config[\Modules\Setting\Models\WebsiteConfig::WEBSITE_PHONE_FOR_APPLICANT]  ?? NULL }}">
                     </div>
                     <div class="form-group col-md-6 align-items-start">
+                        <label for="WEBSITE_COMPANY_NAME">{{ trans('Company Name') }}</label>
+                        <input type="text" class="form-control" id="WEBSITE_COMPANY_NAME"
+                               name="{{ \Modules\Setting\Models\WebsiteConfig::WEBSITE_COMPANY_NAME }}"
+                               value="{{ $website_config[\Modules\Setting\Models\WebsiteConfig::WEBSITE_COMPANY_NAME]  ?? NULL }}">
+                    </div>
+                    <div class="form-group col-md-6 align-items-start">
                         <label for="WEBSITE_EMAIL">{{ trans('Email') }}</label>
                         <input type="text" class="form-control" id="WEBSITE_EMAIL"
                                name="{{ \Modules\Setting\Models\WebsiteConfig::WEBSITE_EMAIL }}"

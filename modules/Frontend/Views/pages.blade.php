@@ -39,7 +39,7 @@
                                     {{ trans('Company') }}:
                                 </td>
                                 <td>
-                                    {{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_TITLE] ?? NULL }}
+                                    {{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_COMPANY_NAME] ?? NULL }}
                                 </td>
                             </tr>
                             <tr>

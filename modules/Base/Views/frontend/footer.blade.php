@@ -14,7 +14,7 @@ $setting = Setting::query()->pluck('value', 'key');
             <div class="text-white">
                 <i class="fas fa-building" aria-hidden="true"></i>
                 {{ trans('Company') }}:
-                <span>{{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_TITLE] ?? NULL }}</span>
+                <span>{{ $setting[\Modules\Setting\Models\WebsiteConfig::WEBSITE_COMPANY_NAME] ?? NULL }}</span>
             </div>
             <div class="text-white">
                 <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
