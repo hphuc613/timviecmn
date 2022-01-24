@@ -104,7 +104,7 @@
                             <tr>
                                 <td>{{$key++}}</td>
                                 <td>{{ trans($item->name) }}</td>
-                                <td>{{ trans($item->career->name) }}</td>
+                                <td>{{ !empty($item->career->name) ? trans($item->career->name) : NULL}}</td>
                                 <td>{{ trans($item->email) }}</td>
                                 <td>{{ trans($item->phone) }}</td>
                                 <td>{{ trans($item->address) }}</td>
