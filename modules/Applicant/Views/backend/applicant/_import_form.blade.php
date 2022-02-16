@@ -9,7 +9,7 @@
     </div>
     <div class="input-group mt-5">
         <button type="submit" class="btn btn-success mr-2">{{ trans('Import') }}</button>
-        <button type="reset" class="btn btn-default" onclick='window.location.reload(true);'>{{ trans('Cancel') }}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('Cancel') }}</button>
     </div>
 </form>
 {!! JsValidator::formRequest('Modules\Applicant\Requests\ApplicantImportRequest', "#import-form")->ignore('file') !!}

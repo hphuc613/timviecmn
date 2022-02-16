@@ -238,5 +238,6 @@
     " must have 10 digits.": " phải có 10 chữ số.",
     "Apply Now": "Đăng ký ngay",
     "And we'll get back to you within 48 hours.": "Và chúng tôi sẽ liên hệ lại với bạn trong vòng 48 giờ.",
-    " must be format day-month-year": " phải có định dạng ngày-tháng-năm"
+    " must be format day-month-year": " phải có định dạng ngày-tháng-năm",
+    "Wrong columns. Columns must be include: ": "Sai cột! Các cột phải bao gồm: "
 }

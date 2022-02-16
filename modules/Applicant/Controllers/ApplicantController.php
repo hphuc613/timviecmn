@@ -6,6 +6,7 @@ use App\AppHelpers\Excel\Export;
 use App\AppHelpers\Excel\Import;
 use App\AppHelpers\Helper;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -187,56 +188,62 @@ class ApplicantController extends Controller{
             /** Get header*/
             $header = ["#", "name", "phone", "email", "address", "birthday", "post_id", "position_id", "experience"];
 
+            $header_condition = "#, Tên, Điện thoại, E-mail, Địa chỉ, Ngày sinh, Bài đăng, Chức vụ, Trạng thái, Kinh nghiệm";
             /** Get data*/
             unset($array[0]);
             $clients = $array;
-
-
-            $error_data = [];
-            $i          = 1;
-            foreach($clients as $key => $applicant){
-                $data                = array_combine($header, $applicant);
-                $data['birthday']    = formatDate(strtotime($data['birthday']), 'Y-m-d');
-                $data['post_id']     = Post::query()
-                                           ->where('slug', Helper::slug($data['post_id']))
-                                           ->first()->id ?? NULL;
-                $data['position_id'] = Position::query()
-                                               ->where('slug', Helper::slug($data['position_id']))
+            try{
+                $error_data = [];
+                $i          = 1;
+                foreach($clients as $key => $applicant){
+                    $data                = array_combine($header, $applicant);
+                    $data['birthday']    = formatDate(strtotime($data['birthday']), 'Y-m-d');
+                    $data['post_id']     = Post::query()
+                                               ->where('slug', Helper::slug($data['post_id']))
                                                ->first()->id ?? NULL;
+                    $data['position_id'] = Position::query()
+                                                   ->where('slug', Helper::slug($data['position_id']))
+                                                   ->first()->id ?? NULL;
 
-                $rule      = new ApplicantRequest();
-                $validator = Validator::make($data, [
-                    'name'        => 'required',
-                    'birthday'    => 'required',
-                    'email'       => 'required|email',
-                    'phone'       => 'digits:10|required',
-                    'address'     => 'required',
-                    'position_id' => 'required'
-                ], $rule->messages(), $rule->attributes());
-                $messages  = $validator->getMessageBag()->toArray();
-                if(!empty($messages)){
-                    $data["#"] = $i;
-                    $i++;
-                    $data['error_messages'] = '';
-                    foreach($messages as $message){
-                        $data['error_messages'] .= implode(" ", $message) . " ";
+                    $rule      = new ApplicantRequest();
+                    $validator = Validator::make($data, [
+                        'name'        => 'required',
+                        'birthday'    => 'required',
+                        'email'       => 'nullable|email',
+                        'phone'       => 'digits:10|required',
+                        'address'     => 'required',
+                        'position_id' => 'required'
+                    ], $rule->messages(), $rule->attributes());
+                    $messages  = $validator->getMessageBag()->toArray();
+                    if(!empty($messages)){
+                        $data["#"] = $i;
+                        $i++;
+                        $data['error_messages'] = '';
+                        foreach($messages as $message){
+                            $data['error_messages'] .= implode(" ", $message) . " ";
+                        }
+                        $error_data[] = $data;
+                        continue;
+                    }else{
+                        unset($data["#"]); // leave column number
+                        $member = new Applicant($data);
+                        $member->save();
                     }
-                    $error_data[] = $data;
-                    continue;
-                }else{
-                    unset($data["#"]); // leave column number
-                    $member = new Applicant($data);
-                    $member->save();
+                }
+
+                if(!empty($error_data)){
+                    array_push($header, 'error_messages');
+                    $export             = new Export;
+                    $export->collection = collect($error_data);
+                    $export->headings   = $header;
+                    $request->session()->flash('success', trans('There are some record insert fail.'));
+                    return Excel::download($export, 'fail_import.xlsx');
                 }
             }
+            catch(Exception $e){
+                $request->session()->flash('danger', trans('Wrong columns! Columns must be include: ').$header_condition);
 
-            if(!empty($error_data)){
-                array_push($header, 'error_messages');
-                $export             = new Export;
-                $export->collection = collect($error_data);
-                $export->headings   = $header;
-                $request->session()->flash('success', trans('There are some record insert fail.'));
-                return Excel::download($export, 'fail_import.xlsx');
+                return redirect()->back();
             }
         }
         $request->session()->flash('success', trans('Import successfully.'));

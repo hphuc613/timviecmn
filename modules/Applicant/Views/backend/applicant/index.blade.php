@@ -18,11 +18,13 @@
         <div class="mb-3 d-flex justify-content-end group-btn">
             <a href="{{route('get.applicant.import')}}" class="btn btn-info mr-2" data-toggle="modal"
                data-title="{{ trans("Import") }}" data-target="#form-modal">
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-upload"></i>
                 {{ trans("Import") }}
             </a>
             <a href="{{ route('get.applicant.list', array_merge(request()->query(), ['export' => true])) }}"
-               class="btn btn-warning mr-2">{{ trans('Export') }}</a>
+               class="btn btn-warning mr-2">
+                <i class="fa fa-download"></i>  {{ trans('Export') }}
+            </a>
             <a href="{{ route('get.applicant.create') }}" class="btn btn-primary"
                data-title="{{ trans("Create Applicant") }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; {{ trans("Add New") }}
